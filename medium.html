@@ -41,9 +41,6 @@
       color: white;
       border: none;
       padding: 10px 20px;
-      text-align: center;
-      text-decoration: none;
-      display: inline-block;
       font-size: 1.2em;
       cursor: pointer;
       border-radius: 5px;
@@ -113,7 +110,7 @@
         }
       }
 
-      options.forEach((option, index) => {
+      options.forEach((option) => {
         const button = document.createElement("button");
         button.textContent = option;
         button.classList.add("option");
@@ -147,7 +144,7 @@
       if (isCorrect) {
         resultDisplay.innerHTML = "<span style='color: green; font-size: 2em;'>🎉 You win!</span>";
         setTimeout(() => {
-          window.location.href = "https://vuyani1.github.io/secret-game"; // Redirect to secret game after 2 seconds
+          window.location.href = "https://vuyani1.github.io/suprise123.html"; // Redirect to surprise page
         }, 2000);
       } else {
         resultDisplay.innerHTML = "<span style='color: red;'>❌ Incorrect! Try again.</span>";
