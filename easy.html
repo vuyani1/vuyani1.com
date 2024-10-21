@@ -1,60 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Number Guessing Game - Easy 🎮</title>
-    <style>
-        body {
-            text-align: center;
-            font-family: Arial, sans-serif;
-        }
-        .game {
-            margin-top: 50px;
-        }
-        input {
-            padding: 10px;
-            font-size: 1rem;
-        }
-        button {
-            padding: 10px 20px;
-            font-size: 1rem;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Easy Game - Guess the Number!</title>
 </head>
 <body>
+  <h1>Easy Level: Guess the Number!</h1>
+  <p>I'm thinking of a number between 1 and 10. Can you guess it?</p>
+  <input type="number" id="guessInput" placeholder="Enter your guess" min="1" max="10">
+  <button onclick="checkGuess()">Submit Guess</button>
 
-    <h1>Number Guessing Game - Easy</h1>
-    <div class="game">
-        <p>Guess a number between 1 and 10!</p>
-        <input type="number" id="guess" min="1" max="10">
-        <button onclick="checkGuess()">Submit Guess</button>
-        <p id="result"></p>
-    </div>
+  <p id="result"></p>
+  <p id="attemptsLeft"></p>
 
-    <script>
-        const correctNumber = Math.floor(Math.random() * 10) + 1;
+  <script>
+    const correctNumber = Math.floor(Math.random() * 10) + 1;
+    let attempts = 3;
 
-        function checkGuess() {
-            const userGuess = document.getElementById('guess').value;
-            const resultText = document.getElementById('result');
+    function checkGuess() {
+      const userGuess = parseInt(document.getElementById("guessInput").value);
+      const result = document.getElementById("result");
+      const attemptsLeft = document.getElementById("attemptsLeft");
 
-            if (userGuess == correctNumber) {
-                resultText.innerHTML = "Correct! 🎉 You guessed the right number!";
-            } else {
-                resultText.innerHTML = "Try again! The number was " + correctNumber;
-            }
+      if (attempts > 0) {
+        if (userGuess === correctNumber) {
+          result.innerHTML = "🎉 Congratulations! You guessed the number!";
+        } else {
+          attempts--;
+          result.innerHTML = "❌ Incorrect! Try again.";
+          attemptsLeft.innerHTML = `You have ${attempts} attempt(s) left.`;
         }
-    </script>
 
-    <!-- Google AdSense -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7484489054116946" crossorigin="anonymous"></script>
-    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-7484489054116946" data-ad-slot="7806392924" data-ad-format="auto"></ins>
-    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-
+        if (attempts === 0) {
+          result.innerHTML = `😞 Game Over! The correct number was ${correctNumber}.`;
+          attemptsLeft.innerHTML = "";
+        }
+      }
+    }
+  </script>
 </body>
 </html>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7484489054116946"
+     crossorigin="anonymous"></script>
