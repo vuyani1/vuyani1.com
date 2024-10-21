@@ -3,16 +3,64 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Easy Game - Guess the Number!</title>
+  <title>Easy Game - Guess the Number</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 50px auto;
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      color: #333333;
+    }
+
+    #guessInput {
+      width: 60px;
+      padding: 10px;
+      font-size: 1.2em;
+      margin-right: 10px;
+    }
+
+    button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 1.2em;
+      margin-top: 10px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    #result {
+      font-size: 1.5em;
+      margin-top: 20px;
+    }
+  </style>
 </head>
 <body>
-  <h1>Easy Level: Guess the Number!</h1>
-  <p>I'm thinking of a number between 1 and 10. Can you guess it?</p>
-  <input type="number" id="guessInput" placeholder="Enter your guess" min="1" max="10">
-  <button onclick="checkGuess()">Submit Guess</button>
+  <div class="container">
+    <h1>Easy Level: Guess the Number!</h1>
+    <p>I'm thinking of a number between 1 and 10. Can you guess it?</p>
+    <input type="number" id="guessInput" placeholder="Enter your guess" min="1" max="10">
+    <button onclick="checkGuess()">Submit Guess</button>
 
-  <p id="result"></p>
-  <p id="attemptsLeft"></p>
+    <p id="result"></p>
+    <p id="attemptsLeft">Attempts left: <span id="attempts">3</span></p>
+  </div>
 
   <script>
     const correctNumber = Math.floor(Math.random() * 10) + 1;
@@ -21,25 +69,34 @@
     function checkGuess() {
       const userGuess = parseInt(document.getElementById("guessInput").value);
       const result = document.getElementById("result");
-      const attemptsLeft = document.getElementById("attemptsLeft");
+      const attemptsDisplay = document.getElementById("attempts");
 
       if (attempts > 0) {
         if (userGuess === correctNumber) {
-          result.innerHTML = "🎉 Congratulations! You guessed the number!";
+          result.innerHTML = "<span style='color: green; font-size: 2em;'>🎉 You win!</span>";
+          setTimeout(() => {
+            window.location.href = "https://example.com/secret-game";
+          }, 2000); // Redirect to secret game after 2 seconds
         } else {
           attempts--;
-          result.innerHTML = "❌ Incorrect! Try again.";
-          attemptsLeft.innerHTML = `You have ${attempts} attempt(s) left.`;
+          result.innerHTML = "<span style='color: red;'>❌ Incorrect! Try again.</span>";
+          attemptsDisplay.textContent = attempts;
         }
 
         if (attempts === 0) {
-          result.innerHTML = `😞 Game Over! The correct number was ${correctNumber}.`;
-          attemptsLeft.innerHTML = "";
+          result.innerHTML = `<span style='color: red; font-size: 1.5em;'>😞 You lose! The correct number was ${correctNumber}.</span>`;
+          setTimeout(() => {
+            window.location.href = "https://example.com";
+          }, 2000); // Redirect home after 2 seconds
         }
       }
     }
   </script>
+
+  <!-- Google AdSense Code -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7484489054116946"
+     crossorigin="anonymous"></script>
+  <!-- Your AdSense ad code here -->
 </body>
 </html>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7484489054116946"
-     crossorigin="anonymous"></script>
+
