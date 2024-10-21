@@ -1,6 +1,5 @@
 # 🎮 Fun Games Collection by Vuyani 🎮
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7484489054116946"
-     crossorigin="anonymous"></script>
+
 Welcome to my gaming website! This is a simple yet entertaining collection of fun games where you can test your skills across **Easy**, **Medium**, and **Hard** levels.
 
 ## 🌟 Features
@@ -33,5 +32,9 @@ Feel free to fork this repository and contribute to adding more games or improvi
 ---
 
 ### 📢 Advertisement
-This website includes advertisements powered by Google AdSense.
+This website includes advertisements powered by Google AdSense. 
 
+---
+
+## ⚠️ Copyright Notice
+&copy; 2024 Vuyani Siyanda Vilakazi. All rights reserved. 🚫 DO NOT COPY V WORK 🚫
