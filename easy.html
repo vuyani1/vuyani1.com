@@ -49,6 +49,11 @@
       font-size: 1.5em;
       margin-top: 20px;
     }
+
+    #attempts {
+      font-size: 1.5em;
+      margin-top: 20px;
+    }
   </style>
 </head>
 <body>
@@ -59,7 +64,7 @@
     <button onclick="checkGuess()">Submit Guess</button>
 
     <p id="result"></p>
-    <p id="attemptsLeft">Attempts left: <span id="attempts">3</span></p>
+    <p id="attempts"></p>
   </div>
 
   <script>
@@ -75,19 +80,19 @@
         if (userGuess === correctNumber) {
           result.innerHTML = "<span style='color: green; font-size: 2em;'>🎉 You win!</span>";
           setTimeout(() => {
-            window.location.href = "https://example.com/secret-game";
+            window.location.href = "https://vuyani1.github.io/secret-game";
           }, 2000); // Redirect to secret game after 2 seconds
         } else {
           attempts--;
+          attemptsDisplay.innerHTML += "<span style='font-size: 2em;'>❤️</span>";
           result.innerHTML = "<span style='color: red;'>❌ Incorrect! Try again.</span>";
-          attemptsDisplay.textContent = attempts;
         }
 
         if (attempts === 0) {
           result.innerHTML = `<span style='color: red; font-size: 1.5em;'>😞 You lose! The correct number was ${correctNumber}.</span>`;
           setTimeout(() => {
-            window.location.href = "https://example.com";
-          }, 2000); // Redirect home after 2 seconds
+            window.location.href = "https://vuyani1.github.io"; // Redirect home after 2 seconds
+          }, 2000);
         }
       }
     }
@@ -96,7 +101,5 @@
   <!-- Google AdSense Code -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7484489054116946"
      crossorigin="anonymous"></script>
-  <!-- Your AdSense ad code here -->
 </body>
 </html>
-
