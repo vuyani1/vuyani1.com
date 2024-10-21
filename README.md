@@ -1,51 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WEB DEVELOPMENT BY ME 🌐💻</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background-color: #f0f0f0;
-            color: #333;
-            margin: 0;
-        }
-        header {
-            padding: 50px;
-            background-color: #007bff;
-            color: white;
-        }
-        h1 {
-            font-size: 3rem;
-            margin: 0;
-        }
-        p {
-            font-size: 1.2rem;
-        }
-        footer {
-            margin-top: 50px;
-            padding: 20px;
-            background-color: #007bff;
-            color: white;
-        }
-    </style>
-</head>
-<body>
-    <header>
-        <h1>WEB DEVELOPMENT BY ME 🌐💻</h1>
-        <p>Welcome to my website where I showcase my web development skills!</p>
-    </header>
+# 🎮 Fun Games by Vuyani 🎮
 
-    <main>
-        <section>
-            <p>This site is hosted on GitHub Pages. Stay tuned for more updates!</p>
-        </section>
-    </main>
+Welcome to **Fun Games by Vuyani**, a simple and fun gaming website offering different difficulty levels for everyone to enjoy! Test your skills and see if you can master the games.
 
-    <footer>
-        <p>Created by [Your Name] &copy; 2024</p>
-    </footer>
-</body>
-</html>
+## Website
+
+You can access the gaming website here: [Fun Games by Vuyani](https://vuyani1.github.io/)
+
+## Games Available
+
+### 1. **Number Guessing Game**
+   - **Easy**: Guess a number between 1 and 10
+   - **Medium**: Guess a number between 1 and 50
+   - **Hard**: Guess a number between 1 and 100
+
+More games coming soon!
+
+## How to Play
+
+Each game provides a random number range depending on the difficulty level. Your goal is to guess the correct number!
+
+- *
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7484489054116946"
+     crossorigin="anonymous"></script>
