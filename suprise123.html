@@ -1,128 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Memory Game - Remember the Numbers</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      background-color: #f0f0f0;
-      overflow: hidden; /* Prevents scrolling */
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Game by Vuyani Vilakazi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            color: white;
+            background-color: black; /* Set background to black */
+            overflow: hidden;
+        }
 
-    .slide {
-      display: none;
-      padding: 20px;
-      border-radius: 10px;
-      color: white;
-      font-size: 2em;
-      margin: 50px auto;
-      max-width: 600px;
-    }
+        .slide {
+            display: none;
+            padding: 20px;
+            border-radius: 10px;
+            font-size: 2em;
+        }
 
-    .btn {
-      padding: 15px 30px;
-      font-size: 1.5em;
-      color: #fff;
-      background-color: #4CAF50;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      margin-top: 20px;
-    }
+        button {
+            padding: 10px 20px;
+            font-size: 1em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            background-color: #ff5733; /* Button color */
+            color: white;
+        }
 
-    #finalSlide {
-      display: none;
-    }
-
-    /* Random backgrounds for slides */
-    .bg1 { background-color: #3498db; }
-    .bg2 { background-color: #e74c3c; }
-    .bg3 { background-color: #8e44ad; }
-    .bg4 { background-color: #f39c12; }
-    .bg5 { background-color: #2ecc71; }
-  </style>
+        #submitAnswer {
+            display: none; /* Hide by default */
+        }
+    </style>
 </head>
 <body>
-  <div id="slide1" class="slide bg1"></div>
-  <div id="slide2" class="slide bg2"></div>
-  <div id="slide3" class="slide bg3"></div>
-  <div id="slide4" class="slide bg4"></div>
-  <div id="slide5" class="slide bg5"></div>
-  <div id="finalSlide" class="slide"></div>
+    <div id="numberSlide" class="slide"></div>
+    <div id="questionSlide" class="slide"></div>
+    <div id="answerSlide" class="slide">
+        <input type="text" id="userAnswer" placeholder="Enter your answer" />
+        <button id="submitAnswer" onclick="checkAnswer()">Submit</button>
+    </div>
+    <div id="result" class="slide"></div>
 
-  <script>
-    // Generate five random numbers
-    const randomNumbers = Array.from({ length: 5 }, () => Math.floor(Math.random() * 100));
-    let currentSlide = 0;
+    <script>
+        // Generate a random five-digit number
+        const randomNumber = Math.floor(10000 + Math.random() * 90000);
+        document.getElementById("numberSlide").textContent = `Remember this number: ${randomNumber}`;
+        
+        // Show the first slide with the number
+        document.getElementById("numberSlide").style.display = "block";
+        setTimeout(showQuestionSlide, 10000); // Show question slide after 10 seconds
 
-    // Show the first slide with random numbers
-    function showNumbers() {
-      const slide1 = document.getElementById("slide1");
-      slide1.innerHTML = `<p>${randomNumbers.join(", ")}</p>`;
-      slide1.style.display = "block";
-      setTimeout(() => {
-        slide1.style.display = "none";
-        showDistractingQuestions();
-      }, 3000); // Show for 3 seconds
-    }
+        function showQuestionSlide() {
+            document.getElementById("numberSlide").style.display = "none";
+            const questions = [
+                "What is your favorite color?",
+                "Do you prefer cats or dogs?",
+                "What is your dream vacation destination?",
+                "What is your favorite movie?",
+                "If you could have any superpower, what would it be?"
+            ];
+            const randomQuestion = questions[Math.floor(Math.random() * questions.length)];
+            document.getElementById("questionSlide").textContent = randomQuestion;
+            document.getElementById("questionSlide").style.display = "block";
 
-    // Show distracting questions
-    function showDistractingQuestions() {
-      const questions = [
-        "What is your favorite color?",
-        "Do you prefer cats or dogs?",
-        "What is your dream vacation destination?",
-        "What is your favorite movie?",
-        "Do you like coding?",
-      ];
+            setTimeout(showAnswerSlide, 3000); // Show answer slide after 3 seconds
+        }
 
-      if (currentSlide < questions.length) {
-        const slide = document.getElementById(`slide${currentSlide + 2}`);
-        slide.innerHTML = `<p>${questions[currentSlide]}</p>`;
-        slide.style.display = "block";
-        currentSlide++;
-        setTimeout(() => {
-          slide.style.display = "none";
-          showDistractingQuestions();
-        }, 4000); // Show for 4 seconds
-      } else {
-        showFinalSlide();
-      }
-    }
+        function showAnswerSlide() {
+            document.getElementById("questionSlide").style.display = "none";
+            document.getElementById("answerSlide").style.display = "block";
+            document.getElementById("submitAnswer").style.display = "block";
 
-    // Show final slide to ask for the remembered numbers
-    function showFinalSlide() {
-      const finalSlide = document.getElementById("finalSlide");
-      finalSlide.innerHTML = `
-        <p>Put your answer (numbers separated by commas):</p>
-        <input type="text" id="userInput" placeholder="Your answer here" />
-        <button class="btn" onclick="checkAnswer()">Submit</button>
-      `;
-      finalSlide.style.display = "block";
-    }
+            // Display the original number in the answer slide for reference
+            const questionForNumber = `What was the number you just saw?`;
+            document.getElementById("answerSlide").innerHTML = `<p>${questionForNumber}</p><input type="text" id="userAnswer" placeholder="Enter your answer" /><br>`;
+        }
 
-    // Check the user's answer
-    function checkAnswer() {
-      const userInput = document.getElementById("userInput").value.split(",").map(num => num.trim());
-      const isCorrect = userInput.length === randomNumbers.length && userInput.every((num, index) => num === randomNumbers[index].toString());
+        function checkAnswer() {
+            const userAnswer = document.getElementById("userAnswer").value;
+            const result = document.getElementById("result");
+            document.getElementById("answerSlide").style.display = "none";
+            if (userAnswer === randomNumber.toString()) {
+                result.textContent = "🎉 Correct! You have a great memory! 🎉";
+            } else {
+                result.textContent = "😞 Fail! You're not that clever! 😞";
+            }
+            result.style.display = "block";
 
-      if (isCorrect) {
-        alert("Correct! You're a genius!");
-      } else {
-        alert("You fail! You're not that clever.");
-      }
-
-      // Redirect after the alert
-      setTimeout(() => {
-        window.location.href = "https://vuyani1.github.io/";
-      }, 2000);
-    }
-
-    // Start the game
-    showNumbers();
-  </script>
+            setTimeout(() => {
+                window.location.href = "https://vuyani1.github.io/"; // Redirect after 3 seconds
+            }, 3000);
+        }
+    </script>
 </body>
 </html>
