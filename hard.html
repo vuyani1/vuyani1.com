@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hard Level - Memory Game</title>
+  <title>Hard Game - Word Scramble</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #f0f0f0;
+      background-color: #800080; /* Purple background */
       text-align: center;
     }
 
@@ -24,37 +24,35 @@
       color: #333333;
     }
 
-    #memoryBoard {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
-      margin-top: 20px;
+    #scrambledWord {
+      font-size: 2em;
+      margin: 20px 0;
     }
 
-    .card {
-      width: 80px;
-      height: 80px;
+    #guessInput {
+      width: 200px;
+      padding: 10px;
+      font-size: 1.2em;
+      margin-right: 10px;
+    }
+
+    button {
       background-color: #4CAF50;
       color: white;
-      font-size: 2em;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      border: none;
+      padding: 10px 20px;
+      font-size: 1.2em;
+      margin-top: 10px;
       cursor: pointer;
       border-radius: 5px;
-      transition: transform 0.3s;
-    }
-
-    .card:hover {
-      transform: scale(1.1);
-    }
-
-    .card.flipped {
-      background-color: #ffffff;
-      color: #4CAF50;
     }
 
     #result {
+      font-size: 1.5em;
+      margin-top: 20px;
+    }
+
+    #attempts {
       font-size: 1.5em;
       margin-top: 20px;
     }
@@ -62,69 +60,48 @@
 </head>
 <body>
   <div class="container">
-    <h1>Hard Level: Memory Game!</h1>
-    <div id="memoryBoard"></div>
+    <h1>Hard Level: Word Scramble!</h1>
+    <p id="scrambledWord"></p>
+    <input type="text" id="guessInput" placeholder="Your guess" />
+    <button id="submitBtn" onclick="checkGuess()">Submit Guess</button>
+
     <p id="result"></p>
+    <p id="attempts"></p>
   </div>
 
   <script>
-    const cardValues = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
-    let cards = [...cardValues, ...cardValues]; // Duplicate values for pairs
-    let firstCard, secondCard;
-    let lockBoard = false;
-    let matchedCards = 0;
+    const words = ['javascript', 'python', 'html', 'css', 'programming', 'developer'];
+    let attempts = 3;
 
-    // Shuffle the cards
-    cards.sort(() => 0.5 - Math.random());
+    // Select a random word and scramble it
+    const randomWord = words[Math.floor(Math.random() * words.length)];
+    const scrambledWord = randomWord.split('').sort(() => Math.random() - 0.5).join('');
+    document.getElementById("scrambledWord").textContent = scrambledWord;
 
-    // Create card elements
-    const memoryBoard = document.getElementById("memoryBoard");
-    cards.forEach(value => {
-      const card = document.createElement("div");
-      card.classList.add("card");
-      card.setAttribute("data-value", value);
-      card.addEventListener("click", flipCard);
-      memoryBoard.appendChild(card);
-    });
+    function checkGuess() {
+      const userGuess = document.getElementById("guessInput").value.toLowerCase();
+      const result = document.getElementById("result");
+      const attemptsDisplay = document.getElementById("attempts");
 
-    function flipCard() {
-      if (lockBoard) return;
-      this.classList.add("flipped");
-      if (!firstCard) {
-        firstCard = this;
-      } else {
-        secondCard = this;
-        checkForMatch();
-      }
-    }
-
-    function checkForMatch() {
-      lockBoard = true;
-      const isMatch = firstCard.getAttribute("data-value") === secondCard.getAttribute("data-value");
-
-      if (isMatch) {
-        matchedCards++;
-        if (matchedCards === cardValues.length) {
-          document.getElementById("result").innerHTML = "<span style='color: green; font-size: 2em;'>🎉 You win!</span>";
+      if (attempts > 0) {
+        if (userGuess === randomWord) {
+          result.innerHTML = "<span style='color: green; font-size: 2em;'>🎉 You win!</span>";
           setTimeout(() => {
             window.location.href = "https://vuyani1.github.io/suprise123.html"; // Redirect to surprise page
           }, 2000);
+        } else {
+          attempts--;
+          attemptsDisplay.innerHTML += "<span style='font-size: 2em;'>❤️</span>";
+          result.innerHTML = "<span style='color: red;'>❌ Incorrect! Try again.</span>";
         }
-        resetCards();
-      } else {
-        setTimeout(() => {
-          firstCard.classList.remove("flipped");
-          secondCard.classList.remove("flipped");
-          resetCards();
-          document.getElementById("result").innerHTML = "<span style='color: red;'>❌ Incorrect! Try again.</span>";
-        }, 1000);
-      }
-    }
 
-    function resetCards() {
-      firstCard = null;
-      secondCard = null;
-      lockBoard = false;
+        if (attempts === 0) {
+          result.innerHTML = `<span style='color: red; font-size: 1.5em;'>😞 You lose! The correct word was "${randomWord}".</span>`;
+          setTimeout(() => {
+            window.location.href = "https://vuyani1.github.io"; // Redirect home after 2 seconds
+          }, 2000);
+        }
+      }
     }
   </script>
 
