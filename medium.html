@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Medium Game - Math Challenge!</title>
+</head>
+<body>
+  <h1>Medium Level: Math Challenge!</h1>
+  <p>Solve the math problem below in under 10 seconds:</p>
+  <div id="problem"></div>
+  <input type="number" id="answerInput" placeholder="Enter your answer">
+  <button onclick="submitAnswer()">Submit Answer</button>
+
+  <p id="timer"></p>
+  <p id="result"></p>
+
+  <script>
+    let num1, num2, operation, correctAnswer, timeLeft;
+    const timerDisplay = document.getElementById("timer");
+    const problemDisplay = document.getElementById("problem");
+    const resultDisplay = document.getElementById("result");
+
+    function startGame() {
+      num1 = Math.floor(Math.random() * 10) + 1;
+      num2 = Math.floor(Math.random() * 10) + 1;
+      const operations = ['+', '-', '*'];
+      operation = operations[Math.floor(Math.random() * operations.length)];
+      correctAnswer = eval(num1 + operation + num2);
+      problemDisplay.innerHTML = `What is ${num1} ${operation} ${num2}?`;
+      timeLeft = 10;
+      startTimer();
+    }
+
+    function startTimer() {
+      const timer = setInterval(() => {
+        timeLeft--;
+        timerDisplay.innerHTML = `⏳ Time left: ${timeLeft} seconds`;
+        if (timeLeft <= 0) {
+          clearInterval(timer);
+          resultDisplay.innerHTML = `💥 Time's up! The correct answer was ${correctAnswer}.`;
+        }
+      }, 1000);
+    }
+
+    function submitAnswer() {
+      const userAnswer = parseInt(document.getElementById("answerInput").value);
+      if (userAnswer === correctAnswer) {
+        resultDisplay.innerHTML = "🎉 Correct! Well done!";
+      } else {
+        resultDisplay.innerHTML = `❌ Wrong! The correct answer was ${correctAnswer}.`;
+      }
+    }
+
+    // Start the game when the page loads
+    window.onload = startGame;
+  </script>
+</body>
+</html>
