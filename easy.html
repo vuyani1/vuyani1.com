@@ -7,7 +7,7 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #f0f0f0;
+      background-color: #800080; /* Purple background */
       text-align: center;
     }
 
@@ -56,9 +56,9 @@
 <body>
   <div class="container">
     <h1>Easy Level: Guess the Number!</h1>
-    <p>I'm thinking of a number between 1 and 10. Can you guess it?</p>
-    <input type="number" id="guessInput" placeholder="Enter your guess" min="1" max="10">
-    <button onclick="checkGuess()">Submit Guess</button>
+    <p id="numberDisplay"></p>
+    <input type="number" id="guessInput" placeholder="Enter your guess" min="1" max="10" disabled>
+    <button id="submitBtn" onclick="checkGuess()" disabled>Submit Guess</button>
 
     <p id="result"></p>
     <p id="attempts"></p>
@@ -67,6 +67,14 @@
   <script>
     const correctNumber = Math.floor(Math.random() * 10) + 1;
     let attempts = 3;
+
+    // Show the number for 3 seconds
+    document.getElementById("numberDisplay").textContent = `The number is: ${correctNumber}`;
+    setTimeout(() => {
+      document.getElementById("numberDisplay").textContent = "Guess the number!";
+      document.getElementById("guessInput").disabled = false;
+      document.getElementById("submitBtn").disabled = false;
+    }, 3000);
 
     function checkGuess() {
       const userGuess = parseInt(document.getElementById("guessInput").value);
