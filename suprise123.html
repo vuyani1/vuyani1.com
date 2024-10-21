@@ -11,6 +11,11 @@
             color: white;
             background-color: black; /* Set background to black */
             overflow: hidden;
+            height: 100vh; /* Full viewport height */
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Center vertically */
+            align-items: center; /* Center horizontally */
         }
 
         .slide {
@@ -31,17 +36,46 @@
             color: white;
         }
 
+        #timer {
+            font-size: 1.5em;
+            margin: 20px 0; /* Spacing for timer */
+        }
+
         #submitAnswer {
             display: none; /* Hide by default */
+        }
+
+        .keyboard {
+            display: none; /* Hide by default */
+            margin-top: 20px;
+        }
+
+        .key {
+            display: inline-block;
+            padding: 10px;
+            margin: 5px;
+            background-color: #ff5733; /* Key color */
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.5em;
+        }
+
+        .key:hover {
+            background-color: #ff2d00; /* Hover color */
         }
     </style>
 </head>
 <body>
     <div id="numberSlide" class="slide"></div>
+    <div id="timer"></div>
     <div id="questionSlide" class="slide"></div>
     <div id="answerSlide" class="slide">
-        <input type="text" id="userAnswer" placeholder="Enter your answer" />
-        <button id="submitAnswer" onclick="checkAnswer()">Submit</button>
+        <p>What was the number you just saw?</p>
+        <div>
+            <input type="text" id="userAnswer" placeholder="Enter your answer" />
+            <button id="submitAnswer" onclick="checkAnswer()">Submit</button>
+        </div>
+        <div class="keyboard" id="keyboard"></div>
     </div>
     <div id="result" class="slide"></div>
 
@@ -49,13 +83,30 @@
         // Generate a random five-digit number
         const randomNumber = Math.floor(10000 + Math.random() * 90000);
         document.getElementById("numberSlide").textContent = `Remember this number: ${randomNumber}`;
-        
+
         // Show the first slide with the number
         document.getElementById("numberSlide").style.display = "block";
-        setTimeout(showQuestionSlide, 10000); // Show question slide after 10 seconds
+        let timerDuration = 10; // Timer for 10 seconds
+        let timerInterval;
+
+        // Start the timer
+        function startTimer() {
+            document.getElementById("timer").textContent = `Disappears in: ${timerDuration} seconds`;
+            timerInterval = setInterval(() => {
+                timerDuration--;
+                document.getElementById("timer").textContent = `Disappears in: ${timerDuration} seconds`;
+
+                if (timerDuration <= 0) {
+                    clearInterval(timerInterval);
+                    showQuestionSlide();
+                }
+            }, 1000); // Update every second
+        }
 
         function showQuestionSlide() {
             document.getElementById("numberSlide").style.display = "none";
+            document.getElementById("timer").style.display = "none"; // Hide timer
+
             const questions = [
                 "What is your favorite color?",
                 "Do you prefer cats or dogs?",
@@ -75,9 +126,45 @@
             document.getElementById("answerSlide").style.display = "block";
             document.getElementById("submitAnswer").style.display = "block";
 
-            // Display the original number in the answer slide for reference
-            const questionForNumber = `What was the number you just saw?`;
-            document.getElementById("answerSlide").innerHTML = `<p>${questionForNumber}</p><input type="text" id="userAnswer" placeholder="Enter your answer" /><br>`;
+            // Show the keyboard
+            createKeyboard();
+        }
+
+        function createKeyboard() {
+            const keyboardContainer = document.getElementById("keyboard");
+            keyboardContainer.style.display = "flex"; // Show keyboard
+            keyboardContainer.innerHTML = ""; // Clear previous keys
+
+            // Create number keys
+            for (let i = 0; i <= 9; i++) {
+                const key = document.createElement("div");
+                key.classList.add("key");
+                key.textContent = i;
+                key.onclick = () => appendToAnswer(i);
+                keyboardContainer.appendChild(key);
+            }
+
+            // Add a clear key
+            const clearKey = document.createElement("div");
+            clearKey.classList.add("key");
+            clearKey.textContent = "C";
+            clearKey.onclick = clearAnswer;
+            keyboardContainer.appendChild(clearKey);
+
+            // Add an enter key
+            const enterKey = document.createElement("div");
+            enterKey.classList.add("key");
+            enterKey.textContent = "Enter";
+            enterKey.onclick = checkAnswer;
+            keyboardContainer.appendChild(enterKey);
+        }
+
+        function appendToAnswer(num) {
+            document.getElementById("userAnswer").value += num;
+        }
+
+        function clearAnswer() {
+            document.getElementById("userAnswer").value = "";
         }
 
         function checkAnswer() {
@@ -95,6 +182,9 @@
                 window.location.href = "https://vuyani1.github.io/"; // Redirect after 3 seconds
             }, 3000);
         }
+
+        // Start the game and the timer
+        startTimer();
     </script>
 </body>
 </html>
