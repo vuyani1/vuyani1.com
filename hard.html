@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hard Level - Word Scramble</title>
+  <title>Hard Level - Memory Game</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -24,29 +24,34 @@
       color: #333333;
     }
 
-    #scrambledWord {
-      font-size: 2em;
-      margin-bottom: 20px;
+    #memoryBoard {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-top: 20px;
     }
 
-    #userInput {
-      width: 200px;
-      padding: 10px;
-      font-size: 1.2em;
-      margin-right: 10px;
-    }
-
-    button {
+    .card {
+      width: 80px;
+      height: 80px;
       background-color: #4CAF50;
       color: white;
-      border: none;
-      padding: 10px 20px;
-      text-align: center;
-      text-decoration: none;
-      display: inline-block;
-      font-size: 1.2em;
+      font-size: 2em;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       cursor: pointer;
       border-radius: 5px;
+      transition: transform 0.3s;
+    }
+
+    .card:hover {
+      transform: scale(1.1);
+    }
+
+    .card.flipped {
+      background-color: #ffffff;
+      color: #4CAF50;
     }
 
     #result {
@@ -57,32 +62,69 @@
 </head>
 <body>
   <div class="container">
-    <h1>Hard Level: Word Scramble!</h1>
-    <div id="scrambledWord"></div>
-    <input type="text" id="userInput" placeholder="Unscramble the word">
-    <button onclick="checkWord()">Submit</button>
-
+    <h1>Hard Level: Memory Game!</h1>
+    <div id="memoryBoard"></div>
     <p id="result"></p>
   </div>
 
   <script>
-    const words = ["javascript", "html", "css", "python", "ruby", "java", "php"];
-    const randomWord = words[Math.floor(Math.random() * words.length)];
-    const scrambledWord = randomWord.split('').sort(() => 0.5 - Math.random()).join('');
-    document.getElementById("scrambledWord").textContent = scrambledWord;
+    const cardValues = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
+    let cards = [...cardValues, ...cardValues]; // Duplicate values for pairs
+    let firstCard, secondCard;
+    let lockBoard = false;
+    let matchedCards = 0;
 
-    function checkWord() {
-      const userInput = document.getElementById("userInput").value.toLowerCase();
-      const resultDisplay = document.getElementById("result");
+    // Shuffle the cards
+    cards.sort(() => 0.5 - Math.random());
 
-      if (userInput === randomWord) {
-        resultDisplay.innerHTML = "<span style='color: green; font-size: 2em;'>🎉 You win!</span>";
-        setTimeout(() => {
-          window.location.href = "https://vuyani1.github.io/secret-game"; // Redirect to secret game after 2 seconds
-        }, 2000);
+    // Create card elements
+    const memoryBoard = document.getElementById("memoryBoard");
+    cards.forEach(value => {
+      const card = document.createElement("div");
+      card.classList.add("card");
+      card.setAttribute("data-value", value);
+      card.addEventListener("click", flipCard);
+      memoryBoard.appendChild(card);
+    });
+
+    function flipCard() {
+      if (lockBoard) return;
+      this.classList.add("flipped");
+      if (!firstCard) {
+        firstCard = this;
       } else {
-        resultDisplay.innerHTML = "<span style='color: red;'>❌ Incorrect! Try again.</span>";
+        secondCard = this;
+        checkForMatch();
       }
+    }
+
+    function checkForMatch() {
+      lockBoard = true;
+      const isMatch = firstCard.getAttribute("data-value") === secondCard.getAttribute("data-value");
+
+      if (isMatch) {
+        matchedCards++;
+        if (matchedCards === cardValues.length) {
+          document.getElementById("result").innerHTML = "<span style='color: green; font-size: 2em;'>🎉 You win!</span>";
+          setTimeout(() => {
+            window.location.href = "https://vuyani1.github.io/suprise123.html"; // Redirect to surprise page
+          }, 2000);
+        }
+        resetCards();
+      } else {
+        setTimeout(() => {
+          firstCard.classList.remove("flipped");
+          secondCard.classList.remove("flipped");
+          resetCards();
+          document.getElementById("result").innerHTML = "<span style='color: red;'>❌ Incorrect! Try again.</span>";
+        }, 1000);
+      }
+    }
+
+    function resetCards() {
+      firstCard = null;
+      secondCard = null;
+      lockBoard = false;
     }
   </script>
 
