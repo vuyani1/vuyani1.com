@@ -3,57 +3,139 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Medium Game - Math Challenge!</title>
+  <title>Hard Game - Word Scramble</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 50px auto;
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      color: #333333;
+    }
+
+    #scrambledWord {
+      font-size: 2em;
+      margin-bottom: 20px;
+    }
+
+    #guessInput {
+      width: 200px;
+      padding: 10px;
+      font-size: 1.2em;
+      margin-right: 10px;
+    }
+
+    button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 1.2em;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    #timer {
+      font-size: 1.2em;
+      margin-top: 10px;
+    }
+
+    #result {
+      font-size: 1.5em;
+      margin-top: 20px;
+    }
+  </style>
 </head>
 <body>
-  <h1>Medium Level: Math Challenge!</h1>
-  <p>Solve the math problem below in under 10 seconds:</p>
-  <div id="problem"></div>
-  <input type="number" id="answerInput" placeholder="Enter your answer">
-  <button onclick="submitAnswer()">Submit Answer</button>
+  <div class="container">
+    <h1>Hard Level: Word Scramble!</h1>
+    <div id="scrambledWord"></div>
+    <input type="text" id="guessInput" placeholder="Enter your guess">
+    <button onclick="checkGuess()">Submit Guess</button>
 
-  <p id="timer"></p>
-  <p id="result"></p>
+    <p id="timer">Time left: <span id="timeLeft">15</span> seconds</p>
+    <p id="result"></p>
+  </div>
 
   <script>
-    let num1, num2, operation, correctAnswer, timeLeft;
-    const timerDisplay = document.getElementById("timer");
-    const problemDisplay = document.getElementById("problem");
+    const words = ["apple", "banana", "orange", "grape", "melon"];
+    let scrambledWord, correctWord, timeLeft;
+    const scrambledWordDisplay = document.getElementById("scrambledWord");
+    const guessInput = document.getElementById("guessInput");
     const resultDisplay = document.getElementById("result");
 
     function startGame() {
-      num1 = Math.floor(Math.random() * 10) + 1;
-      num2 = Math.floor(Math.random() * 10) + 1;
-      const operations = ['+', '-', '*'];
-      operation = operations[Math.floor(Math.random() * operations.length)];
-      correctAnswer = eval(num1 + operation + num2);
-      problemDisplay.innerHTML = `What is ${num1} ${operation} ${num2}?`;
-      timeLeft = 10;
+      generateWord();
+      timeLeft = 15;
       startTimer();
+    }
+
+    function generateWord() {
+      correctWord = words[Math.floor(Math.random() * words.length)];
+      scrambledWord = scrambleWord(correctWord);
+      scrambledWordDisplay.textContent = scrambledWord;
+    }
+
+    function scrambleWord(word) {
+      let scrambled = "";
+      const wordArray = word.split("");
+      while (wordArray.length > 0) {
+        scrambled += wordArray.splice(Math.floor(Math.random() * wordArray.length), 1);
+      }
+      return scrambled;
     }
 
     function startTimer() {
       const timer = setInterval(() => {
         timeLeft--;
-        timerDisplay.innerHTML = `⏳ Time left: ${timeLeft} seconds`;
-        if (timeLeft <= 0) {
+        document.getElementById("timeLeft").textContent = timeLeft;
+        if (timeLeft === 0) {
           clearInterval(timer);
-          resultDisplay.innerHTML = `💥 Time's up! The correct answer was ${correctAnswer}.`;
+          resultDisplay.innerHTML = `<span style='color: red; font-size: 1.5em;'>😞 Time's up! You lose. The correct word was ${correctWord}.</span>`;
+          setTimeout(() => {
+            window.location.href = "https://example.com";
+          }, 2000); // Redirect home after 2 seconds
         }
       }, 1000);
     }
 
-    function submitAnswer() {
-      const userAnswer = parseInt(document.getElementById("answerInput").value);
-      if (userAnswer === correctAnswer) {
-        resultDisplay.innerHTML = "🎉 Correct! Well done!";
+    function checkGuess() {
+      const userGuess = guessInput.value.trim().toLowerCase();
+      if (userGuess === correctWord) {
+        resultDisplay.innerHTML = "<span style='color: green; font-size: 2em;'>🎉 You win!</span>";
+        setTimeout(() => {
+          window.location.href = "https://example.com/secret-game";
+        }, 2000); // Redirect to secret game after 2 seconds
       } else {
-        resultDisplay.innerHTML = `❌ Wrong! The correct answer was ${correctAnswer}.`;
+        resultDisplay.innerHTML = "<span style='color: red;'>❌ Incorrect! Try again.</span>";
       }
     }
 
     // Start the game when the page loads
-    window.onload = startGame;
+    document.addEventListener("DOMContentLoaded", startGame);
   </script>
+
+  <!-- Google AdSense Code -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7484489054116946"
+     crossorigin="anonymous"></script>
+  <!-- Your AdSense ad code here -->
 </body>
 </html>
