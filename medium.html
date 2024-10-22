@@ -3,110 +3,177 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game Menu</title>
+    <title>Exciting Game Hub</title>
     <style>
+        /* Global Styles */
         body {
-            background-color: #f0f0f0; /* Light gray background */
-            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to bottom, #1c1c1c, #3a3a3a);
+            color: #f0f0f0;
+        }
+        
+        h1, h2 {
             text-align: center;
+            color: #fff;
         }
-        .game-container {
-            margin: 20px auto;
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
             padding: 20px;
-            border: 2px solid #ccc;
+        }
+
+        /* Menu Button Styles */
+        .menu {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 50px;
+        }
+
+        .menu button {
+            padding: 15px 30px;
+            background-color: #ff4500;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .menu button:hover {
+            background-color: #ff6347;
+            transform: scale(1.1);
+        }
+
+        /* Game Section Styles */
+        .game-section {
+            display: none;
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #2b2b2b;
             border-radius: 10px;
-            width: 80%;
-            max-width: 600px;
-            background-color: #fff; /* White background for game containers */
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
         }
-        h1 {
-            color: #333; /* Dark gray heading */
+
+        .active {
+            display: block;
         }
-        .game {
-            margin: 20px 0;
+
+        /* Exciting Animations */
+        .game-section h2 {
+            color: #ff4500;
+            font-size: 2em;
+            margin-bottom: 20px;
         }
-        .game-title {
-            font-size: 24px;
-            margin-bottom: 10px;
-            color: #007bff; /* Blue title */
+
+        /* Game-specific styles */
+        .game-instructions {
+            margin-bottom: 15px;
         }
-        .game-description {
+
+        .trivia-container, .mastermind-container, .text-adventure-container, .rpg-container {
+            font-size: 18px;
+            color: #ddd;
+        }
+
+        /* Buttons for game functionality (placeholders for now) */
+        .play-btn {
+            padding: 10px 20px;
+            background-color: #28a745;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
             font-size: 16px;
-            color: #666; /* Gray text */
+            cursor: pointer;
+            transition: background-color 0.3s ease;
         }
-        .game-feature {
-            margin-top: 10px;
-            text-align: left;
-        }
-        .game-feature ul {
-            list-style-type: disc;
-            margin-left: 20px;
-        }
-        .game-feature li {
-            margin-bottom: 5px;
+
+        .play-btn:hover {
+            background-color: #218838;
         }
     </style>
 </head>
 <body>
-    <div class="game-container">
-        <h1>Game Menu</h1>
-        
-        <div class="game">
-            <div class="game-title">Trivia Quiz Game</div>
-            <div class="game-description">
-                Concept: Players answer multiple-choice questions across various topics.
-            </div>
-            <div class="game-feature">
-                <ul>
-                    <li>Timed questions to increase difficulty.</li>
-                    <li>Leaderboard for high scores.</li>
-                    <li>Categories (history, science, pop culture) with varying levels of difficulty.</li>
-                </ul>
-            </div>
+    <div class="container">
+        <h1>Welcome to the Thrill-Seeker Game Hub!</h1>
+        <div class="menu">
+            <button onclick="showGame('trivia')">Trivia Quiz Game</button>
+            <button onclick="showGame('mastermind')">Mastermind</button>
+            <button onclick="showGame('text-adventure')">Text Adventure Game</button>
+            <button onclick="showGame('rpg')">Text-Based RPG</button>
         </div>
-        
-        <div class="game">
-            <div class="game-title">Mastermind</div>
-            <div class="game-description">
-                Concept: A code-breaking game where one player creates a secret code and the other player guesses it.
-            </div>
-            <div class="game-feature">
-                <ul>
-                    <li>Multiple rounds with increasing difficulty.</li>
-                    <li>Feedback on each guess.</li>
-                    <li>Score tracking based on time and accuracy.</li>
-                </ul>
+
+        <!-- Trivia Quiz Game Section -->
+        <div id="trivia" class="game-section trivia-container">
+            <h2>Trivia Quiz Game</h2>
+            <p class="game-instructions">Answer challenging questions across a wide range of topics! Can you beat the clock and top the leaderboard?</p>
+            <button class="play-btn" onclick="startTrivia()">Start Trivia!</button>
+            <div id="trivia-game-content">
+                <!-- Trivia game content will go here (JavaScript-powered) -->
             </div>
         </div>
 
-        <div class="game">
-            <div class="game-title">Text Adventure Game</div>
-            <div class="game-description">
-                Concept: Players navigate through a story by making choices that affect the outcome.
-            </div>
-            <div class="game-feature">
-                <ul>
-                    <li>Branching paths with multiple endings.</li>
-                    <li>Inventory system for items collected.</li>
-                    <li>Puzzles and riddles to solve.</li>
-                </ul>
+        <!-- Mastermind Game Section -->
+        <div id="mastermind" class="game-section mastermind-container">
+            <h2>Mastermind</h2>
+            <p class="game-instructions">Crack the code! You have limited tries to guess the correct combination of colors or numbers. Think fast!</p>
+            <button class="play-btn" onclick="startMastermind()">Start Mastermind!</button>
+            <div id="mastermind-game-content">
+                <!-- Mastermind game content will go here (JavaScript-powered) -->
             </div>
         </div>
 
-        <div class="game">
-            <div class="game-title">Text-Based Role-Playing Game (RPG)</div>
-            <div class="game-description">
-                Concept: Players create a character and navigate through a world filled with challenges and quests.
-            </div>
-            <div class="game-feature">
-                <ul>
-                    <li>Character stats affect gameplay.</li>
-                    <li>Random encounters with enemies or NPCs.</li>
-                    <li>Choices influence story and progression.</li>
-                </ul>
+        <!-- Text Adventure Game Section -->
+        <div id="text-adventure" class="game-section text-adventure-container">
+            <h2>Text Adventure Game</h2>
+            <p class="game-instructions">Embark on an epic journey! Choose wisely, as every decision shapes your fate. Where will your choices take you?</p>
+            <button class="play-btn" onclick="startTextAdventure()">Start Adventure!</button>
+            <div id="text-adventure-game-content">
+                <!-- Text Adventure game content will go here (JavaScript-powered) -->
             </div>
         </div>
 
+        <!-- Text-Based RPG Game Section -->
+        <div id="rpg" class="game-section rpg-container">
+            <h2>Text-Based Role-Playing Game (RPG)</h2>
+            <p class="game-instructions">Create your hero and dive into a world filled with quests, enemies, and challenges. Only the strong survive!</p>
+            <button class="play-btn" onclick="startRPG()">Start RPG!</button>
+            <div id="rpg-game-content">
+                <!-- RPG game content will go here (JavaScript-powered) -->
+            </div>
+        </div>
     </div>
+
+    <script>
+        // Show selected game section
+        function showGame(gameId) {
+            // Hide all game sections
+            document.querySelectorAll('.game-section').forEach(section => section.classList.remove('active'));
+            
+            // Show the selected game section
+            document.getElementById(gameId).classList.add('active');
+        }
+
+        // Placeholder functions for starting the games
+        function startTrivia() {
+            alert("Starting Trivia Game... (Implement game logic here)");
+        }
+
+        function startMastermind() {
+            alert("Starting Mastermind Game... (Implement game logic here)");
+        }
+
+        function startTextAdventure() {
+            alert("Starting Text Adventure Game... (Implement game logic here)");
+        }
+
+        function startRPG() {
+            alert("Starting RPG Game... (Implement game logic here)");
+        }
+    </script>
 </body>
 </html>
