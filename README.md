@@ -41,6 +41,12 @@ Subscribe for more exciting content and updates:
 - [POOF Channel](https://www.youtube.com/@POOF-f5c)
 - [VUYANI VILAKAZI Channel](https://www.youtube.com/@VUYANI_VILAKAZI)
 
+### 📺 Featured Videos:
+Watch my latest YouTube videos:
+- [Video 1](https://youtube.com/shorts/9r7G193cupk?si=1ImSGx-XkDSKr9L9)
+- [Video 2](https://youtube.com/shorts/gEi5TyNKXiA)
+- [Video 3](https://youtu.be/38JZdJeK5xg?si=nxSOjZOmqUFY-b0H)
+
 ---
 
 ## ⚠️ Copyright Notice
