@@ -3,237 +3,336 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3. Platform Jumping Game</title>
+    <title>Ultimate Game Hub</title>
     <style>
         body {
+            font-family: Arial, sans-serif;
+            background-color: #282c34;
+            color: white;
             margin: 0;
             padding: 0;
-            font-family: 'Poppins', sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            height: 100vh;
-            background: linear-gradient(to bottom, #4e8cda, #deebfa);
-            color: #fff;
-            overflow: hidden;
         }
-
-        h1 {
-            font-size: 3rem;
+        header {
+            background-color: #61dafb;
+            padding: 20px;
             text-align: center;
-            margin-bottom: 20px;
-            animation: typing 3s steps(30, end), blink-caret 0.75s step-end infinite;
-            white-space: nowrap;
-            overflow: hidden;
-            width: 0; /* Hidden by default */
+            font-size: 2em;
         }
-
-        @keyframes typing {
-            from { width: 0 }
-            to { width: 100% }
-        }
-
-        @keyframes blink-caret {
-            from, to { border-color: transparent }
-            50% { border-color: white; }
-        }
-
-        canvas {
-            background: #fff;
-            border: 2px solid #333;
-            margin-bottom: 20px;
-        }
-
-        .controls {
+        .menu {
+            margin: 20px;
             display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
+            gap: 20px;
         }
-
-        .button {
-            padding: 10px 20px;
-            font-size: 1.2rem;
-            border-radius: 5px;
+        .menu button {
+            padding: 15px 30px;
+            font-size: 1.2em;
+            background-color: #ff6347;
             border: none;
-            background-color: #ff4e50;
-            color: white;
+            border-radius: 5px;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: transform 0.2s;
         }
-
-        .button:hover {
-            background-color: #ff7e7e;
+        .menu button:hover {
+            transform: scale(1.1);
         }
-
-        .hidden {
+        .game {
             display: none;
+            text-align: center;
+            margin: 20px;
+        }
+        .game.active {
+            display: block;
+        }
+        #trivia {
+            background-color: #4caf50;
+            padding: 20px;
+            border-radius: 5px;
+        }
+        #mastermind {
+            background-color: #2196F3;
+            padding: 20px;
+            border-radius: 5px;
+        }
+        #textAdventure {
+            background-color: #ff9800;
+            padding: 20px;
+            border-radius: 5px;
+        }
+        #rpg {
+            background-color: #9c27b0;
+            padding: 20px;
+            border-radius: 5px;
+        }
+        /* Common styles */
+        h2 {
+            font-size: 1.5em;
+        }
+        .answer {
+            margin: 5px 0;
+            cursor: pointer;
+            background-color: #f44336;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        .answer:hover {
+            background-color: #d32f2f;
         }
     </style>
 </head>
 <body>
-    <h1 id="game-title">3. Platform Jumping Game</h1>
-    <canvas id="gameCanvas" width="800" height="400"></canvas>
-
-    <div class="controls">
-        <button class="button" onclick="move('left')">Left</button>
-        <button class="button" onclick="move('right')">Right</button>
-        <button class="button" onclick="jump()">Jump</button>
-        <button class="button" onclick="gravityShift()">Gravity Shift</button>
+    <header>
+        Ultimate Game Hub
+    </header>
+    <div class="menu">
+        <button onclick="showGame('trivia')">Trivia Quiz Game</button>
+        <button onclick="showGame('mastermind')">Mastermind</button>
+        <button onclick="showGame('textAdventure')">Text Adventure Game</button>
+        <button onclick="showGame('rpg')">Text-Based RPG</button>
     </div>
 
-    <div id="mode-buttons" class="hidden">
-        <button class="button" onclick="startGame('easy')">Easy Mode</button>
-        <button class="button" onclick="startGame('medium')">Medium Mode</button>
-        <button class="button" onclick="startGame('hard')">Hard Mode</button>
-        <button class="button" onclick="goHome()">Home</button>
+    <!-- Trivia Quiz Game -->
+    <div id="trivia" class="game">
+        <h2>Trivia Quiz Game</h2>
+        <p id="trivia-question"></p>
+        <div id="trivia-answers"></div>
+        <button onclick="nextTriviaQuestion()">Next Question</button>
+        <button onclick="backToMenu()">Back to Menu</button>
+    </div>
+
+    <!-- Mastermind -->
+    <div id="mastermind" class="game">
+        <h2>Mastermind</h2>
+        <p>Guess the color code! (Example: 1234)</p>
+        <input type="text" id="mastermind-input" />
+        <button onclick="submitMastermindGuess()">Guess</button>
+        <div id="mastermind-feedback"></div>
+        <button onclick="backToMenu()">Back to Menu</button>
+    </div>
+
+    <!-- Text Adventure Game -->
+    <div id="textAdventure" class="game">
+        <h2>Text Adventure Game</h2>
+        <p id="adventure-text"></p>
+        <div id="adventure-options"></div>
+        <button onclick="backToMenu()">Back to Menu</button>
+    </div>
+
+    <!-- Text-Based RPG -->
+    <div id="rpg" class="game">
+        <h2>Text-Based RPG</h2>
+        <p id="rpg-description"></p>
+        <button onclick="backToMenu()">Back to Menu</button>
     </div>
 
     <script>
-        const canvas = document.getElementById('gameCanvas');
-        const ctx = canvas.getContext('2d');
-        let player;
-        let platforms = [];
-        let mode;
-        let gameInterval;
-        let gravity = 0.5;
+        // Trivia Quiz Game Logic
+        const triviaQuestions = [
+            {
+                question: "What is the capital of France?",
+                answers: ["Berlin", "Madrid", "Paris", "Rome"],
+                correct: 2
+            },
+            {
+                question: "Which planet is known as the Red Planet?",
+                answers: ["Earth", "Mars", "Jupiter", "Venus"],
+                correct: 1
+            },
+            {
+                question: "What is the largest ocean on Earth?",
+                answers: ["Atlantic Ocean", "Indian Ocean", "Arctic Ocean", "Pacific Ocean"],
+                correct: 3
+            },
+            {
+                question: "Who wrote 'Hamlet'?",
+                answers: ["Charles Dickens", "William Shakespeare", "J.K. Rowling", "Mark Twain"],
+                correct: 1
+            }
+        ];
 
-        // Typing effect for title
-        const title = document.getElementById('game-title');
-        let titleLength = 0;
-        const titleText = title.innerText;
+        let currentTriviaIndex = 0;
 
-        function typeTitle() {
-            if (titleLength < titleText.length) {
-                title.innerText += titleText.charAt(titleLength);
-                titleLength++;
-                setTimeout(typeTitle, 100);
-            } else {
-                setTimeout(showModeButtons, 500);
+        function showGame(game) {
+            document.querySelectorAll('.game').forEach(div => {
+                div.classList.remove('active');
+            });
+            document.getElementById(game).classList.add('active');
+            if (game === 'trivia') {
+                loadTriviaQuestion();
             }
         }
 
-        function showModeButtons() {
-            title.classList.add('hidden');
-            document.getElementById('mode-buttons').classList.remove('hidden');
-        }
-
-        // Player object
-        class Player {
-            constructor() {
-                this.x = 50;
-                this.y = canvas.height - 60;
-                this.width = 40;
-                this.height = 40;
-                this.velocityY = 0;
-                this.jumping = false;
-                this.gravityShifted = false;
-            }
-
-            draw() {
-                ctx.fillStyle = 'blue';
-                ctx.fillRect(this.x, this.y, this.width, this.height);
-            }
-
-            move(dx) {
-                this.x += dx;
-            }
-
-            jump() {
-                if (!this.jumping) {
-                    this.velocityY = -10;
-                    this.jumping = true;
-                }
-            }
-
-            applyGravity() {
-                if (this.jumping) {
-                    this.velocityY += gravity;
-                    this.y += this.velocityY;
-
-                    if (this.y + this.height >= canvas.height - 20) {
-                        this.y = canvas.height - 60;
-                        this.jumping = false;
-                        this.velocityY = 0;
-                    }
-                }
-            }
-        }
-
-        // Platform object
-        class Platform {
-            constructor(x, y, width) {
-                this.x = x;
-                this.y = y;
-                this.width = width;
-            }
-
-            draw() {
-                ctx.fillStyle = 'green';
-                ctx.fillRect(this.x, this.y, this.width, 10);
-            }
-        }
-
-        function startGame(selectedMode) {
-            mode = selectedMode;
-            platforms = [];
-            player = new Player();
-            gameInterval = setInterval(updateGame, 20);
-            generatePlatforms();
-        }
-
-        function generatePlatforms() {
-            const platformCount = mode === 'easy' ? 5 : mode === 'medium' ? 7 : 9;
-            for (let i = 0; i < platformCount; i++) {
-                let x = Math.random() * (canvas.width - 100);
-                let y = Math.random() * (canvas.height - 100) + 100;
-                let width = Math.random() * (100 - 40) + 40;
-                platforms.push(new Platform(x, y, width));
-            }
-        }
-
-        function move(direction) {
-            const step = 10;
-            if (direction === 'left') player.move(-step);
-            if (direction === 'right') player.move(step);
-        }
-
-        function jump() {
-            player.jump();
-        }
-
-        function gravityShift() {
-            player.gravityShifted = !player.gravityShifted;
-            gravity = player.gravityShifted ? -0.5 : 0.5; // Toggle gravity direction
-        }
-
-        function updateGame() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            player.applyGravity();
-            player.draw();
-
-            // Draw platforms
-            platforms.forEach(platform => {
-                platform.draw();
-                if (player.y + player.height >= platform.y && player.x + player.width > platform.x && player.x < platform.x + platform.width) {
-                    player.y = platform.y - player.height; // Place player on platform
-                    player.jumping = false;
-                    player.velocityY = 0;
-                }
+        function loadTriviaQuestion() {
+            const questionData = triviaQuestions[currentTriviaIndex];
+            document.getElementById('trivia-question').textContent = questionData.question;
+            const answersDiv = document.getElementById('trivia-answers');
+            answersDiv.innerHTML = '';
+            questionData.answers.forEach((answer, index) => {
+                const answerDiv = document.createElement('div');
+                answerDiv.textContent = answer;
+                answerDiv.className = 'answer';
+                answerDiv.onclick = () => checkTriviaAnswer(index);
+                answersDiv.appendChild(answerDiv);
             });
         }
 
-        function goHome() {
-            clearInterval(gameInterval);
-            player = null;
-            platforms = [];
-            titleLength = 0;
-            title.innerText = '';
-            document.getElementById('mode-buttons').classList.add('hidden');
-            typeTitle();
+        function checkTriviaAnswer(selected) {
+            if (selected === triviaQuestions[currentTriviaIndex].correct) {
+                alert("Correct!");
+            } else {
+                alert("Wrong!");
+            }
+            currentTriviaIndex++;
+            if (currentTriviaIndex < triviaQuestions.length) {
+                loadTriviaQuestion();
+            } else {
+                alert("Quiz finished!");
+                currentTriviaIndex = 0;
+                backToMenu();
+            }
         }
 
-        typeTitle();
+        // Mastermind Logic
+        const mastermindCode = generateMastermindCode();
+        let attempts = 0;
+
+        function generateMastermindCode() {
+            let code = '';
+            for (let i = 0; i < 4; i++) {
+                code += Math.floor(Math.random() * 10); // Generate a random digit (0-9)
+            }
+            return code;
+        }
+
+        function submitMastermindGuess() {
+            const input = document.getElementById('mastermind-input').value;
+            if (input.length !== 4) {
+                alert("Please enter a 4-digit code.");
+                return;
+            }
+            attempts++;
+            const feedback = getMastermindFeedback(input);
+            document.getElementById('mastermind-feedback').innerHTML += `<p>Attempt ${attempts}: ${feedback}</p>`;
+            if (input === mastermindCode) {
+                alert("Congratulations! You've cracked the code!");
+                attempts = 0; // Reset attempts for the next game
+                backToMenu();
+            } else if (attempts >= 10) {
+                alert(`Game over! The code was ${mastermindCode}.`);
+                attempts = 0; // Reset attempts for the next game
+                backToMenu();
+            }
+            document.getElementById('mastermind-input').value = '';
+        }
+
+        function getMastermindFeedback(guess) {
+            let correctPosition = 0;
+            let wrongPosition = 0;
+            let codeArray = mastermindCode.split('');
+            let guessArray = guess.split('');
+
+            // Check for correct positions
+            for (let i = 0; i < 4; i++) {
+                if (guessArray[i] === codeArray[i]) {
+                    correctPosition++;
+                    codeArray[i] = null; // Mark as checked
+                    guessArray[i] = null; // Mark as checked
+                }
+            }
+
+            // Check for wrong positions
+            for (let i = 0; i < 4; i++) {
+                if (guessArray[i] !== null && codeArray.includes(guessArray[i])) {
+                    wrongPosition++;
+                    codeArray[codeArray.indexOf(guessArray[i])] = null; // Mark as checked
+                }
+            }
+
+            return `${correctPosition} correct positions, ${wrongPosition} wrong positions.`;
+        }
+
+        // Text Adventure Game Logic
+        const adventureStory = {
+            start: {
+                text: "You find yourself in a dark forest. You can go left or right.",
+                options: [
+                    { text: "Go left", next: "leftPath" },
+                    { text: "Go right", next: "rightPath" }
+                ]
+            },
+            leftPath: {
+                text: "You encounter a wild animal! Fight or run?",
+                options: [
+                    { text: "Fight", next: "fightAnimal" },
+                    { text: "Run", next: "runAway" }
+                ]
+            },
+            rightPath: {
+                text: "You discover a hidden treasure! What do you want to do?",
+                options: [
+                    { text: "Take treasure", next: "takeTreasure" },
+                    { text: "Leave it", next: "leaveTreasure" }
+                ]
+            },
+            fightAnimal: {
+                text: "You bravely fight the animal and win!",
+                options: [{ text: "Return to the start", next: "start" }]
+            },
+            runAway: {
+                text: "You run away safely but feel cowardly.",
+                options: [{ text: "Return to the start", next: "start" }]
+            },
+            takeTreasure: {
+                text: "You take the treasure and become rich!",
+                options: [{ text: "Return to the start", next: "start" }]
+            },
+            leaveTreasure: {
+                text: "You leave the treasure behind and continue your adventure.",
+                options: [{ text: "Return to the start", next: "start" }]
+            }
+        };
+
+        function loadAdventureText(path) {
+            const adventureData = adventureStory[path];
+            document.getElementById('adventure-text').textContent = adventureData.text;
+            const optionsDiv = document.getElementById('adventure-options');
+            optionsDiv.innerHTML = '';
+            adventureData.options.forEach(option => {
+                const button = document.createElement('button');
+                button.textContent = option.text;
+                button.onclick = () => loadAdventureText(option.next);
+                optionsDiv.appendChild(button);
+            });
+        }
+
+        // Text-Based RPG Logic
+        const rpgCharacter = {
+            name: "Hero",
+            strength: 10,
+            intelligence: 8,
+            quests: [],
+            health: 100
+        };
+
+        function loadRpgDescription() {
+            document.getElementById('rpg-description').textContent = `Welcome, ${rpgCharacter.name}! You have ${rpgCharacter.health} health, ${rpgCharacter.strength} strength, and ${rpgCharacter.intelligence} intelligence. Choose wisely as you embark on your adventures!`;
+        }
+
+        // Show the first game on load
+        window.onload = function() {
+            showGame('trivia');
+            loadAdventureText('start');
+            loadRpgDescription();
+        };
+
+        function backToMenu() {
+            document.querySelectorAll('.game').forEach(div => {
+                div.classList.remove('active');
+            });
+        }
     </script>
 </body>
 </html>
