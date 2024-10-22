@@ -197,24 +197,60 @@
         ];
 
         const textAdventures = [
-            "You find yourself in a dark forest. A mysterious figure approaches you. Do you speak to them or hide?",
-            "A village elder tells you of a powerful artifact hidden in the mountains. Do you embark on the quest or refuse?",
-            "You overhear people talking about a hero who saved their town. Do you reveal yourself or keep quiet?"
+            {
+                story: "You find yourself in a dark forest. A mysterious figure approaches you. Do you speak to them?",
+                choices: [
+                    { text: "Yes", next: "The figure hands you a map. Do you follow it?" },
+                    { text: "No", next: "You hide behind a tree. The figure vanishes." }
+                ]
+            },
+            {
+                story: "A village elder tells you of a powerful artifact hidden in the mountains. Do you embark on the quest?",
+                choices: [
+                    { text: "Yes", next: "You set off into the mountains. After days of travel, you find a cave. Do you enter?" },
+                    { text: "No", next: "You stay behind, but your dreams are haunted by visions of the artifact." }
+                ]
+            },
+            {
+                story: "You overhear people talking about a hero who saved their town. Do you reveal your identity?",
+                choices: [
+                    { text: "Yes", next: "The people cheer, but a shadowy figure watches you from afar. Do you confront them?" },
+                    { text: "No", next: "You keep quiet and continue living your secret life." }
+                ]
+            }
         ];
 
         const rpgScenarios = [
-            "A shadowy figure in a cloak knows your secret. Will you confront them or flee?",
-            "The king summons you for a dangerous mission. Will you accept, risking exposure, or decline?",
-            "A mysterious traveler offers to help you with your quest. Do you trust them or proceed alone?"
+            {
+                story: "You are in a tavern, and a mysterious traveler offers you a quest. Do you accept?",
+                choices: [
+                    { text: "Yes", next: "You follow the traveler into the woods. You hear wolves howling. Do you press on?" },
+                    { text: "No", next: "You stay in the tavern, but a sense of unease fills you." }
+                ]
+            },
+            {
+                story: "A king asks for your help in reclaiming his lost kingdom. Do you agree?",
+                choices: [
+                    { text: "Yes", next: "You march with the king’s army. On the battlefield, you spot a traitor. Do you warn the king?" },
+                    { text: "No", next: "You refuse, but spies begin to follow your every move." }
+                ]
+            },
+            {
+                story: "You find an ancient sword in the ruins of a temple. Do you take it?",
+                choices: [
+                    { text: "Yes", next: "The sword glows with power. A dragon awakens nearby. Do you stand your ground?" },
+                    { text: "No", next: "You leave the sword behind, but it calls to you in your dreams." }
+                ]
+            }
         ];
 
-        // Function to show the selected game section
-        function showGame(gameId) {
+        // Function to show the selected game
+        function showGame(game) {
             document.querySelectorAll('.game-section').forEach(section => section.classList.remove('active'));
-            document.getElementById(gameId).classList.add('active');
+            document.getElementById(game).classList.add('active');
         }
 
-        // Random Trivia Game
+        // Trivia Quiz Logic
         function startTrivia() {
             const randomQuestion = triviaQuestions[Math.floor(Math.random() * triviaQuestions.length)];
             let content = `<p>${randomQuestion.question}</p>`;
@@ -226,7 +262,6 @@
             document.getElementById('trivia-game-content').innerHTML = content;
         }
 
-        // Function to check Trivia Answer
         function checkTriviaAnswer(index, correct) {
             if (index === correct) {
                 alert("Correct! Here's the next question...");
@@ -236,33 +271,40 @@
             }
         }
 
-        // Mastermind (Placeholder for now)
-        function startMastermind() {
-            document.getElementById('mastermind-game-content').innerHTML = "<p>Coming Soon: Mastermind Game Logic!</p>";
-        }
-
-        // Random Text Adventure Game
+        // Text Adventure Game Logic
         function startTextAdventure() {
             const randomAdventure = textAdventures[Math.floor(Math.random() * textAdventures.length)];
-            let content = `<p>${randomAdventure}</p>`;
-            content += `<button class="play-btn" onclick="continueTextAdventure()">Continue...</button>`;
+            let content = `<p>${randomAdventure.story}</p>`;
+            randomAdventure.choices.forEach((choice, index) => {
+                content += `<button class="answer-btn" onclick="continueTextAdventure(${index})">${choice.text}</button>`;
+            });
             document.getElementById('text-adventure-game-content').innerHTML = content;
         }
 
-        function continueTextAdventure() {
-            startTextAdventure();
+        function continueTextAdventure(choiceIndex) {
+            const randomAdventure = textAdventures[Math.floor(Math.random() * textAdventures.length)];
+            const nextPart = randomAdventure.choices[choiceIndex].next;
+            let content = `<p>${nextPart}</p>`;
+            content += `<button class="play-btn" onclick="startTextAdventure()">Play another story</button>`;
+            document.getElementById('text-adventure-game-content').innerHTML = content;
         }
 
-        // Random RPG Game
+        // RPG Game Logic
         function startRPG() {
             const randomRPG = rpgScenarios[Math.floor(Math.random() * rpgScenarios.length)];
-            let content = `<p>${randomRPG}</p>`;
-            content += `<button class="play-btn" onclick="continueRPG()">Continue...</button>`;
+            let content = `<p>${randomRPG.story}</p>`;
+            randomRPG.choices.forEach((choice, index) => {
+                content += `<button class="answer-btn" onclick="continueRPG(${index})">${choice.text}</button>`;
+            });
             document.getElementById('rpg-game-content').innerHTML = content;
         }
 
-        function continueRPG() {
-            startRPG();
+        function continueRPG(choiceIndex) {
+            const randomRPG = rpgScenarios[Math.floor(Math.random() * rpgScenarios.length)];
+            const nextPart = randomRPG.choices[choiceIndex].next;
+            let content = `<p>${nextPart}</p>`;
+            content += `<button class="play-btn" onclick="startRPG()">Play another story</button>`;
+            document.getElementById('rpg-game-content').innerHTML = content;
         }
     </script>
 </body>
