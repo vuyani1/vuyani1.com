@@ -3,20 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fun Games Collection by Vuyani</title>
+  <title>Wild Thrill-Seeker Games by Vuyani</title>
   <style>
     body {
       font-family: 'Arial', sans-serif;
-      background: linear-gradient(to bottom right, #1e1e2f, #3f3f5f);
+      background: linear-gradient(to bottom right, #ff416c, #ff4b2b);
       color: #ffffff;
       text-align: center;
       padding: 20px;
+      animation: gradientMove 10s ease infinite;
+    }
+
+    /* Gradient Animation */
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
     h1 {
-      color: #ffcc00;
+      color: #ffdd00;
       font-size: 3em;
       margin-bottom: 20px;
+      text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.7);
     }
 
     .game-list {
@@ -39,7 +48,7 @@
     }
 
     a:hover {
-      background-color: #ff0066;
+      background-color: #06d6a0;
     }
 
     footer {
@@ -54,13 +63,13 @@
   </style>
 </head>
 <body>
-  <h1>🎮 Fun Games by Vuyani 🎮</h1>
-  <p>Welcome to the ultimate collection of simple yet fun games. Choose your level and start playing now!</p>
+  <h1>🎮 Wild Thrill-Seeker Games by Vuyani 🎮</h1>
+  <p>Welcome to the ultimate collection of exciting and thrilling games. Choose your adventure and start playing now!</p>
 
   <ul class="game-list">
-    <li><a href="easy.html">🟢 Easy Game: Guess the Number</a></li>
-    <li><a href="medium.html">🟡 Medium Game: Math Challenge</a></li>
-    <li><a href="hard.html">🔴 Hard Game: Word Scramble</a></li>
+    <li><a href="Adventure.html">🌲 Adventure Game: Choose Your Destiny</a></li>
+    <li><a href="TIC-TAC-TOE.html">⚔️ TIC-TAC-TOE: Battle of Wits</a></li>
+    <li><a href="Simon-Says.html">🎵 Simon Says: Memory Challenge</a></li>
   </ul>
 
   <footer>
