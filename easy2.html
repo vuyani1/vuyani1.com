@@ -45,6 +45,27 @@
             cursor: pointer;
             border-radius: 10px;
         }
+        .trophy {
+            display: none; /* Hide trophy initially */
+            font-size: 3em; /* Adjust size as needed */
+            margin-top: 20px;
+        }
+        /* Fireworks CSS animation */
+        @keyframes fireworks {
+            0% { opacity: 0; }
+            100% { opacity: 1; transform: scale(1.5); }
+        }
+        .fireworks {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 999;
+            animation: fireworks 1s ease-in-out;
+        }
     </style>
 </head>
 <body>
@@ -63,12 +84,19 @@
         <div class="cell" data-cell></div>
     </div>
     <div id="message"></div>
+    <div class="trophy" id="trophy">🏆</div> <!-- Trophy emoji -->
     <button class="home-btn" onclick="window.location.href='easy.html'">Back to Easy</button>
+    <button class="game-button" onclick="window.location.href='https://vuyani1.github.io/easy2.html'">Easy 2: Bot Mode Tic Tac Toe</button>
+
+    <!-- Fireworks div -->
+    <div class="fireworks" id="fireworks"></div>
 </div>
 
 <script>
     const cells = document.querySelectorAll('[data-cell]');
     const messageElement = document.getElementById('message');
+    const trophyElement = document.getElementById('trophy');
+    const fireworksElement = document.getElementById('fireworks');
     let currentPlayer = 'X';
     let gameOver = false;
 
@@ -85,6 +113,9 @@
                 cells[b].textContent === currentPlayer &&
                 cells[c].textContent === currentPlayer) {
                 messageElement.textContent = `${currentPlayer} Wins!`;
+                trophyElement.style.display = 'block'; // Show trophy
+                fireworksElement.style.display = 'block'; // Show fireworks
+                playSound(); // Play sound on win
                 gameOver = true;
             }
         });
@@ -100,6 +131,7 @@
 
     function botMove() {
         let availableCells = [...cells].filter(cell => cell.textContent === '');
+        if (availableCells.length === 0) return; // Check if there are available cells
         let randomCell = availableCells[Math.floor(Math.random() * availableCells.length)];
         randomCell.textContent = 'O';
         checkWin();
@@ -118,6 +150,12 @@
             }
         });
     });
+
+    // Function to play sound
+    function playSound() {
+        const audio = new Audio('https://www.soundjay.com/button/sounds/button-1.mp3'); // Replace with a suitable sound URL
+        audio.play();
+    }
 </script>
 
 </body>
