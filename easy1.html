@@ -37,13 +37,34 @@
             font-size: 1.5em;
             color: white;
         }
-        .home-btn {
+        .home-btn, .reset-btn {
             padding: 10px 30px;
             margin-top: 20px;
             background-color: #ff6b6b;
             color: white;
             cursor: pointer;
             border-radius: 10px;
+            border: none;
+        }
+        .trophy {
+            display: none; /* Hide trophy initially */
+            font-size: 3em; /* Adjust size as needed */
+            margin-top: 20px;
+        }
+        @keyframes fireworks {
+            0% { opacity: 0; }
+            100% { opacity: 1; transform: scale(1.5); }
+        }
+        .fireworks {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 999;
+            animation: fireworks 1s ease-in-out forwards;
         }
     </style>
 </head>
@@ -63,12 +84,18 @@
         <div class="cell" data-cell></div>
     </div>
     <div id="message"></div>
-    <button class="home-btn" onclick="window.location.href='easy.html'">Back to Easy</button>
+    <div class="trophy" id="trophy">🏆</div> <!-- Trophy emoji -->
+    <button class="reset-btn" id="resetButton">Reset Game</button>
+    <button class="game-button" onclick="window.location.href='https://vuyani1.github.io/easy2.html'">Easy 2: Bot Mode Tic Tac Toe</button>
+
+    <div class="fireworks" id="fireworks"></div>
 </div>
 
 <script>
     const cells = document.querySelectorAll('[data-cell]');
     const messageElement = document.getElementById('message');
+    const trophyElement = document.getElementById('trophy');
+    const fireworksElement = document.getElementById('fireworks');
     let currentPlayer = 'X';
     let gameOver = false;
 
@@ -85,7 +112,10 @@
                 cells[b].textContent === currentPlayer &&
                 cells[c].textContent === currentPlayer) {
                 messageElement.textContent = `${currentPlayer} Wins!`;
+                trophyElement.style.display = 'block'; // Show trophy
+                fireworksElement.style.display = 'block'; // Show fireworks
                 gameOver = true;
+                playSound(); // Play sound on win
             }
         });
     }
@@ -107,6 +137,27 @@
                 currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
             }
         });
+    });
+
+    // Function to play sound
+    function playSound() {
+        const audio = new Audio('https://www.soundjay.com/button/beep-07.wav'); // Example sound effect
+        audio.play();
+    }
+
+    // Reset the game
+    document.getElementById('resetButton').addEventListener('click', () => {
+        cells.forEach(cell => cell.textContent = '');
+        messageElement.textContent = '';
+        trophyElement.style.display = 'none'; // Hide trophy
+        fireworksElement.style.display = 'none'; // Hide fireworks
+        currentPlayer = 'X';
+        gameOver = false;
+    });
+
+    // Hide fireworks after animation ends
+    fireworksElement.addEventListener('animationend', () => {
+        fireworksElement.style.display = 'none';
     });
 </script>
 
