@@ -174,7 +174,7 @@
         <!-- Text Adventure Game Section -->
         <div id="text-adventure" class="game-section">
             <h2>Text Adventure Game</h2>
-            <p class="game-story">You awaken in an unknown land. Every choice you make leads to a different path in this unpredictable story. Choose wisely!</p>
+            <p class="game-story">You are a hero with a secret. Every choice you make will shape your destiny and hide your identity. Continue your journey!</p>
             <button class="play-btn" onclick="startTextAdventure()">Start Your Adventure!</button>
             <div id="text-adventure-game-content"></div>
         </div>
@@ -182,7 +182,7 @@
         <!-- Text-Based RPG Game Section -->
         <div id="rpg" class="game-section">
             <h2>Text-Based RPG</h2>
-            <p class="game-story">Step into the shoes of a brave hero in this dynamic world where battles, quests, and random encounters await you.</p>
+            <p class="game-story">Step into a world full of quests, secrets, and challenges. You are a hero, but can you keep your secret hidden?</p>
             <button class="play-btn" onclick="startRPG()">Start Your RPG Journey!</button>
             <div id="rpg-game-content"></div>
         </div>
@@ -197,15 +197,15 @@
         ];
 
         const textAdventures = [
-            "You find yourself in a dark forest. Do you venture deeper or head back to the village?",
-            "A bridge appears before you, but it's crumbling. Do you cross it or find another path?",
-            "An old man offers you a magical sword. Do you take it or refuse his offer?"
+            "You find yourself in a dark forest. A mysterious figure approaches you. Do you speak to them or hide?",
+            "A village elder tells you of a powerful artifact hidden in the mountains. Do you embark on the quest or refuse?",
+            "You overhear people talking about a hero who saved their town. Do you reveal yourself or keep quiet?"
         ];
 
         const rpgScenarios = [
-            "You stand at the gates of a haunted castle. The king has asked you to rescue the princess. What will you do?",
-            "In the mountains, you encounter a fierce dragon. Do you fight or flee?",
-            "You meet a mysterious traveler offering rare artifacts. Do you trade with him or continue on your quest?"
+            "A shadowy figure in a cloak knows your secret. Will you confront them or flee?",
+            "The king summons you for a dangerous mission. Will you accept, risking exposure, or decline?",
+            "A mysterious traveler offers to help you with your quest. Do you trust them or proceed alone?"
         ];
 
         // Function to show the selected game section
@@ -217,36 +217,52 @@
         // Random Trivia Game
         function startTrivia() {
             const randomQuestion = triviaQuestions[Math.floor(Math.random() * triviaQuestions.length)];
-            let content = `<p>${randomQuestion.question}</p><div class="answer-options">`;
+            let content = `<p>${randomQuestion.question}</p>`;
+            content += `<div class="answer-options">`;
             randomQuestion.answers.forEach((answer, index) => {
-                content += `<button class="answer-btn" onclick="checkAnswer(${index}, ${randomQuestion.correct})">${answer}</button>`;
+                content += `<button class="answer-btn" onclick="checkTriviaAnswer(${index}, ${randomQuestion.correct})">${answer}</button>`;
             });
             content += "</div>";
             document.getElementById('trivia-game-content').innerHTML = content;
         }
 
         // Function to check Trivia Answer
-        function checkAnswer(index, correct) {
+        function checkTriviaAnswer(index, correct) {
             if (index === correct) {
-                alert("Correct! Well done.");
+                alert("Correct! Here's the next question...");
+                startTrivia();
             } else {
-                alert("Wrong answer. Try again!");
+                window.location.href = "https://vuyani1.github.io";
             }
         }
 
-        // Placeholder for other game logics (Mastermind, Text Adventure, RPG)
+        // Mastermind (Placeholder for now)
         function startMastermind() {
             document.getElementById('mastermind-game-content').innerHTML = "<p>Coming Soon: Mastermind Game Logic!</p>";
         }
 
+        // Random Text Adventure Game
         function startTextAdventure() {
             const randomAdventure = textAdventures[Math.floor(Math.random() * textAdventures.length)];
-            document.getElementById('text-adventure-game-content').innerHTML = `<p>${randomAdventure}</p>`;
+            let content = `<p>${randomAdventure}</p>`;
+            content += `<button class="play-btn" onclick="continueTextAdventure()">Continue...</button>`;
+            document.getElementById('text-adventure-game-content').innerHTML = content;
         }
 
+        function continueTextAdventure() {
+            startTextAdventure();
+        }
+
+        // Random RPG Game
         function startRPG() {
             const randomRPG = rpgScenarios[Math.floor(Math.random() * rpgScenarios.length)];
-            document.getElementById('rpg-game-content').innerHTML = `<p>${randomRPG}</p>`;
+            let content = `<p>${randomRPG}</p>`;
+            content += `<button class="play-btn" onclick="continueRPG()">Continue...</button>`;
+            document.getElementById('rpg-game-content').innerHTML = content;
+        }
+
+        function continueRPG() {
+            startRPG();
         }
     </script>
 </body>
