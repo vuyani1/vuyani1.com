@@ -3,27 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Memory Flip Game 😊😊</title>
+    <title>3. Platform Jumping Game</title>
     <style>
-        /* General Styles */
         body {
             margin: 0;
             padding: 0;
             font-family: 'Poppins', sans-serif;
-            background: radial-gradient(circle, rgba(58,123,213,1) 0%, rgba(0,212,255,1) 100%);
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
+            justify-content: center;
             height: 100vh;
+            background: linear-gradient(to bottom, #4e8cda, #deebfa);
+            color: #fff;
             overflow: hidden;
         }
 
         h1 {
             font-size: 3rem;
-            color: #fff;
             text-align: center;
-            margin-top: 0;
-            animation: typing 3s steps(40, end), blink-caret .75s step-end infinite;
+            margin-bottom: 20px;
+            animation: typing 3s steps(30, end), blink-caret 0.75s step-end infinite;
+            white-space: nowrap;
+            overflow: hidden;
+            width: 0; /* Hidden by default */
         }
 
         @keyframes typing {
@@ -36,238 +39,201 @@
             50% { border-color: white; }
         }
 
-        .container {
-            text-align: center;
-            color: white;
-            width: 100%;
-            padding: 20px;
+        canvas {
+            background: #fff;
+            border: 2px solid #333;
+            margin-bottom: 20px;
         }
 
-        /* Main Menu */
-        .main-menu {
+        .controls {
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 20px;
+            gap: 10px;
+            margin-bottom: 20px;
         }
 
-        /* Responsive Game buttons */
         .button {
-            padding: 15px 30px;
-            font-size: 1.5rem;
-            border-radius: 10px;
+            padding: 10px 20px;
+            font-size: 1.2rem;
+            border-radius: 5px;
             border: none;
             background-color: #ff4e50;
             color: white;
             cursor: pointer;
-            transition: transform 0.3s, background-color 0.3s;
-            width: 80%;
-            max-width: 300px;
-        }
-
-        .button:hover {
-            transform: scale(1.1);
-            background-color: #ff7e7e;
-        }
-
-        /* Game card grid for responsiveness */
-        .game-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-            gap: 10px;
-            justify-content: center;
-            margin: 30px 0;
-            padding: 0 10px;
-        }
-
-        .game-button {
-            width: 100%;
-            padding-top: 100%;
-            position: relative;
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            cursor: pointer;
-            transition: transform 0.3s;
-        }
-
-        .game-button.flipped span {
-            opacity: 1; /* Show emoji */
-        }
-
-        .game-button span {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 2rem;
-            color: #333;
-            opacity: 0; /* Hide initially */
-            transition: opacity 0.3s;
-        }
-
-        /* Retry and Back buttons */
-        .retry-btn, .back-btn {
-            padding: 10px 20px;
-            font-size: 1.2rem;
-            color: white;
-            background-color: #333;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
             transition: background-color 0.3s;
         }
 
-        .retry-btn:hover, .back-btn:hover {
-            background-color: #555;
+        .button:hover {
+            background-color: #ff7e7e;
         }
 
-        /* Cool Background Animation */
-        .background-animate {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            background: url('https://i.pinimg.com/originals/a2/7c/d7/a27cd75f3a471484c5a6710e9252f617.gif') no-repeat center center;
-            background-size: cover;
-            z-index: -1;
-        }
-
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2.5rem;
-            }
-
-            .button {
-                font-size: 1.2rem;
-            }
-
-            .game-button span {
-                font-size: 1.5rem;
-            }
+        .hidden {
+            display: none;
         }
     </style>
 </head>
 <body>
+    <h1 id="game-title">3. Platform Jumping Game</h1>
+    <canvas id="gameCanvas" width="800" height="400"></canvas>
 
-    <div class="background-animate"></div>
+    <div class="controls">
+        <button class="button" onclick="move('left')">Left</button>
+        <button class="button" onclick="move('right')">Right</button>
+        <button class="button" onclick="jump()">Jump</button>
+        <button class="button" onclick="gravityShift()">Gravity Shift</button>
+    </div>
 
-    <div class="container">
-        <h1>Memory Flip Game 😊😊</h1>
-
-        <!-- Main Menu -->
-        <div id="main-menu" class="main-menu">
-            <button class="button" onclick="startGame('easy')">Easy Mode</button>
-            <button class="button" onclick="startGame('medium')">Medium Mode</button>
-            <button class="button" onclick="startGame('hard')">Hard Mode</button>
-            <button class="button" onclick="startGame('competitive')">Player vs Bot</button>
-        </div>
-
-        <!-- Game Grid -->
-        <div id="game-grid" class="game-grid hidden">
-            <!-- Memory cards will be generated here -->
-        </div>
-
-        <!-- Retry and Back Buttons -->
-        <button id="retry-btn" class="retry-btn hidden" onclick="startGame(currentMode)">Retry</button>
-        <button id="back-btn" class="back-btn hidden" onclick="goHome()">Back</button>
+    <div id="mode-buttons" class="hidden">
+        <button class="button" onclick="startGame('easy')">Easy Mode</button>
+        <button class="button" onclick="startGame('medium')">Medium Mode</button>
+        <button class="button" onclick="startGame('hard')">Hard Mode</button>
+        <button class="button" onclick="goHome()">Home</button>
     </div>
 
     <script>
-        let cards = [];
-        let selectedCards = [];
-        let matchedCards = [];
-        let currentMode = 'easy';
-        let emojiSet = [
-            '😀', '😃', '😄', '😆', '😅', '😂', '🤣', '😇',
-            '🥰', '😍', '🤩', '😘', '😋', '😜', '😎', '🤖'
-        ];
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        let player;
+        let platforms = [];
+        let mode;
+        let gameInterval;
+        let gravity = 0.5;
 
-        const gameGrid = document.getElementById('game-grid');
-        const retryBtn = document.getElementById('retry-btn');
-        const backBtn = document.getElementById('back-btn');
-        const mainMenu = document.getElementById('main-menu');
+        // Typing effect for title
+        const title = document.getElementById('game-title');
+        let titleLength = 0;
+        const titleText = title.innerText;
 
-        const modes = {
-            easy: 4,  // 4 pairs of cards
-            medium: 8,  // 8 pairs
-            hard: 12,  // 12 pairs
-            competitive: 8  // Competitive will use 8 pairs like medium
-        };
-
-        function startGame(mode) {
-            currentMode = mode;
-            mainMenu.classList.add('hidden');
-            gameGrid.classList.remove('hidden');
-            retryBtn.classList.remove('hidden');
-            backBtn.classList.remove('hidden');
-            generateCards(modes[mode]);
+        function typeTitle() {
+            if (titleLength < titleText.length) {
+                title.innerText += titleText.charAt(titleLength);
+                titleLength++;
+                setTimeout(typeTitle, 100);
+            } else {
+                setTimeout(showModeButtons, 500);
+            }
         }
 
-        function generateCards(numPairs) {
-            gameGrid.innerHTML = '';
-            cards = [];
-            matchedCards = [];
-            selectedCards = [];
+        function showModeButtons() {
+            title.classList.add('hidden');
+            document.getElementById('mode-buttons').classList.remove('hidden');
+        }
 
-            // Select random emojis
-            const selectedEmojis = emojiSet.sort(() => 0.5 - Math.random()).slice(0, numPairs);
-            const cardValues = [...selectedEmojis, ...selectedEmojis];  // duplicate for matching
+        // Player object
+        class Player {
+            constructor() {
+                this.x = 50;
+                this.y = canvas.height - 60;
+                this.width = 40;
+                this.height = 40;
+                this.velocityY = 0;
+                this.jumping = false;
+                this.gravityShifted = false;
+            }
 
-            // Shuffle cards
-            cardValues.sort(() => Math.random() - 0.5);
+            draw() {
+                ctx.fillStyle = 'blue';
+                ctx.fillRect(this.x, this.y, this.width, this.height);
+            }
 
-            // Create card elements
-            cardValues.forEach(value => {
-                const card = document.createElement('div');
-                card.classList.add('game-button');
-                card.dataset.value = value;
-                card.innerHTML = '<span>?</span>';
-                card.addEventListener('click', handleCardClick);
-                gameGrid.appendChild(card);
-                cards.push(card);
+            move(dx) {
+                this.x += dx;
+            }
+
+            jump() {
+                if (!this.jumping) {
+                    this.velocityY = -10;
+                    this.jumping = true;
+                }
+            }
+
+            applyGravity() {
+                if (this.jumping) {
+                    this.velocityY += gravity;
+                    this.y += this.velocityY;
+
+                    if (this.y + this.height >= canvas.height - 20) {
+                        this.y = canvas.height - 60;
+                        this.jumping = false;
+                        this.velocityY = 0;
+                    }
+                }
+            }
+        }
+
+        // Platform object
+        class Platform {
+            constructor(x, y, width) {
+                this.x = x;
+                this.y = y;
+                this.width = width;
+            }
+
+            draw() {
+                ctx.fillStyle = 'green';
+                ctx.fillRect(this.x, this.y, this.width, 10);
+            }
+        }
+
+        function startGame(selectedMode) {
+            mode = selectedMode;
+            platforms = [];
+            player = new Player();
+            gameInterval = setInterval(updateGame, 20);
+            generatePlatforms();
+        }
+
+        function generatePlatforms() {
+            const platformCount = mode === 'easy' ? 5 : mode === 'medium' ? 7 : 9;
+            for (let i = 0; i < platformCount; i++) {
+                let x = Math.random() * (canvas.width - 100);
+                let y = Math.random() * (canvas.height - 100) + 100;
+                let width = Math.random() * (100 - 40) + 40;
+                platforms.push(new Platform(x, y, width));
+            }
+        }
+
+        function move(direction) {
+            const step = 10;
+            if (direction === 'left') player.move(-step);
+            if (direction === 'right') player.move(step);
+        }
+
+        function jump() {
+            player.jump();
+        }
+
+        function gravityShift() {
+            player.gravityShifted = !player.gravityShifted;
+            gravity = player.gravityShifted ? -0.5 : 0.5; // Toggle gravity direction
+        }
+
+        function updateGame() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            player.applyGravity();
+            player.draw();
+
+            // Draw platforms
+            platforms.forEach(platform => {
+                platform.draw();
+                if (player.y + player.height >= platform.y && player.x + player.width > platform.x && player.x < platform.x + platform.width) {
+                    player.y = platform.y - player.height; // Place player on platform
+                    player.jumping = false;
+                    player.velocityY = 0;
+                }
             });
         }
 
-        function handleCardClick(e) {
-            const card = e.target.closest('.game-button');
-            if (selectedCards.length < 2 && !card.classList.contains('flipped')) {
-                card.classList.add('flipped');
-                card.querySelector('span').innerText = card.dataset.value;
-                selectedCards.push(card);
-
-                if (selectedCards.length === 2) {
-                    setTimeout(checkMatch, 1000);
-                }
-            }
-        }
-
-        function checkMatch() {
-            const [card1, card2] = selectedCards;
-
-            if (card1.dataset.value === card2.dataset.value) {
-                card1.style.visibility = 'hidden';
-                card2.style.visibility = 'hidden';
-                matchedCards.push(card1, card2);
-                selectedCards = [];
-                if (matchedCards.length === cards.length) {
-                    setTimeout(() => alert('You won!'), 500);
-                }
-            } else {
-                card1.querySelector('span').innerText = '?';
-                card2.querySelector('span').innerText = '?';
-                card1.classList.remove('flipped');
-                card2.classList.remove('flipped');
-                selectedCards = [];
-            }
-        }
-
         function goHome() {
-            gameGrid.classList.add('hidden');
-            retry
+            clearInterval(gameInterval);
+            player = null;
+            platforms = [];
+            titleLength = 0;
+            title.innerText = '';
+            document.getElementById('mode-buttons').classList.add('hidden');
+            typeTitle();
+        }
+
+        typeTitle();
+    </script>
+</body>
+</html>
