@@ -51,3 +51,23 @@ Watch my latest YouTube videos:
 
 ## ⚠️ Copyright Notice
 &copy; 2024 Vuyani Siyanda Vilakazi. All rights reserved. 🚫 DO NOT COPY V WORK 🚫
+
+---
+
+### LEGAL CLAIM Button
+Click the button below for the legal claim page:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Button Redirect</title>
+</head>
+<body>
+
+    <button onclick="window.location.href='https://vuyani1.github.io/your_random_page_here.html'">LEGAL CLAIM</button>
+
+</body>
+</html>
