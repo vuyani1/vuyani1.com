@@ -3,33 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ultimate Thrill-Seeker Game Hub</title>
+    <title>Wild Thrill-Seeker Game Hub</title>
     <style>
-        /* Global Styles */
+        /* Global Styles with Energetic Colors */
         body {
             margin: 0;
             padding: 0;
             font-family: 'Courier New', Courier, monospace;
-            background: url('https://your-image-url-here.jpg') no-repeat center center fixed;
-            background-size: cover;
-            color: #ffffff;
+            background: linear-gradient(135deg, #ff006e, #8338ec, #3a86ff, #00b4d8, #ffd60a);
+            background-size: 400% 400%;
+            animation: gradientMove 10s ease infinite;
+            color: #fff;
             overflow-x: hidden;
         }
 
-        /* Game Menu and Sections */
+        /* Gradient Animation */
+        @keyframes gradientMove {
+            0% {background-position: 0% 50%;}
+            50% {background-position: 100% 50%;}
+            100% {background-position: 0% 50%;}
+        }
+
+        /* Title and Headings */
         h1, h2 {
             text-align: center;
-            color: #ff4500;
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+            text-transform: uppercase;
+            color: #ffdd00;
+            text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.8);
+            font-size: 3em;
+            letter-spacing: 5px;
+        }
+
+        h1 {
+            margin-top: 20px;
+            animation: bounce 2s infinite alternate;
+        }
+
+        /* Bounce Animation */
+        @keyframes bounce {
+            from {transform: translateY(0);}
+            to {transform: translateY(-10px);}
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.85);
+            border-radius: 20px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.9);
         }
 
-        /* Menu Styles */
+        /* Energetic Menu Buttons */
         .menu {
             display: flex;
             justify-content: center;
@@ -40,20 +65,20 @@
 
         .menu button {
             padding: 20px 40px;
-            background-color: #ff4500;
+            background-color: #ff006e;
             border: none;
-            border-radius: 12px;
+            border-radius: 50px;
             color: white;
             font-size: 22px;
             font-weight: bold;
             cursor: pointer;
-            transition: all 0.3s ease-in-out;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.6);
         }
 
         .menu button:hover {
-            background-color: #ff6347;
-            transform: scale(1.15);
+            background-color: #3a86ff;
+            transform: scale(1.2) rotate(-5deg);
         }
 
         /* Game Section Styles */
@@ -61,45 +86,66 @@
             display: none;
             margin-top: 30px;
             padding: 30px;
-            background-color: rgba(0, 0, 0, 0.8);
+            background-color: rgba(0, 0, 0, 0.95);
             border-radius: 15px;
-            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.7);
-            color: #fff;
+            color: #ffdd00;
         }
 
         .game-section.active {
             display: block;
         }
 
-        /* Placeholder Story Styles */
+        /* Wild Story Styles */
         .game-story {
-            font-size: 1.2em;
+            font-size: 1.4em;
             margin-bottom: 20px;
             font-style: italic;
         }
 
+        /* Play Button */
         .play-btn {
-            padding: 12px 24px;
-            background-color: #28a745;
+            padding: 15px 30px;
+            background-color: #06d6a0;
             border: none;
             border-radius: 10px;
             color: white;
             font-size: 18px;
             font-weight: bold;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: transform 0.3s ease, background-color 0.3s ease;
         }
 
         .play-btn:hover {
-            background-color: #218838;
+            background-color: #ffd60a;
+            transform: scale(1.1);
+        }
+
+        /* Trivia Answer Styles */
+        .answer-options {
+            margin-top: 20px;
+        }
+
+        .answer-btn {
+            padding: 12px 18px;
+            background-color: #ff006e;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            margin: 10px;
+            cursor: pointer;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .answer-btn:hover {
+            background-color: #06d6a0;
             transform: scale(1.1);
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Welcome to the Ultimate Thrill-Seeker Game Hub</h1>
-        <p style="text-align: center; color: #ffcc00;">Prepare yourself for heart-racing games that will test your wits and courage!</p>
+        <h1>Wild Thrill-Seeker Game Hub</h1>
+        <p style="text-align: center; font-size: 1.2em;">Get ready for adrenaline-packed games, randomly generated stories, and challenges that will test your limits!</p>
         
         <!-- Game Menu -->
         <div class="menu">
@@ -112,66 +158,95 @@
         <!-- Trivia Quiz Game Section -->
         <div id="trivia" class="game-section">
             <h2>Trivia Quiz Game</h2>
-            <p class="game-story">Dive into the arena of knowledge! You will be tested with rapid-fire questions across various topics. Each second counts as you race against time to secure the top score!</p>
+            <p class="game-story">Answer fast, answer right, and prove your knowledge in the craziest quiz ever! The questions change every time, so no two games are the same!</p>
             <button class="play-btn" onclick="startTrivia()">Start Trivia!</button>
-            <div id="trivia-game-content">
-                <!-- Trivia game content will be dynamically added -->
-            </div>
+            <div id="trivia-game-content"></div>
         </div>
 
         <!-- Mastermind Game Section -->
         <div id="mastermind" class="game-section">
             <h2>Mastermind</h2>
-            <p class="game-story">The ultimate test of logic and intuition! A secret code has been set. You must break the code before time runs out. Use your best deduction skills and guess the correct combination before it's too late.</p>
+            <p class="game-story">Test your logic in the ultimate code-breaking challenge. Every round brings a new secret code for you to crack!</p>
             <button class="play-btn" onclick="startMastermind()">Start Mastermind!</button>
-            <div id="mastermind-game-content">
-                <!-- Mastermind game content will be dynamically added -->
-            </div>
+            <div id="mastermind-game-content"></div>
         </div>
 
         <!-- Text Adventure Game Section -->
         <div id="text-adventure" class="game-section">
             <h2>Text Adventure Game</h2>
-            <p class="game-story">An ancient temple looms before you, shrouded in mystery. Every choice you make will alter the course of your journey. Will you discover the treasure within, or be trapped forever?</p>
+            <p class="game-story">You awaken in an unknown land. Every choice you make leads to a different path in this unpredictable story. Choose wisely!</p>
             <button class="play-btn" onclick="startTextAdventure()">Start Your Adventure!</button>
-            <div id="text-adventure-game-content">
-                <!-- Text Adventure game content will be dynamically added -->
-            </div>
+            <div id="text-adventure-game-content"></div>
         </div>
 
         <!-- Text-Based RPG Game Section -->
         <div id="rpg" class="game-section">
-            <h2>Text-Based Role-Playing Game (RPG)</h2>
-            <p class="game-story">In the war-torn kingdom of Eldoria, a hero rises. Create your character and embark on a dangerous quest filled with battles, secrets, and powerful enemies. Will you be the savior Eldoria desperately needs?</p>
+            <h2>Text-Based RPG</h2>
+            <p class="game-story">Step into the shoes of a brave hero in this dynamic world where battles, quests, and random encounters await you.</p>
             <button class="play-btn" onclick="startRPG()">Start Your RPG Journey!</button>
-            <div id="rpg-game-content">
-                <!-- RPG game content will be dynamically added -->
-            </div>
+            <div id="rpg-game-content"></div>
         </div>
     </div>
 
     <script>
-        // Function to show the selected game and hide the others
+        // Game content pools for random generation
+        const triviaQuestions = [
+            {question: "What is the capital of Japan?", answers: ["Tokyo", "Seoul", "Beijing", "Bangkok"], correct: 0},
+            {question: "What is the chemical symbol for Gold?", answers: ["Au", "Ag", "Fe", "Pb"], correct: 0},
+            {question: "Who wrote 'The Odyssey'?", answers: ["Homer", "Shakespeare", "Tolstoy", "Fitzgerald"], correct: 0}
+        ];
+
+        const textAdventures = [
+            "You find yourself in a dark forest. Do you venture deeper or head back to the village?",
+            "A bridge appears before you, but it's crumbling. Do you cross it or find another path?",
+            "An old man offers you a magical sword. Do you take it or refuse his offer?"
+        ];
+
+        const rpgScenarios = [
+            "You stand at the gates of a haunted castle. The king has asked you to rescue the princess. What will you do?",
+            "In the mountains, you encounter a fierce dragon. Do you fight or flee?",
+            "You meet a mysterious traveler offering rare artifacts. Do you trade with him or continue on your quest?"
+        ];
+
+        // Function to show the selected game section
         function showGame(gameId) {
             document.querySelectorAll('.game-section').forEach(section => section.classList.remove('active'));
             document.getElementById(gameId).classList.add('active');
         }
 
-        // Placeholder Functions for Starting the Games
+        // Random Trivia Game
         function startTrivia() {
-            document.getElementById('trivia-game-content').innerHTML = "<p>Welcome to Trivia! Question 1: What is the capital of France?</p>";
+            const randomQuestion = triviaQuestions[Math.floor(Math.random() * triviaQuestions.length)];
+            let content = `<p>${randomQuestion.question}</p><div class="answer-options">`;
+            randomQuestion.answers.forEach((answer, index) => {
+                content += `<button class="answer-btn" onclick="checkAnswer(${index}, ${randomQuestion.correct})">${answer}</button>`;
+            });
+            content += "</div>";
+            document.getElementById('trivia-game-content').innerHTML = content;
         }
 
+        // Function to check Trivia Answer
+        function checkAnswer(index, correct) {
+            if (index === correct) {
+                alert("Correct! Well done.");
+            } else {
+                alert("Wrong answer. Try again!");
+            }
+        }
+
+        // Placeholder for other game logics (Mastermind, Text Adventure, RPG)
         function startMastermind() {
-            document.getElementById('mastermind-game-content').innerHTML = "<p>Mastermind Game: Guess the secret code (Hint: 4 numbers).</p>";
+            document.getElementById('mastermind-game-content').innerHTML = "<p>Coming Soon: Mastermind Game Logic!</p>";
         }
 
         function startTextAdventure() {
-            document.getElementById('text-adventure-game-content').innerHTML = "<p>You walk into a dark cave... Ahead, you see a glowing object. Do you pick it up?</p>";
+            const randomAdventure = textAdventures[Math.floor(Math.random() * textAdventures.length)];
+            document.getElementById('text-adventure-game-content').innerHTML = `<p>${randomAdventure}</p>`;
         }
 
         function startRPG() {
-            document.getElementById('rpg-game-content').innerHTML = "<p>Create your character: Are you a warrior, mage, or rogue?</p>";
+            const randomRPG = rpgScenarios[Math.floor(Math.random() * rpgScenarios.length)];
+            document.getElementById('rpg-game-content').innerHTML = `<p>${randomRPG}</p>`;
         }
     </script>
 </body>
