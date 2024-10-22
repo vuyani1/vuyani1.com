@@ -1,110 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Easy Game - Guess the Number</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #800080; /* Purple background */
-      text-align: center;
-    }
-
-    .container {
-      max-width: 600px;
-      margin: 50px auto;
-      background-color: #ffffff;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-
-    h1 {
-      color: #333333;
-    }
-
-    #guessInput {
-      width: 60px;
-      padding: 10px;
-      font-size: 1.2em;
-      margin-right: 10px;
-    }
-
-    button {
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      font-size: 1.2em;
-      margin-top: 10px;
-      cursor: pointer;
-      border-radius: 5px;
-    }
-
-    #result {
-      font-size: 1.5em;
-      margin-top: 20px;
-    }
-
-    #attempts {
-      font-size: 1.5em;
-      margin-top: 20px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Easy Mode Games</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f7b733;
+        }
+        .container {
+            text-align: center;
+        }
+        h1 {
+            font-size: 3em;
+            color: white;
+            margin-bottom: 20px;
+        }
+        .game-button {
+            display: inline-block;
+            padding: 20px 40px;
+            margin: 20px;
+            background-color: #ff6b6b;
+            color: white;
+            font-size: 1.5em;
+            cursor: pointer;
+            border: none;
+            border-radius: 15px;
+            transition: transform 0.2s;
+        }
+        .game-button:hover {
+            transform: scale(1.1);
+        }
+        .game-button:active {
+            transform: translateY(-10px);
+        }
+        footer {
+            margin-top: 50px;
+        }
+        .footer-btn {
+            padding: 10px 30px;
+            background-color: #4ecdc4;
+            color: white;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Easy Level: Guess the Number!</h1>
-    <p id="numberDisplay"></p>
-    <input type="number" id="guessInput" placeholder="Enter your guess" min="1" max="10" disabled>
-    <button id="submitBtn" onclick="checkGuess()" disabled>Submit Guess</button>
 
-    <p id="result"></p>
-    <p id="attempts"></p>
-  </div>
+<div class="container">
+    <h1>Select a Game</h1>
+    <button class="game-button" onclick="window.location.href='easy1.html'">Easy 1: Tic Tac Toe</button>
+    <button class="game-button" onclick="window.location.href='easy2.html'">Easy 2: Bot Mode Tic Tac Toe</button>
+</div>
 
-  <script>
-    const correctNumber = Math.floor(Math.random() * 10) + 1;
-    let attempts = 3;
+<footer>
+    <button class="footer-btn" onclick="window.location.href='index.html'">Home</button>
+</footer>
 
-    // Show the number for 3 seconds
-    document.getElementById("numberDisplay").textContent = `The number is: ${correctNumber}`;
-    setTimeout(() => {
-      document.getElementById("numberDisplay").textContent = "Guess the number!";
-      document.getElementById("guessInput").disabled = false;
-      document.getElementById("submitBtn").disabled = false;
-    }, 3000);
-
-    function checkGuess() {
-      const userGuess = parseInt(document.getElementById("guessInput").value);
-      const result = document.getElementById("result");
-      const attemptsDisplay = document.getElementById("attempts");
-
-      if (attempts > 0) {
-        if (userGuess === correctNumber) {
-          result.innerHTML = "<span style='color: green; font-size: 2em;'>🎉 You win!</span>";
-          setTimeout(() => {
-            window.location.href = "https://vuyani1.github.io/suprise123.html"; // Redirect to surprise page
-          }, 2000);
-        } else {
-          attempts--;
-          attemptsDisplay.innerHTML += "<span style='font-size: 2em;'>❤️</span>";
-          result.innerHTML = "<span style='color: red;'>❌ Incorrect! Try again.</span>";
-        }
-
-        if (attempts === 0) {
-          result.innerHTML = `<span style='color: red; font-size: 1.5em;'>😞 You lose! The correct number was ${correctNumber}.</span>`;
-          setTimeout(() => {
-            window.location.href = "https://vuyani1.github.io"; // Redirect home after 2 seconds
-          }, 2000);
-        }
-      }
-    }
-  </script>
-
-  <!-- Google AdSense Code -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7484489054116946"
-     crossorigin="anonymous"></script>
 </body>
 </html>
