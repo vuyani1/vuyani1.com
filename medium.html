@@ -91,8 +91,8 @@
             transition: transform 0.3s;
         }
 
-        .game-button:hover {
-            transform: rotateY(180deg);
+        .game-button.flipped span {
+            opacity: 1; /* Show emoji */
         }
 
         .game-button span {
@@ -106,6 +106,8 @@
             align-items: center;
             font-size: 2rem;
             color: #333;
+            opacity: 0; /* Hide initially */
+            transition: opacity 0.3s;
         }
 
         /* Retry and Back buttons */
@@ -182,6 +184,10 @@
         let selectedCards = [];
         let matchedCards = [];
         let currentMode = 'easy';
+        let emojiSet = [
+            '😀', '😃', '😄', '😆', '😅', '😂', '🤣', '😇',
+            '🥰', '😍', '🤩', '😘', '😋', '😜', '😎', '🤖'
+        ];
 
         const gameGrid = document.getElementById('game-grid');
         const retryBtn = document.getElementById('retry-btn');
@@ -207,15 +213,18 @@
         function generateCards(numPairs) {
             gameGrid.innerHTML = '';
             cards = [];
+            matchedCards = [];
+            selectedCards = [];
 
-            const cardValues = Array.from({ length: numPairs }, (_, i) => i + 1);
-            const cardSet = [...cardValues, ...cardValues];  // duplicate for matching
+            // Select random emojis
+            const selectedEmojis = emojiSet.sort(() => 0.5 - Math.random()).slice(0, numPairs);
+            const cardValues = [...selectedEmojis, ...selectedEmojis];  // duplicate for matching
 
             // Shuffle cards
-            cardSet.sort(() => Math.random() - 0.5);
+            cardValues.sort(() => Math.random() - 0.5);
 
             // Create card elements
-            cardSet.forEach(value => {
+            cardValues.forEach(value => {
                 const card = document.createElement('div');
                 card.classList.add('game-button');
                 card.dataset.value = value;
@@ -229,8 +238,8 @@
         function handleCardClick(e) {
             const card = e.target.closest('.game-button');
             if (selectedCards.length < 2 && !card.classList.contains('flipped')) {
-                card.querySelector('span').innerText = card.dataset.value;
                 card.classList.add('flipped');
+                card.querySelector('span').innerText = card.dataset.value;
                 selectedCards.push(card);
 
                 if (selectedCards.length === 2) {
@@ -246,24 +255,19 @@
                 card1.style.visibility = 'hidden';
                 card2.style.visibility = 'hidden';
                 matchedCards.push(card1, card2);
+                selectedCards = [];
                 if (matchedCards.length === cards.length) {
                     setTimeout(() => alert('You won!'), 500);
                 }
             } else {
                 card1.querySelector('span').innerText = '?';
                 card2.querySelector('span').innerText = '?';
+                card1.classList.remove('flipped');
+                card2.classList.remove('flipped');
+                selectedCards = [];
             }
-
-            selectedCards = [];
         }
 
         function goHome() {
             gameGrid.classList.add('hidden');
-            retryBtn.classList.add('hidden');
-            backBtn.classList.add('hidden');
-            mainMenu.classList.remove('hidden');
-        }
-    </script>
-
-</body>
-</html>
+            retry
