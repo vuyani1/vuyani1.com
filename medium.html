@@ -3,336 +3,110 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ultimate Game Hub</title>
+    <title>Game Menu</title>
     <style>
         body {
+            background-color: #f0f0f0; /* Light gray background */
             font-family: Arial, sans-serif;
-            background-color: #282c34;
-            color: white;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        header {
-            background-color: #61dafb;
-            padding: 20px;
             text-align: center;
-            font-size: 2em;
         }
-        .menu {
-            margin: 20px;
-            display: flex;
-            gap: 20px;
+        .game-container {
+            margin: 20px auto;
+            padding: 20px;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 600px;
+            background-color: #fff; /* White background for game containers */
         }
-        .menu button {
-            padding: 15px 30px;
-            font-size: 1.2em;
-            background-color: #ff6347;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: transform 0.2s;
-        }
-        .menu button:hover {
-            transform: scale(1.1);
+        h1 {
+            color: #333; /* Dark gray heading */
         }
         .game {
-            display: none;
-            text-align: center;
-            margin: 20px;
+            margin: 20px 0;
         }
-        .game.active {
-            display: block;
+        .game-title {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #007bff; /* Blue title */
         }
-        #trivia {
-            background-color: #4caf50;
-            padding: 20px;
-            border-radius: 5px;
+        .game-description {
+            font-size: 16px;
+            color: #666; /* Gray text */
         }
-        #mastermind {
-            background-color: #2196F3;
-            padding: 20px;
-            border-radius: 5px;
+        .game-feature {
+            margin-top: 10px;
+            text-align: left;
         }
-        #textAdventure {
-            background-color: #ff9800;
-            padding: 20px;
-            border-radius: 5px;
+        .game-feature ul {
+            list-style-type: disc;
+            margin-left: 20px;
         }
-        #rpg {
-            background-color: #9c27b0;
-            padding: 20px;
-            border-radius: 5px;
-        }
-        /* Common styles */
-        h2 {
-            font-size: 1.5em;
-        }
-        .answer {
-            margin: 5px 0;
-            cursor: pointer;
-            background-color: #f44336;
-            padding: 10px;
-            border-radius: 5px;
-            transition: background 0.3s;
-        }
-        .answer:hover {
-            background-color: #d32f2f;
+        .game-feature li {
+            margin-bottom: 5px;
         }
     </style>
 </head>
 <body>
-    <header>
-        Ultimate Game Hub
-    </header>
-    <div class="menu">
-        <button onclick="showGame('trivia')">Trivia Quiz Game</button>
-        <button onclick="showGame('mastermind')">Mastermind</button>
-        <button onclick="showGame('textAdventure')">Text Adventure Game</button>
-        <button onclick="showGame('rpg')">Text-Based RPG</button>
+    <div class="game-container">
+        <h1>Game Menu</h1>
+        
+        <div class="game">
+            <div class="game-title">Trivia Quiz Game</div>
+            <div class="game-description">
+                Concept: Players answer multiple-choice questions across various topics.
+            </div>
+            <div class="game-feature">
+                <ul>
+                    <li>Timed questions to increase difficulty.</li>
+                    <li>Leaderboard for high scores.</li>
+                    <li>Categories (history, science, pop culture) with varying levels of difficulty.</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="game">
+            <div class="game-title">Mastermind</div>
+            <div class="game-description">
+                Concept: A code-breaking game where one player creates a secret code and the other player guesses it.
+            </div>
+            <div class="game-feature">
+                <ul>
+                    <li>Multiple rounds with increasing difficulty.</li>
+                    <li>Feedback on each guess.</li>
+                    <li>Score tracking based on time and accuracy.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="game">
+            <div class="game-title">Text Adventure Game</div>
+            <div class="game-description">
+                Concept: Players navigate through a story by making choices that affect the outcome.
+            </div>
+            <div class="game-feature">
+                <ul>
+                    <li>Branching paths with multiple endings.</li>
+                    <li>Inventory system for items collected.</li>
+                    <li>Puzzles and riddles to solve.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="game">
+            <div class="game-title">Text-Based Role-Playing Game (RPG)</div>
+            <div class="game-description">
+                Concept: Players create a character and navigate through a world filled with challenges and quests.
+            </div>
+            <div class="game-feature">
+                <ul>
+                    <li>Character stats affect gameplay.</li>
+                    <li>Random encounters with enemies or NPCs.</li>
+                    <li>Choices influence story and progression.</li>
+                </ul>
+            </div>
+        </div>
+
     </div>
-
-    <!-- Trivia Quiz Game -->
-    <div id="trivia" class="game">
-        <h2>Trivia Quiz Game</h2>
-        <p id="trivia-question"></p>
-        <div id="trivia-answers"></div>
-        <button onclick="nextTriviaQuestion()">Next Question</button>
-        <button onclick="backToMenu()">Back to Menu</button>
-    </div>
-
-    <!-- Mastermind -->
-    <div id="mastermind" class="game">
-        <h2>Mastermind</h2>
-        <p>Guess the color code! (Example: 1234)</p>
-        <input type="text" id="mastermind-input" />
-        <button onclick="submitMastermindGuess()">Guess</button>
-        <div id="mastermind-feedback"></div>
-        <button onclick="backToMenu()">Back to Menu</button>
-    </div>
-
-    <!-- Text Adventure Game -->
-    <div id="textAdventure" class="game">
-        <h2>Text Adventure Game</h2>
-        <p id="adventure-text"></p>
-        <div id="adventure-options"></div>
-        <button onclick="backToMenu()">Back to Menu</button>
-    </div>
-
-    <!-- Text-Based RPG -->
-    <div id="rpg" class="game">
-        <h2>Text-Based RPG</h2>
-        <p id="rpg-description"></p>
-        <button onclick="backToMenu()">Back to Menu</button>
-    </div>
-
-    <script>
-        // Trivia Quiz Game Logic
-        const triviaQuestions = [
-            {
-                question: "What is the capital of France?",
-                answers: ["Berlin", "Madrid", "Paris", "Rome"],
-                correct: 2
-            },
-            {
-                question: "Which planet is known as the Red Planet?",
-                answers: ["Earth", "Mars", "Jupiter", "Venus"],
-                correct: 1
-            },
-            {
-                question: "What is the largest ocean on Earth?",
-                answers: ["Atlantic Ocean", "Indian Ocean", "Arctic Ocean", "Pacific Ocean"],
-                correct: 3
-            },
-            {
-                question: "Who wrote 'Hamlet'?",
-                answers: ["Charles Dickens", "William Shakespeare", "J.K. Rowling", "Mark Twain"],
-                correct: 1
-            }
-        ];
-
-        let currentTriviaIndex = 0;
-
-        function showGame(game) {
-            document.querySelectorAll('.game').forEach(div => {
-                div.classList.remove('active');
-            });
-            document.getElementById(game).classList.add('active');
-            if (game === 'trivia') {
-                loadTriviaQuestion();
-            }
-        }
-
-        function loadTriviaQuestion() {
-            const questionData = triviaQuestions[currentTriviaIndex];
-            document.getElementById('trivia-question').textContent = questionData.question;
-            const answersDiv = document.getElementById('trivia-answers');
-            answersDiv.innerHTML = '';
-            questionData.answers.forEach((answer, index) => {
-                const answerDiv = document.createElement('div');
-                answerDiv.textContent = answer;
-                answerDiv.className = 'answer';
-                answerDiv.onclick = () => checkTriviaAnswer(index);
-                answersDiv.appendChild(answerDiv);
-            });
-        }
-
-        function checkTriviaAnswer(selected) {
-            if (selected === triviaQuestions[currentTriviaIndex].correct) {
-                alert("Correct!");
-            } else {
-                alert("Wrong!");
-            }
-            currentTriviaIndex++;
-            if (currentTriviaIndex < triviaQuestions.length) {
-                loadTriviaQuestion();
-            } else {
-                alert("Quiz finished!");
-                currentTriviaIndex = 0;
-                backToMenu();
-            }
-        }
-
-        // Mastermind Logic
-        const mastermindCode = generateMastermindCode();
-        let attempts = 0;
-
-        function generateMastermindCode() {
-            let code = '';
-            for (let i = 0; i < 4; i++) {
-                code += Math.floor(Math.random() * 10); // Generate a random digit (0-9)
-            }
-            return code;
-        }
-
-        function submitMastermindGuess() {
-            const input = document.getElementById('mastermind-input').value;
-            if (input.length !== 4) {
-                alert("Please enter a 4-digit code.");
-                return;
-            }
-            attempts++;
-            const feedback = getMastermindFeedback(input);
-            document.getElementById('mastermind-feedback').innerHTML += `<p>Attempt ${attempts}: ${feedback}</p>`;
-            if (input === mastermindCode) {
-                alert("Congratulations! You've cracked the code!");
-                attempts = 0; // Reset attempts for the next game
-                backToMenu();
-            } else if (attempts >= 10) {
-                alert(`Game over! The code was ${mastermindCode}.`);
-                attempts = 0; // Reset attempts for the next game
-                backToMenu();
-            }
-            document.getElementById('mastermind-input').value = '';
-        }
-
-        function getMastermindFeedback(guess) {
-            let correctPosition = 0;
-            let wrongPosition = 0;
-            let codeArray = mastermindCode.split('');
-            let guessArray = guess.split('');
-
-            // Check for correct positions
-            for (let i = 0; i < 4; i++) {
-                if (guessArray[i] === codeArray[i]) {
-                    correctPosition++;
-                    codeArray[i] = null; // Mark as checked
-                    guessArray[i] = null; // Mark as checked
-                }
-            }
-
-            // Check for wrong positions
-            for (let i = 0; i < 4; i++) {
-                if (guessArray[i] !== null && codeArray.includes(guessArray[i])) {
-                    wrongPosition++;
-                    codeArray[codeArray.indexOf(guessArray[i])] = null; // Mark as checked
-                }
-            }
-
-            return `${correctPosition} correct positions, ${wrongPosition} wrong positions.`;
-        }
-
-        // Text Adventure Game Logic
-        const adventureStory = {
-            start: {
-                text: "You find yourself in a dark forest. You can go left or right.",
-                options: [
-                    { text: "Go left", next: "leftPath" },
-                    { text: "Go right", next: "rightPath" }
-                ]
-            },
-            leftPath: {
-                text: "You encounter a wild animal! Fight or run?",
-                options: [
-                    { text: "Fight", next: "fightAnimal" },
-                    { text: "Run", next: "runAway" }
-                ]
-            },
-            rightPath: {
-                text: "You discover a hidden treasure! What do you want to do?",
-                options: [
-                    { text: "Take treasure", next: "takeTreasure" },
-                    { text: "Leave it", next: "leaveTreasure" }
-                ]
-            },
-            fightAnimal: {
-                text: "You bravely fight the animal and win!",
-                options: [{ text: "Return to the start", next: "start" }]
-            },
-            runAway: {
-                text: "You run away safely but feel cowardly.",
-                options: [{ text: "Return to the start", next: "start" }]
-            },
-            takeTreasure: {
-                text: "You take the treasure and become rich!",
-                options: [{ text: "Return to the start", next: "start" }]
-            },
-            leaveTreasure: {
-                text: "You leave the treasure behind and continue your adventure.",
-                options: [{ text: "Return to the start", next: "start" }]
-            }
-        };
-
-        function loadAdventureText(path) {
-            const adventureData = adventureStory[path];
-            document.getElementById('adventure-text').textContent = adventureData.text;
-            const optionsDiv = document.getElementById('adventure-options');
-            optionsDiv.innerHTML = '';
-            adventureData.options.forEach(option => {
-                const button = document.createElement('button');
-                button.textContent = option.text;
-                button.onclick = () => loadAdventureText(option.next);
-                optionsDiv.appendChild(button);
-            });
-        }
-
-        // Text-Based RPG Logic
-        const rpgCharacter = {
-            name: "Hero",
-            strength: 10,
-            intelligence: 8,
-            quests: [],
-            health: 100
-        };
-
-        function loadRpgDescription() {
-            document.getElementById('rpg-description').textContent = `Welcome, ${rpgCharacter.name}! You have ${rpgCharacter.health} health, ${rpgCharacter.strength} strength, and ${rpgCharacter.intelligence} intelligence. Choose wisely as you embark on your adventures!`;
-        }
-
-        // Show the first game on load
-        window.onload = function() {
-            showGame('trivia');
-            loadAdventureText('start');
-            loadRpgDescription();
-        };
-
-        function backToMenu() {
-            document.querySelectorAll('.game').forEach(div => {
-                div.classList.remove('active');
-            });
-        }
-    </script>
 </body>
 </html>
