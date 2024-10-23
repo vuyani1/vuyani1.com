@@ -3,235 +3,121 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Wild Thrill-Seeker Games by Vuyani</title>
-  <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js"></script>
+  <title>Wild Thrill-Seeker Games by Vuyani 🎮🔥</title>
   <style>
     body {
       font-family: 'Arial', sans-serif;
-      background: linear-gradient(to bottom right, #ff416c, #ff4b2b);
+      background-color: #000000;
       color: #ffffff;
       text-align: center;
-      padding: 20px;
-      animation: gradientMove 10s ease infinite;
     }
-
-    /* Gradient Animation */
-    @keyframes gradientMove {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    h1 {
+    /* First Slide Style */
+    .slide1 .vgames-logo {
+      font-size: 5em;
       color: #ffdd00;
+      text-shadow: 0 0 20px #ffdd00;
+      animation: glow 3s infinite alternate;
+    }
+    .slide1 .signature {
+      font-size: 2em;
+      color: #ffffff;
+      font-style: italic;
+      text-shadow: 0 0 10px #ffffff;
+    }
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #ffdd00; }
+      to { text-shadow: 0 0 40px #ffdd00; }
+    }
+    /* Second Slide Style */
+    .slide2 h1 {
       font-size: 3em;
-      margin-bottom: 20px;
-      text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.7);
+      color: #00ffcc;
     }
-
-    .game-list {
-      list-style: none;
-      padding: 0;
+    .slide2 p {
+      font-size: 1.5em;
     }
-
-    .game-list li {
-      margin: 15px 0;
+    .github-logo {
+      font-size: 3em;
+      color: #4078c0;
     }
-
-    a {
+    .chatgpt-logo {
+      font-size: 2.5em;
+      color: #ffffff;
+    }
+    .notepad-logo {
+      font-size: 2.5em;
+      color: #32CD32;
+    }
+    /* Third Slide Style */
+    .legal-notice {
+      padding: 10px;
+      font-size: 1.2em;
+    }
+    /* Fourth Slide Style */
+    .game-buttons {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 20px;
+    }
+    .game-buttons a {
       text-decoration: none;
       font-size: 1.5em;
-      color: #00ffcc;
-      background-color: #282838;
-      padding: 10px 20px;
-      border-radius: 8px;
-      transition: background-color 0.3s ease;
-    }
-
-    a:hover {
-      background-color: #06d6a0;
-    }
-
-    footer {
-      margin-top: 50px;
-      font-size: 1.1em;
-      color: #999999;
-    }
-
-    .adsense {
-      margin-top: 40px;
-    }
-
-    /* YouTube Section Styles */
-    .youtube-buttons {
-      margin-top: 20px;
-    }
-
-    .youtube-buttons a {
-      margin: 10px;
-      display: inline-block;
-      font-size: 1.5em;
-      color: #ffcc00;
-      background-color: #282838;
-      padding: 10px 20px;
-      border-radius: 8px;
-      transition: background-color 0.3s ease;
-    }
-
-    .youtube-buttons a:hover {
-      background-color: #ff0066;
-    }
-
-    .video-embed {
-      margin-top: 20px;
-      max-width: 100%;
-    }
-
-    .legal-claim-button {
-      margin-top: 20px;
-    }
-
-    .legal-claim-button button {
-      font-size: 1.5em;
+      background-color: #333;
       color: #ffffff;
-      background-color: #333333;
-      padding: 10px 20px;
-      border-radius: 8px;
-      border: none;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
+      padding: 15px;
+      border-radius: 10px;
+      transition: background-color 0.3s;
     }
-
-    .legal-claim-button button:hover {
-      background-color: #ff0033;
+    .game-buttons a:hover {
+      background-color: #ff6600;
     }
-
-    /* Slide Animation Styles */
-    #slider {
-      margin-top: 50px;
+    .rainbow-clock {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 2em;
+      animation: rainbow 2s infinite;
     }
-
-    .slide {
-      display: none;
-    }
-
-    .slide.active {
-      display: block;
-      animation: slideIn 1.5s ease;
-    }
-
-    @keyframes slideIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    .slide-letters {
-      font-size: 5em;
-      color: #00ffcc;
-      animation: letterIn 1s ease forwards;
-    }
-
-    .signature {
-      font-size: 1.5em;
-      color: #ffffff;
-      text-shadow: 2px 2px 5px #ff00ff;
-      animation: signatureGlow 2s ease infinite;
-    }
-
-    @keyframes letterIn {
-      0% { transform: translateX(-100%); }
-      100% { transform: translateX(0); }
-    }
-
-    @keyframes signatureGlow {
-      0%, 100% { text-shadow: 2px 2px 5px #ff00ff; }
-      50% { text-shadow: 2px 2px 10px #00ffcc; }
+    @keyframes rainbow {
+      0% { color: red; }
+      20% { color: orange; }
+      40% { color: yellow; }
+      60% { color: green; }
+      80% { color: blue; }
+      100% { color: violet; }
     }
   </style>
 </head>
 <body>
-  <amp-auto-ads type="adsense" data-ad-client="ca-pub-7484489054116946"></amp-auto-ads>
-
-  <h1>🎮 Wild Thrill-Seeker Games by Vuyani 🎮</h1>
-  <p>Welcome to the ultimate collection of exciting and thrilling games. Choose your adventure and start playing now!</p>
-
-  <ul class="game-list">
-    <li><a href="Adventure.html">🌲 Adventure Game: Choose Your Destiny</a></li>
-    <li><a href="TIC-TAC-TOE.html">⚔️ TIC-TAC-TOE: Battle of Wits</a></li>
-    <li><a href="Simon-Says.html">🎵 Simon Says: Memory Challenge</a></li>
-  </ul>
-
-  <!-- YouTube Buttons Section -->
-  <div class="youtube-buttons">
-    <a href="https://www.youtube.com/@POOF-f5c" target="_blank">Subscribe to POOF Channel</a>
-    <a href="https://www.youtube.com/@VUYANI_VILAKAZI" target="_blank">Subscribe to VUYANI VILAKAZI Channel</a>
+  <!-- First Slide -->
+  <div class="slide1">
+    <div class="vgames-logo">VGAMES 🌟✨</div>
+    <div class="signature">V.S Vilakazi</div>
   </div>
 
-  <!-- Embedded YouTube Video -->
-  <div class="video-embed">
-    <iframe width="300" height="200" src="https://www.youtube.com/embed/9r7G193cupk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <!-- Second Slide -->
+  <div class="slide2">
+    <h1>💻 GitHub</h1>
+    <p class="github-logo">💙 Powered by GitHub</p>
+    <p class="notepad-logo">📝 Notepad++ for editing</p>
+    <p class="chatgpt-logo">🤖 ChatGPT for AI assistance</p>
   </div>
 
-  <!-- Legal Claim Button -->
-  <div class="legal-claim-button">
-    <button onclick="window.location.href='https://vuyani1.github.io/your_random_page_here.html'">LEGAL CLAIM</button>
+  <!-- Third Slide -->
+  <div class="legal-notice">
+    <h2>Conditions of Use ⚖️🚨</h2>
+    <p>Unauthorized use of VGAMES software may result in legal action.</p>
   </div>
 
-  <!-- "More Games" Button -->
-  <div class="more-games-button">
-    <button onclick="window.location.href='https://vgames1.github.io/'">More Games</button>
+  <!-- Fourth Slide -->
+  <div class="game-buttons">
+    <a href="https://vgames1.github.io/vgames.github.io/aquiz.html">🧠 AQUIZ</a>
+    <a href="https://vgames1.github.io/vgames.github.io/ball.html">🎱 BALL DIE</a>
+    <a href="https://vgames1.github.io/vgames.github.io/atrivia.html">🎲 ATRIVIA</a>
+    <a href="https://vgames1.github.io/vgames.github.io/scram.html">🔤 AUNSCRAMBLE</a>
   </div>
 
-  <!-- Slider for Animated Slides -->
-  <div id="slider">
-    <div class="slide active">
-      <span class="slide-letters">V</span>
-      <span class="slide-letters">G</span>
-      <span class="slide-letters">A</span>
-      <span class="slide-letters">M</span>
-      <span class="slide-letters">E</span>
-      <span class="slide-letters">S</span>
-      <div class="signature">v.s vilakazi</div>
-    </div>
-    <div class="slide">
-      <h2>READY</h2>
-    </div>
-    <div class="slide">
-      <h2>Powered by VGAMES</h2>
-    </div>
-    <div class="slide">
-      <ul class="game-list">
-        <li><a href="Adventure.html">Adventure Game</a></li>
-        <li><a href="TIC-TAC-TOE.html">TIC-TAC-TOE</a></li>
-        <li><a href="Simon-Says.html">Simon Says</a></li>
-      </ul>
-    </div>
-  </div>
-
-  <footer>
-    <p>Contact Me: <strong>Email</strong> - vuyaniphila86@gmail.com | <strong>WhatsApp</strong> - +27 69 120 7349</p>
-    <p>&copy; 2024 Vuyani Siyanda Vilakazi. All rights reserved. 🚫 DO NOT COPY V WORK 🚫</p>
-  </footer>
-
-  <div class="adsense">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7484489054116946" crossorigin="anonymous"></script>
-  </div>
-
-  <script>
-    // Slider logic
-    const slides = document.querySelectorAll('.slide');
-    let currentSlide = 0;
-
-    function showNextSlide() {
-      slides[currentSlide].classList.remove('active');
-      currentSlide = (currentSlide + 1) % slides.length;
-      slides[currentSlide].classList.add('active');
-    }
-
-    setInterval(showNextSlide, 3000);
-
-    // IP Blocking (this requires server-side implementation)
-    // Here you would implement server-side code to block specific IP addresses.
-  </script>
+  <!-- Clock -->
+  <div class="rainbow-clock">⏰ 12:34</div>
 </body>
 </html>
