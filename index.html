@@ -199,22 +199,23 @@
     }
 
     let slideIndex = 1;
-    let screensaverTimeout;
 
     function showNextSlide() {
       if (slideIndex > 4) {
-        clearInterval(screensaverTimeout);
         showScreensaver();
         return;
       }
       showSlide('slide' + slideIndex);
       slideIndex++;
       if (slideIndex === 4) {
-        // Show the fourth slide for 30 seconds
+        // Show the fourth slide for 25 seconds
         setTimeout(() => {
-          clearInterval(screensaverTimeout);
-          showScreensaver();
-        }, 30000); // 30 seconds
+          slideIndex++;
+          showSlide('slide4');
+          setTimeout(() => {
+            showScreensaver();
+          }, 25000); // Fade to screensaver after 25 seconds
+        }, 0);
       }
     }
 
