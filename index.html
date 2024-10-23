@@ -6,8 +6,7 @@
   <title>VGAMES 🎮✨</title>
 
   <!-- Google AdSense script -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7484489054116946"
-     crossorigin="anonymous"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7484489054116946" crossorigin="anonymous"></script>
 
   <style>
     body {
@@ -37,6 +36,7 @@
     .vgames-logo {
       color: #ffdd00;
       text-shadow: 0 0 20px #ffdd00;
+      cursor: pointer; /* Change cursor to pointer */
     }
     .signature {
       font-size: 2em;
@@ -101,6 +101,17 @@
       100% { color: violet; }
     }
 
+    /* Screensaver Style */
+    .screensaver {
+      display: none;
+      font-size: 10em;
+      animation: bounce 1s infinite alternate;
+    }
+    @keyframes bounce {
+      from { transform: translateY(0); }
+      to { transform: translateY(-20px); }
+    }
+
     /* Media Queries for Responsive Design */
     @media only screen and (max-width: 768px) {
       /* For phones */
@@ -138,7 +149,7 @@
 <body>
   <!-- First Slide -->
   <div id="slide1" class="slide1">
-    <div class="vgames-logo">VGAMES 🌟✨</div>
+    <div class="vgames-logo" onclick="redirectToVGAMES()">VGAMES 🌟✨</div>
     <div class="signature">V.S Vilakazi</div>
   </div>
 
@@ -172,18 +183,55 @@
     <div class="rainbow-clock">⏰ 12:34</div>
   </div>
 
+  <!-- Screensaver -->
+  <div id="screensaver" class="screensaver hidden">
+    <div class="vgames-logo" onclick="redirectToVGAMES()">VGAMES 🎮✨</div>
+  </div>
+
   <script>
     function showSlide(slideId) {
       document.querySelectorAll('div').forEach(div => div.classList.add('hidden'));
       document.getElementById(slideId).classList.remove('hidden');
     }
 
+    function redirectToVGAMES() {
+      window.location.href = "https://vgames1.github.io";
+    }
+
     let slideIndex = 1;
-    setInterval(() => {
-      if (slideIndex > 4) slideIndex = 1;
+    let screensaverTimeout;
+
+    function showNextSlide() {
+      if (slideIndex > 4) {
+        clearInterval(screensaverTimeout);
+        showScreensaver();
+        return;
+      }
       showSlide('slide' + slideIndex);
       slideIndex++;
-    }, 5000); // Change slide every 5 seconds for demo
+      if (slideIndex === 4) {
+        // Show the fourth slide for 30 seconds
+        setTimeout(() => {
+          clearInterval(screensaverTimeout);
+          showScreensaver();
+        }, 30000); // 30 seconds
+      }
+    }
+
+    function showScreensaver() {
+      document.querySelectorAll('div').forEach(div => div.classList.add('hidden'));
+      document.getElementById('screensaver').classList.remove('hidden');
+      // Stop the screensaver if it is touched
+      document.getElementById('screensaver').addEventListener('click', () => {
+        document.getElementById('screensaver').classList.add('hidden');
+        slideIndex = 1; // Reset slide index to start over
+        showNextSlide(); // Show the first slide
+      });
+    }
+
+    // Start the slideshow
+    showNextSlide();
+    setInterval(showNextSlide, 5000); // Change slide every 5 seconds for demo
   </script>
 </body>
 </html>
