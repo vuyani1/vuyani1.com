@@ -105,6 +105,48 @@
     .legal-claim-button button:hover {
       background-color: #ff0033;
     }
+
+    /* Slide Animation Styles */
+    #slider {
+      margin-top: 50px;
+    }
+
+    .slide {
+      display: none;
+    }
+
+    .slide.active {
+      display: block;
+      animation: slideIn 1.5s ease;
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .slide-letters {
+      font-size: 5em;
+      color: #00ffcc;
+      animation: letterIn 1s ease forwards;
+    }
+
+    .signature {
+      font-size: 1.5em;
+      color: #ffffff;
+      text-shadow: 2px 2px 5px #ff00ff;
+      animation: signatureGlow 2s ease infinite;
+    }
+
+    @keyframes letterIn {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(0); }
+    }
+
+    @keyframes signatureGlow {
+      0%, 100% { text-shadow: 2px 2px 5px #ff00ff; }
+      50% { text-shadow: 2px 2px 10px #00ffcc; }
+    }
   </style>
 </head>
 <body>
@@ -135,6 +177,37 @@
     <button onclick="window.location.href='https://vuyani1.github.io/your_random_page_here.html'">LEGAL CLAIM</button>
   </div>
 
+  <!-- "More Games" Button -->
+  <div class="more-games-button">
+    <button onclick="window.location.href='https://vgames1.github.io/vgames.github.io/'">More Games</button>
+  </div>
+
+  <!-- Slider for Animated Slides -->
+  <div id="slider">
+    <div class="slide active">
+      <span class="slide-letters">V</span>
+      <span class="slide-letters">G</span>
+      <span class="slide-letters">A</span>
+      <span class="slide-letters">M</span>
+      <span class="slide-letters">E</span>
+      <span class="slide-letters">S</span>
+      <div class="signature">v.s vilakazi</div>
+    </div>
+    <div class="slide">
+      <h2>READY</h2>
+    </div>
+    <div class="slide">
+      <h2>Powered by VGAMES</h2>
+    </div>
+    <div class="slide">
+      <ul class="game-list">
+        <li><a href="Adventure.html">Adventure Game</a></li>
+        <li><a href="TIC-TAC-TOE.html">TIC-TAC-TOE</a></li>
+        <li><a href="Simon-Says.html">Simon Says</a></li>
+      </ul>
+    </div>
+  </div>
+
   <footer>
     <p>Contact Me: <strong>Email</strong> - vuyaniphila86@gmail.com | <strong>WhatsApp</strong> - +27 69 120 7349</p>
     <p>&copy; 2024 Vuyani Siyanda Vilakazi. All rights reserved. 🚫 DO NOT COPY V WORK 🚫</p>
@@ -143,5 +216,19 @@
   <div class="adsense">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7484489054116946" crossorigin="anonymous"></script>
   </div>
+
+  <script>
+    // Slider logic
+    const slides = document.querySelectorAll('.slide');
+    let currentSlide = 0;
+
+    function showNextSlide() {
+      slides[currentSlide].classList.remove('active');
+      currentSlide = (currentSlide + 1) % slides.length;
+      slides[currentSlide].classList.add('active');
+    }
+
+    setInterval(showNextSlide, 3000);
+  </script>
 </body>
 </html>
