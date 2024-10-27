@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VGAMES - Home</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Container for welcome screen -->
+    <div class="welcome-container">
+        <!-- Responsive heading for different devices -->
+        <h1 class="main-heading" id="device-heading">Vilakazi Games</h1>
+        <h2 class="welcome-text">WELCOME</h2>
+    </div>
+
+    <!-- Button Grid -->
+    <div class="button-grid">
+        <!-- Add 12 buttons, placeholders for your games -->
+        <button class="game-button">Game 1</button>
+        <button class="game-button">Game 2</button>
+        <button class="game-button">Game 3</button>
+        <button class="game-button">Game 4</button>
+        <button class="game-button">Game 5</button>
+        <button class="game-button">Game 6</button>
+        <button class="game-button">Game 7</button>
+        <button class="game-button">Game 8</button>
+        <button class="game-button">Game 9</button>
+        <button class="game-button">Game 10</button>
+        <button class="game-button">Game 11</button>
+        <button class="game-button">Game 12</button>
+    </div>
+
+    <!-- JavaScript for detecting device type -->
+    <script>
+        const deviceHeading = document.getElementById("device-heading");
+        if (window.innerWidth <= 768) {
+            deviceHeading.innerText = "VGAMES";
+        } else {
+            deviceHeading.innerText = "Vilakazi Games";
+        }
+    </script>
+</body>
+</html>
