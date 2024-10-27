@@ -54,3 +54,5 @@ function navigateTo(page) {
   };
   window.location.href = urls[page];
 }
+
+
