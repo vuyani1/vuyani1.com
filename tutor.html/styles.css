@@ -1,37 +1,134 @@
-/* Existing styles remain the same */
+/* General reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(120deg, #a1c4fd, #fdbb2d);
+  background-size: 400% 400%;
+  animation: gradientAnimation 8s ease infinite;
+}
+
+/* Gradient Animation */
+@keyframes gradientAnimation {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Login Container */
+.login-container, .button-container, .video-overlay {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  max-width: 350px;
+  text-align: center;
+}
+
+.hidden {
+  display: none;
+}
+
+h2 {
+  color: #333;
+  margin-bottom: 10px;
+}
+
+p {
+  color: #666;
+  margin-bottom: 20px;
+  font-size: 0.9em;
+}
+
+/* Input fields */
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1em;
+}
+
+/* Buttons */
+button {
+  padding: 10px 20px;
+  margin-top: 15px;
+  background: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background 0.3s;
+}
+
+button:hover {
+  background: #45a049;
+}
+
+/* Error message */
+.error {
+  color: red;
+  font-size: 0.85em;
+  margin-top: 10px;
+}
+
+/* Video Overlay styling */
 .video-overlay {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   background: rgba(0, 0, 0, 0.8);
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   flex-direction: column;
-  z-index: 10;
 }
 
 .video-overlay iframe {
-  border-radius: 8px;
-  max-width: 90%;
-  max-height: 80%;
+  width: 328px;
+  height: 583px;
+  border: none;
 }
 
-.video-overlay button {
-  margin-top: 10px;
+#continueButton {
   padding: 10px 20px;
-  font-size: 1em;
-  font-weight: bold;
+  margin-top: 15px;
+  background: #2196F3;
   color: white;
-  background-color: #4CAF50;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  font-size: 1em;
+  display: none;
 }
 
-.video-overlay button:hover {
-  background-color: #45a049;
+#continueButton:hover {
+  background: #1E88E5;
+}
+
+/* Button Container */
+.button-container button {
+  width: 100%;
+  margin: 5px 0;
+  background: #2196F3;
+}
+
+.button-container button:hover {
+  background: #1E88E5;
 }
