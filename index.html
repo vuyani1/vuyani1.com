@@ -1,238 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>VGAMES 🎮✨</title>
-
-  <!-- Google AdSense script -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7484489054116946" crossorigin="anonymous"></script>
-
-  <style>
-    body {
-      font-family: 'Arial', sans-serif;
-      background-color: #000000;
-      color: #ffffff;
-      text-align: center;
-      overflow: hidden;
-      margin: 0;
-      padding: 0;
-    }
-
-    /* General Styles */
-    .hidden { display: none; }
-    .fade { animation: fadeEffect 2s; }
-
-    @keyframes fadeEffect {
-      from { opacity: 1; }
-      to { opacity: 0; }
-    }
-
-    /* First Slide Style */
-    .slide1 {
-      font-size: 5em;
-      animation: glow 3s infinite alternate;
-    }
-    .vgames-logo {
-      color: #ffdd00;
-      text-shadow: 0 0 20px #ffdd00;
-      cursor: pointer; /* Change cursor to pointer */
-    }
-    .signature {
-      font-size: 2em;
-      font-style: italic;
-      color: #ffffff;
-      text-shadow: 0 0 10px #ffffff;
-    }
-    @keyframes glow {
-      from { text-shadow: 0 0 10px #ffdd00; }
-      to { text-shadow: 0 0 40px #ffdd00; }
-    }
-
-    /* Second Slide Style */
-    .slide2 {
-      font-size: 2.5em;
-    }
-    .github-logo { color: #4078c0; font-size: 3em; }
-    .chatgpt-logo { color: #ffffff; font-size: 2.5em; }
-    .notepad-logo { color: #32CD32; font-size: 2.5em; }
-
-    /* Third Slide Style */
-    .legal-notice {
-      font-size: 1.2em;
-      margin: 20px;
-    }
-
-    /* Fourth Slide Style */
-    .game-buttons {
-      display: flex;
-      justify-content: space-around;
-      flex-wrap: wrap;
-      margin-top: 20px;
-    }
-    .game-buttons a {
-      text-decoration: none;
-      font-size: 1.5em;
-      background-color: #333;
-      color: #ffffff;
-      padding: 15px;
-      border-radius: 10px;
-      transition: background-color 0.3s;
-      margin: 10px;
-      display: block;
-      width: 45%;
-    }
-    .game-buttons a:hover {
-      background-color: #ff6600;
-    }
-    .rainbow-clock {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      font-size: 2em;
-      animation: rainbow 2s infinite;
-    }
-    @keyframes rainbow {
-      0% { color: red; }
-      20% { color: orange; }
-      40% { color: yellow; }
-      60% { color: green; }
-      80% { color: blue; }
-      100% { color: violet; }
-    }
-
-    /* Screensaver Style */
-    .screensaver {
-      display: none;
-      font-size: 10em;
-      animation: bounce 1s infinite alternate;
-    }
-    @keyframes bounce {
-      from { transform: translateY(0); }
-      to { transform: translateY(-20px); }
-    }
-
-    /* Media Queries for Responsive Design */
-    @media only screen and (max-width: 768px) {
-      /* For phones */
-      .slide1 { font-size: 3em; }
-      .signature { font-size: 1.5em; }
-      .slide2 { font-size: 2em; }
-      .game-buttons a { 
-        font-size: 1.2em; 
-        width: 90%;
-      }
-      .rainbow-clock {
-        font-size: 1.5em;
-        top: 10px;
-        right: 10px;
-      }
-    }
-
-    @media only screen and (min-width: 769px) {
-      /* For larger screens like PC */
-      .slide1 { font-size: 5em; }
-      .signature { font-size: 2em; }
-      .slide2 { font-size: 2.5em; }
-      .game-buttons a {
-        font-size: 1.5em;
-        width: 30%;
-      }
-      .rainbow-clock {
-        font-size: 2em;
-        top: 20px;
-        right: 20px;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VGAMES - Gaming Website</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- First Slide -->
-  <div id="slide1" class="slide1">
-    <div class="vgames-logo" onclick="redirectToVGAMES()">VGAMES 🌟✨</div>
-    <div class="signature">V.S Vilakazi</div>
-  </div>
+    <!-- Slide Container -->
+    <div class="slide-container">
 
-  <!-- Second Slide -->
-  <div id="slide2" class="slide2 hidden">
-    <h1>💻 GitHub</h1>
-    <p class="github-logo">💙 Powered by GitHub</p>
-    <p class="chatgpt-logo">🤖 ChatGPT for AI assistance</p>
-    <p class="notepad-logo">📝 Notepad++ for editing</p>
-  </div>
+        <!-- Slide 1: VGAMES Title -->
+        <div class="slide" id="slide1">
+            <h1 class="title">VGAMES</h1>
+        </div>
 
-  <!-- Third Slide -->
-  <div id="slide3" class="legal-notice hidden">
-    <h2>⚖️ Legal Notice</h2>
-    <p>Unauthorized use may result in legal action.</p>
-  </div>
+        <!-- Slide 2: Loading Screen -->
+        <div class="slide" id="slide2">
+            <h2 class="loading-text">Loading...</h2>
+        </div>
 
-  <!-- Fourth Slide -->
-  <div id="slide4" class="hidden">
-    <div class="game-buttons">
-      <a href="https://vuyani1.github.io/adventure.html">🌍 Adventure</a>
-      <a href="https://vuyani1.github.io/TIC-TAC-TOE.html">❌⭕ TIC-TAC-TOE</a>
-      <a href="https://vuyani1.github.io/Simon-Says.html">🗣️ Simon Says</a>
-      <a href="https://vuyani1.github.io/ig.html">📜 Legal Notice</a>
-      <a href="https://vgames1.github.io">🌟 VGAMES</a>
+        <!-- Slide 3: Tech Used -->
+        <div class="slide" id="slide3">
+            <p class="tech-used">Developed with GitHub, Notepad++, HTML</p>
+        </div>
+
+        <!-- Slide 4: Embedded Video 1 -->
+        <div class="slide" id="slide4">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/ts8i-6AtDfc?si=bw6oWr0-8RJgqnSu&amp;controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+
+        <!-- Slide 5: Embedded Video 2 -->
+        <div class="slide" id="slide5">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/qxOkaU6RVz4?si=dyNInZuBjFj31Bfv&amp;controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+
     </div>
-    <div class="game-buttons">
-      <a href="https://youtube.com/@POOF-f5c">📺 Subscribe at POOF</a>
-      <a href="https://youtube.com/@VUYANI_SIYANDA_VILAKAZI">📺 Subscribe to VUYANI</a>
-    </div>
-    <div class="rainbow-clock">⏰ 12:34</div>
-  </div>
 
-  <!-- Screensaver -->
-  <div id="screensaver" class="screensaver hidden">
-    <div class="vgames-logo" onclick="redirectToVGAMES()">VGAMES 🎮✨</div>
-  </div>
+    <!-- JavaScript for Slide Transition -->
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const slideDurations = [3000, 10000, 3000, 0, 0]; // Duration for each slide in ms
 
-  <script>
-    function showSlide(slideId) {
-      document.querySelectorAll('div').forEach(div => div.classList.add('hidden'));
-      document.getElementById(slideId).classList.remove('hidden');
-    }
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.style.display = i === index ? 'block' : 'none';
+            });
+            if (index === 4) {
+                setTimeout(() => {
+                    window.location.href = 'https://vuyani1.github.io/home.html';
+                }, 5000); // Redirect after the last slide
+            }
+        }
 
-    function redirectToVGAMES() {
-      window.location.href = "https://vgames1.github.io";
-    }
+        function nextSlide() {
+            if (currentSlide < slides.length - 1) {
+                currentSlide++;
+                showSlide(currentSlide);
+                if (slideDurations[currentSlide] > 0) {
+                    setTimeout(nextSlide, slideDurations[currentSlide]);
+                }
+            }
+        }
 
-    let slideIndex = 1;
-
-    function showNextSlide() {
-      if (slideIndex > 4) {
-        showScreensaver();
-        return;
-      }
-      showSlide('slide' + slideIndex);
-      slideIndex++;
-      if (slideIndex === 4) {
-        // Show the fourth slide for 25 seconds
-        setTimeout(() => {
-          slideIndex++;
-          showSlide('slide4');
-          setTimeout(() => {
-            showScreensaver();
-          }, 25000); // Fade to screensaver after 25 seconds
-        }, 0);
-      }
-    }
-
-    function showScreensaver() {
-      document.querySelectorAll('div').forEach(div => div.classList.add('hidden'));
-      document.getElementById('screensaver').classList.remove('hidden');
-      // Stop the screensaver if it is touched
-      document.getElementById('screensaver').addEventListener('click', () => {
-        document.getElementById('screensaver').classList.add('hidden');
-        slideIndex = 1; // Reset slide index to start over
-        showNextSlide(); // Show the first slide
-      });
-    }
-
-    // Start the slideshow
-    showNextSlide();
-    setInterval(showNextSlide, 5000); // Change slide every 5 seconds for demo
-  </script>
+        showSlide(currentSlide);
+        setTimeout(nextSlide, slideDurations[currentSlide]);
+    </script>
 </body>
 </html>
