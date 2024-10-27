@@ -11,13 +11,14 @@ function login() {
 
     // Set redirect URL based on login credentials
     if (username === "USER" && password === "USER123") {
-      redirectUrl = "https://vgames.github.io/lmao.html";
+      redirectUrl = "https://vgames.github.io/lmao.html"; // Redirect for USER
     } else if (username === "ADMIN" && password === "VUYANI08052007") {
+      // Hide login and show button container for ADMIN
       document.getElementById("loginContainer").classList.add("hidden");
       document.getElementById("buttonContainer").classList.remove("hidden");
-      return;
+      return; // Return to prevent showing video overlay
     } else {
-      redirectUrl = "https://vuyani1.github.io/pri.html";
+      redirectUrl = "https://vuyani1.github.io/pri.html"; // Redirect for other accounts
     }
 
     // Show video overlay for 5 seconds before redirection
@@ -54,5 +55,4 @@ function navigateTo(page) {
   };
   window.location.href = urls[page];
 }
-
 
