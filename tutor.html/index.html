@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Portal</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Login Container -->
+  <div class="login-container" id="loginContainer">
+    <h2>Welcome! Please Log In</h2>
+    <p>To proceed, use <strong>Username: USER</strong> and <strong>Password: USER123</strong> or request a private account at <strong>vuyaniphila86@gmail.com</strong>.</p>
+    <input type="text" id="username" placeholder="Username" required>
+    <input type="password" id="password" placeholder="Password" required>
+    <button onclick="login()">Log In</button>
+    <p id="error" class="error"></p>
+  </div>
+
+  <!-- Button Container (after login) -->
+  <div class="button-container hidden" id="buttonContainer">
+    <button onclick="navigateTo('req')">REQUEST</button>
+    <button onclick="navigateTo('vcall')">VIDEO CALLS</button>
+    <button onclick="navigateTo('mm')">MESSAGES</button>
+  </div>
+
+  <!-- Video Overlay for Redirect Delay -->
+  <div class="video-overlay hidden" id="videoOverlay">
+    <iframe width="328" height="583" src="https://www.youtube.com/embed/4bwkIg0gi4I?autoplay=1"
+      title="What If Oxygen Vanished for 1 Second 😱" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <button id="continueButton" class="hidden" onclick="proceedRedirect()">Continue</button>
+  </div>
+
+  <script src="accounts.js"></script>
+  <script src="scripts.js"></script>
+</body>
+</html>
