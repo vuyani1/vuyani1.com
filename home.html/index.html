@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Time Display -->
+    <div id="time-display"></div>
+
     <!-- Container for welcome screen -->
     <div class="welcome-container">
         <!-- Responsive heading for different devices -->
@@ -16,22 +19,22 @@
 
     <!-- Button Grid -->
     <div class="button-grid">
-        <!-- Add 12 buttons, placeholders for your games -->
-        <button class="game-button">Game 1</button>
-        <button class="game-button">Game 2</button>
-        <button class="game-button">Game 3</button>
-        <button class="game-button">Game 4</button>
-        <button class="game-button">Game 5</button>
-        <button class="game-button">Game 6</button>
-        <button class="game-button">Game 7</button>
-        <button class="game-button">Game 8</button>
-        <button class="game-button">Game 9</button>
-        <button class="game-button">Game 10</button>
-        <button class="game-button">Game 11</button>
-        <button class="game-button">Game 12</button>
+        <!-- Game Buttons linked to respective pages -->
+        <button class="game-button" onclick="location.href='https://vuyani1.github.io/home.html/game1.html'">Game 1</button>
+        <button class="game-button" onclick="location.href='https://vuyani1.github.io/home.html/game2.html'">Game 2</button>
+        <button class="game-button" onclick="location.href='https://vuyani1.github.io/home.html/game3.html'">Game 3</button>
+        <button class="game-button" onclick="location.href='https://vuyani1.github.io/home.html/game4.html'">Game 4</button>
+        <button class="game-button" onclick="location.href='https://vuyani1.github.io/home.html/game5.html'">Game 5</button>
+        <button class="game-button" onclick="location.href='https://vuyani1.github.io/home.html/game6.html'">Game 6</button>
+        <button class="game-button" onclick="location.href='https://vuyani1.github.io/home.html/game7.html'">Game 7</button>
+        <button class="game-button" onclick="location.href='https://vuyani1.github.io/home.html/game8.html'">Game 8</button>
+        <button class="game-button" onclick="location.href='https://vuyani1.github.io/home.html/game9.html'">Game 9</button>
+        <button class="game-button" onclick="location.href='https://vuyani1.github.io/home.html/game10.html'">Game 10</button>
+        <button class="game-button" onclick="location.href='https://vuyani1.github.io/home.html/game11.html'">Game 11</button>
+        <button class="game-button" onclick="location.href='https://vuyani1.github.io/home.html/game12.html'">Game 12</button>
     </div>
 
-    <!-- JavaScript for detecting device type -->
+    <!-- JavaScript for device detection and time display -->
     <script>
         const deviceHeading = document.getElementById("device-heading");
         if (window.innerWidth <= 768) {
@@ -39,6 +42,15 @@
         } else {
             deviceHeading.innerText = "Vilakazi Games";
         }
+
+        // Time Display
+        function updateTime() {
+            const timeDisplay = document.getElementById("time-display");
+            const now = new Date();
+            timeDisplay.innerText = now.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'});
+        }
+        setInterval(updateTime, 1000);
+        updateTime();
     </script>
 </body>
 </html>
