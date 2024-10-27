@@ -1,0 +1,109 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+    color: white;
+}
+
+/* Animated Gradient Background */
+body {
+    animation: animeBackground 10s infinite alternate;
+}
+
+/* Main Container */
+.welcome-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 50vh;
+    text-align: center;
+    animation: moveUp 5s ease-in-out forwards;
+}
+
+/* Heading Styles */
+.main-heading {
+    font-size: 4rem;
+    font-family: 'Courier New', monospace;
+    text-shadow: 0 0 10px cyan, 0 0 20px cyan, 0 0 30px cyan;
+    animation: glow 2s infinite alternate;
+}
+
+.welcome-text {
+    font-size: 5rem;
+    margin-top: 10px;
+    color: yellow;
+    text-shadow: 0 0 10px yellow, 0 0 20px yellow, 0 0 30px yellow;
+    animation: glow 3s infinite alternate;
+}
+
+/* Button Grid */
+.button-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 20px;
+    text-align: center;
+    margin-top: 5vh;
+}
+
+.game-button {
+    font-size: 1.5rem;
+    padding: 10px 20px;
+    background: #333;
+    color: white;
+    border: 2px solid cyan;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.game-button:hover {
+    background-color: cyan;
+    color: black;
+    transform: scale(1.1);
+}
+
+/* Media Query for Mobile */
+@media (max-width: 768px) {
+    .main-heading {
+        font-size: 3rem;
+        text-shadow: 0 0 10px blue, 0 0 20px blue, 0 0 30px blue;
+    }
+
+    .welcome-text {
+        font-size: 4rem;
+        margin-top: 5px;
+        animation: glow 2.5s infinite alternate;
+    }
+
+    .button-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+}
+
+/* Animations */
+@keyframes animeBackground {
+    0% { background-color: #141E30; }
+    50% { background-color: #243B55; }
+    100% { background-color: #3A506B; }
+}
+
+@keyframes glow {
+    from { text-shadow: 0 0 10px cyan, 0 0 20px cyan, 0 0 30px cyan; }
+    to { text-shadow: 0 0 20px blue, 0 0 30px blue, 0 0 40px blue; }
+}
+
+@keyframes moveUp {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-50px); }
+}
