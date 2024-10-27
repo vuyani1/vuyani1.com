@@ -9,7 +9,6 @@
 <body>
     <!-- Slide Container -->
     <div class="slide-container">
-
         <!-- Slide 1: VGAMES Title -->
         <div class="slide" id="slide1">
             <h1 class="title">VGAMES</h1>
@@ -34,20 +33,19 @@
         <div class="slide" id="slide5">
             <iframe width="560" height="315" src="https://www.youtube.com/embed/qxOkaU6RVz4?si=dyNInZuBjFj31Bfv&amp;controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         </div>
-
     </div>
 
     <!-- JavaScript for Slide Transition -->
     <script>
         let currentSlide = 0;
         const slides = document.querySelectorAll('.slide');
-        const slideDurations = [3000, 10000, 3000, 0, 0]; // Duration for each slide in ms
+        const slideDurations = [10000, 10000, 10000, 10000, 10000]; // Each slide set to 10 seconds (10000ms)
 
         function showSlide(index) {
             slides.forEach((slide, i) => {
                 slide.style.display = i === index ? 'block' : 'none';
             });
-            if (index === 4) {
+            if (index === slides.length - 1) {
                 setTimeout(() => {
                     window.location.href = 'https://vuyani1.github.io/home.html';
                 }, 5000); // Redirect after the last slide
@@ -58,9 +56,7 @@
             if (currentSlide < slides.length - 1) {
                 currentSlide++;
                 showSlide(currentSlide);
-                if (slideDurations[currentSlide] > 0) {
-                    setTimeout(nextSlide, slideDurations[currentSlide]);
-                }
+                setTimeout(nextSlide, slideDurations[currentSlide]);
             }
         }
 
@@ -69,6 +65,7 @@
     </script>
 </body>
 </html>
+
 
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7484489054116946"
      crossorigin="anonymous"></script>
