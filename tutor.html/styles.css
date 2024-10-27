@@ -1,0 +1,37 @@
+/* Existing styles remain the same */
+
+.video-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  z-index: 10;
+}
+
+.video-overlay iframe {
+  border-radius: 8px;
+  max-width: 90%;
+  max-height: 80%;
+}
+
+.video-overlay button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  font-size: 1em;
+  font-weight: bold;
+  color: white;
+  background-color: #4CAF50;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.video-overlay button:hover {
+  background-color: #45a049;
+}
