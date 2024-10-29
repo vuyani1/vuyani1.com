@@ -32,7 +32,6 @@ header, footer {
   .mobile { display: block; }
 }
 
-/* Background Animation for Media Types */
 @keyframes backgroundTransition {
   0% { background-color: #0f0c29; }
   100% { background-color: #302b63; }
@@ -50,12 +49,7 @@ header, footer {
   display: block;
 }
 
-.search-section {
-  padding: 10px;
-  text-align: center;
-}
-
-.offline-section {
+.search-section, .offline-section {
   padding: 10px;
   text-align: center;
 }
