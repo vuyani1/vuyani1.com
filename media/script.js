@@ -1,11 +1,18 @@
+// script.js
+
 const searchButton = document.getElementById("searchButton");
 const searchInput = document.getElementById("search");
 const videoPlayer = document.getElementById("videoPlayer");
 const audioPlayer = document.getElementById("audioPlayer");
 const localFileInput = document.getElementById("localFile");
 
-searchButton.addEventListener("click", searchOnline);
-localFileInput.addEventListener("change", playLocalFile);
+if (searchButton && searchInput) {
+  searchButton.addEventListener("click", searchOnline);
+}
+
+if (localFileInput) {
+  localFileInput.addEventListener("change", playLocalFile);
+}
 
 function searchOnline() {
   const query = searchInput.value;
