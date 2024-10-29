@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VILAKAZI GAMES</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <header>
+    <h1 class="logo desktop">VILAKAZI GAMES</h1>
+    <h1 class="logo mobile">VGAMES</h1>
+  </header>
+  
+  <main>
+    <div class="search-section">
+      <input type="text" id="search" placeholder="Search for music or videos online...">
+      <button id="searchButton">Search</button>
+    </div>
+
+    <div class="media-section">
+      <video id="videoPlayer" controls></video>
+      <audio id="audioPlayer" controls></audio>
+    </div>
+
+    <div class="offline-section">
+      <input type="file" id="localFile" accept="audio/*,video/*">
+      <label for="localFile">Choose your own file to play offline</label>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2024 VILAKAZI GAMES</p>
+  </footer>
+</body>
+</html>
