@@ -1,0 +1,16 @@
+{
+  "name": "VILAKAZI GAMES",
+  "short_name": "VGAMES",
+  "description": "A media player with offline functionality.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#24243e",
+  "theme_color": "#0f0c29",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "64x64",
+      "type": "image/x-icon"
+    }
+  ]
+}
