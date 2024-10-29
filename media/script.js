@@ -4,7 +4,6 @@ const videoPlayer = document.getElementById("videoPlayer");
 const audioPlayer = document.getElementById("audioPlayer");
 const localFileInput = document.getElementById("localFile");
 
-// Event listeners
 searchButton.addEventListener("click", searchOnline);
 localFileInput.addEventListener("change", playLocalFile);
 
@@ -37,7 +36,6 @@ function playLocalFile(event) {
   }
 }
 
-// Background color control for media types
 function updateBackgroundColor(type) {
   document.body.style.transition = "background 1s";
   if (type === "video") {
