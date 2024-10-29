@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>V.S. Vilakazi's Site</title>
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <style>
+    /* Reset and body styling */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: Arial, sans-serif; overflow: hidden; }
+
+    /* Background */
+    @keyframes backgroundFade {
+      0% { background-image: url('bg11.jpeg'); }
+      20% { background-image: url('bg12.jpeg'); }
+      40% { background-image: url('bg13.jpeg'); }
+      60% { background-image: url('bg14.jpeg'); }
+      80% { background-image: url('bg15.jpeg'); }
+      100% { background-image: url('bg16.jpeg'); }
+    }
+    body { 
+      animation: backgroundFade 30s infinite;
+      background-size: cover;
+      background-attachment: fixed;
+      background-position: center;
+      color: #fff;
+    }
+
+    /* Center box */
+    .center-box {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 2rem;
+      width: 300px;
+      height: 300px;
+      text-align: center;
+      font-size: 2rem;
+      color: #ffffff;
+      background: rgba(0, 0, 0, 0.5);
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+      animation: colorPulse 5s infinite alternate;
+    }
+    @keyframes colorPulse {
+      0% { box-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff; }
+      50% { box-shadow: 0 0 20px #00ffff, 0 0 40px #00ffff; }
+      100% { box-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff; }
+    }
+
+    /* Footer */
+    .footer {
+      position: fixed;
+      bottom: 10px;
+      width: 100%;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #888;
+    }
+
+    /* Mobile styling */
+    @media (max-width: 768px) {
+      body { background-image: url('mobilebg.png'); }
+      .center-box {
+        display: none;
+      }
+      .mobile-message {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        color: #fff;
+      }
+      .mobile-message img {
+        max-width: 100px;
+        margin-bottom: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Mobile Message -->
+  <div class="mobile-message">
+    <img src="logo.png" alt="Logo">
+    <p>Not allowed on mobile devices.</p>
+  </div>
+
+  <!-- Center Box with Time -->
+  <div class="center-box" id="timeBox">
+    <div id="time"></div>
+  </div>
+
+  <!-- Footer with Copyright Info -->
+  <div class="footer">
+    &copy; 2024 V.S. Vilakazi. All rights reserved.
+  </div>
+
+  <!-- JavaScript for Time Update -->
+  <script>
+    function updateTime() {
+      const now = new Date();
+      const timeString = now.toLocaleTimeString();
+      document.getElementById('time').textContent = timeString;
+    }
+    setInterval(updateTime, 1000);
+    updateTime();
+  </script>
+</body>
+</html>
