@@ -56,3 +56,7 @@ function navigateTo(page) {
   window.location.href = urls[page];
 }
 
+  //show pop up after 3000 seconds 
+
+<script type="text/javascript" src="//delivery.r2b2.io/get/vuyani1.github.io/generic/vignette"></script>
+<script type="text/javascript" src="//delivery.r2b2.io/get/vuyani1.github.io/generic/vignette/mobile"></script>
