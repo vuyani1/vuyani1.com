@@ -15,14 +15,12 @@
 
     <!-- Container for welcome screen -->
     <div class="welcome-container">
-        <!-- Responsive heading for different devices -->
         <h1 class="main-heading" id="device-heading">Vilakazi Games</h1>
         <h2 class="welcome-text">WELCOME</h2>
     </div>
 
     <!-- Button Grid -->
     <div class="button-grid">
-        <!-- Game Buttons linked to respective pages -->
         <button class="game-button" onclick="location.href='https://vuyani1.github.io/home.html/game1.html'">Game 1</button>
         <button class="game-button" onclick="location.href='https://vuyani1.github.io/home.html/game2.html'">Game 2</button>
         <button class="game-button" onclick="location.href='https://vuyani1.github.io/home.html/game3.html'">Game 3</button>
@@ -43,11 +41,10 @@
         const themeToggle = document.getElementById("theme-toggle");
 
         // Load theme from local storage
-        const savedTheme = localStorage.getItem("theme");
-        if (savedTheme) {
-            document.body.classList.toggle("dark-theme", savedTheme === "dark");
-        }
+        const savedTheme = localStorage.getItem("theme") || "theme1";
+        document.body.className = savedTheme;
 
+        // Adjust heading for device width
         if (window.innerWidth <= 768) {
             deviceHeading.innerText = "VGAMES";
         } else {
@@ -65,9 +62,10 @@
 
         // Theme toggle functionality
         themeToggle.addEventListener("click", () => {
-            document.body.classList.toggle("dark-theme");
-            const newTheme = document.body.classList.contains("dark-theme") ? "dark" : "light";
-            localStorage.setItem("theme", newTheme);
+            let currentTheme = document.body.className;
+            let nextTheme = `theme${(parseInt(currentTheme.replace('theme', '')) % 12) + 1}`;
+            document.body.className = nextTheme;
+            localStorage.setItem("theme", nextTheme);
         });
     </script>
 </body>
