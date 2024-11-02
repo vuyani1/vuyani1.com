@@ -3,85 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VGAMES - Gaming Website</title>  
-    <link rel="stylesheet" href="style.css">
-     
-    <!-- Favicon setup for various devices and browsers -->
-     <link rel="icon" href="favicon.ico" type="image/x-icon"> <!-- Standard favicon -->
-     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"> <!-- Legacy support -->
-
-      <!-- High-resolution icons for Apple devices -->
-      <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-      <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-      <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-
-      <!-- Manifest for Android and other platforms -->
-      <link rel="manifest" href="site.webmanifest">
-
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="styles.css">
+    <title>VILAKAZI GAMES</title>
 </head>
 <body>
-    <!-- Slide Container -->
-    <div class="slide-container">
-        <!-- Slide 1: VGAMES Title -->
+    <div id="slideshow">
         <div class="slide" id="slide1">
-            <h1 class="title">VGAMES</h1>
+            <h1 class="glow">VGAMES</h1>
+            <h1 class="glow">VILAKAZI GAMES</h1>
         </div>
-
-        <!-- Slide 2: Loading Screen -->
         <div class="slide" id="slide2">
-            <h2 class="loading-text">Loading...</h2>
+            <h1>Loading...</h1>
         </div>
-
-        <!-- Slide 3: Tech Used -->
         <div class="slide" id="slide3">
-            <p class="tech-used">Developed with GitHub, Notepad++, HTML</p>
+            <h1>READY</h1>
         </div>
-
-        <!-- Slide 4: Embedded Video 1 -->
         <div class="slide" id="slide4">
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/ts8i-6AtDfc?si=bw6oWr0-8RJgqnSu&amp;controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-        </div>
-
-        <!-- Slide 5: Embedded Video 2 -->
-        <div class="slide" id="slide5">
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/qxOkaU6RVz4?si=dyNInZuBjFj31Bfv&amp;controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            <h1>MADE BY VILAKAZI VUYANI</h1>
+            <p>"Dream big, work hard."</p>
+            <p>"Success is not final, failure is not fatal."</p>
+            <p>"Believe you can, and you're halfway there."</p>
         </div>
     </div>
-
-    <!-- JavaScript for Slide Transition -->
-    <script>
-        let currentSlide = 0;
-        const slides = document.querySelectorAll('.slide');
-        const slideDurations = [10000, 10000, 10000, 10000, 10000]; // Each slide set to 10 seconds (10000ms)
-
-        function showSlide(index) {
-            slides.forEach((slide, i) => {
-                slide.style.display = i === index ? 'block' : 'none';
-            });
-            if (index === slides.length - 1) {
-                setTimeout(() => {
-                    window.location.href = 'https://vuyani1.github.io/home.html';
-                }, 5000); // Redirect after the last slide
-            }
-        }
-
-        function nextSlide() {
-            if (currentSlide < slides.length - 1) {
-                currentSlide++;
-                showSlide(currentSlide);
-                setTimeout(nextSlide, slideDurations[currentSlide]);
-            }
-        }
-
-        showSlide(currentSlide);
-        setTimeout(nextSlide, slideDurations[currentSlide]);
-    </script>
+    
+    <script src="script.js"></script>
 </body>
 </html>
-
-
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7484489054116946"
-     crossorigin="anonymous"></script>
-
-<script type="text/javascript" src="//delivery.r2b2.io/get/vuyani1.github.io/generic/vignette"></script>
-<script type="text/javascript" src="//delivery.r2b2.io/get/vuyani1.github.io/generic/vignette/mobile"></script>
