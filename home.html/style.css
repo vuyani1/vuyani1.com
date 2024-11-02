@@ -8,15 +8,10 @@
 body, html {
     width: 100%;
     height: 100%;
-    overflow-y: auto; /* Enable scrolling */
+    overflow-y: auto;
     font-family: 'Arial', sans-serif;
     color: white;
-}
-
-/* Animated Background */
-body {
-    background: linear-gradient(135deg, #141E30, #243B55);
-    animation: animeBackground 10s infinite alternate;
+    transition: background 0.3s, color 0.3s;
 }
 
 /* Time Display */
@@ -105,53 +100,72 @@ body {
     box-shadow: 0 8px 20px rgba(255, 215, 0, 0.5);
 }
 
-/* Dark Theme Styles */
-.dark-theme {
-    background: linear-gradient(135deg, #2a2a2a, #1b1b1b);
-    color: #eaeaea;
+/* Themes Styles */
+body.theme1 {
+    background: linear-gradient(135deg, #141E30, #243B55);
 }
 
-.dark-theme .game-button {
-    background: linear-gradient(45deg, #444, #555);
-    border-color: #ffd700;
+body.theme2 {
+    background: linear-gradient(135deg, #FF5733, #FFC300);
 }
 
-/* Media Query for Mobile */
-@media (max-width: 768px) {
-    .main-heading {
-        font-size: 3rem;
-        text-shadow: 0 0 10px #4682b4, 0 0 20px #4682b4, 0 0 30px #4682b4;
-        animation: glowMobile 2s infinite alternate;
-    }
-
-    .welcome-text {
-        font-size: 4rem;
-    }
-
-    .button-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
-    }
+body.theme3 {
+    background: linear-gradient(135deg, #4CA1AF, #C4E0E5);
 }
 
-/* Animations */
-@keyframes animeBackground {
-    0% { background-color: #141E30; }
-    50% { background-color: #243B55; }
-    100% { background-color: #3A506B; }
+body.theme4 {
+    background: linear-gradient(135deg, #1F1C2C, #928DAB);
+}
+
+body.theme5 {
+    background: linear-gradient(135deg, #D8BFD8, #FFE4E1);
+}
+
+body.theme6 {
+    background: linear-gradient(135deg, #3A6073, #3B3B58);
+}
+
+body.theme7 {
+    background: linear-gradient(135deg, #FF6B6B, #FFD93D);
+}
+
+body.theme8 {
+    background: linear-gradient(135deg, #2980B9, #6DD5ED);
+}
+
+body.theme9 {
+    background: linear-gradient(135deg, #6A82FB, #FC5C7D);
+}
+
+body.theme10 {
+    background: linear-gradient(135deg, #84C3FF, #B6F6D8);
+}
+
+body.theme11 {
+    background: linear-gradient(135deg, #B9FBC0, #3BCEAC);
+}
+
+body.theme12 {
+    background: linear-gradient(135deg, #E4B2F4, #3A6073);
+}
+
+/* Keyframe Animations */
+@keyframes moveUp {
+    from {
+        transform: translateY(50%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
 @keyframes glow {
-    from { text-shadow: 0 0 10px #c0c0c0, 0 0 20px #ffd700, 0 0 30px #ffd700; }
-    to { text-shadow: 0 0 20px #c0c0c0, 0 0 40px #ffd700, 0 0 60px #ffd700; }
-}
-
-@keyframes glowMobile {
-    from { text-shadow: 0 0 5px #b8860b, 0 0 10px #ffd700; }
-    to { text-shadow: 0 0 10px #b8860b, 0 0 20px #ffd700; }
-}
-
-@keyframes moveUp {
-    0% { transform: translateY(50px); opacity: 0; }
-    100% { transform: translateY(0); opacity: 1; }
+    0% {
+        text-shadow: 0 0 10px #b8860b, 0 0 20px #ffd700;
+    }
+    100% {
+        text-shadow: 0 0 20px #b8860b, 0 0 40px #ffd700;
+    }
 }
