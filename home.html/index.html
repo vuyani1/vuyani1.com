@@ -10,6 +10,9 @@
     <!-- Time Display -->
     <div id="time-display"></div>
 
+    <!-- Theme Toggle Button -->
+    <button id="theme-toggle" class="theme-button">Toggle Theme</button>
+
     <!-- Container for welcome screen -->
     <div class="welcome-container">
         <!-- Responsive heading for different devices -->
@@ -34,9 +37,17 @@
         <button class="game-button" onclick="location.href='https://vuyani1.github.io/home.html/game12.html'">Game 12</button>
     </div>
 
-    <!-- JavaScript for device detection and time display -->
+    <!-- JavaScript for device detection, time display, and theme toggle -->
     <script>
         const deviceHeading = document.getElementById("device-heading");
+        const themeToggle = document.getElementById("theme-toggle");
+
+        // Load theme from local storage
+        const savedTheme = localStorage.getItem("theme");
+        if (savedTheme) {
+            document.body.classList.toggle("dark-theme", savedTheme === "dark");
+        }
+
         if (window.innerWidth <= 768) {
             deviceHeading.innerText = "VGAMES";
         } else {
@@ -47,14 +58,20 @@
         function updateTime() {
             const timeDisplay = document.getElementById("time-display");
             const now = new Date();
-            timeDisplay.innerText = now.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'});
+            timeDisplay.innerText = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
         }
         setInterval(updateTime, 1000);
         updateTime();
+
+        // Theme toggle functionality
+        themeToggle.addEventListener("click", () => {
+            document.body.classList.toggle("dark-theme");
+            const newTheme = document.body.classList.contains("dark-theme") ? "dark" : "light";
+            localStorage.setItem("theme", newTheme);
+        });
     </script>
 </body>
 </html>
 
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7484489054116946"
      crossorigin="anonymous"></script>
-     
