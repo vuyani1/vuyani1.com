@@ -12,12 +12,15 @@ body {
     font-family: 'Arial', sans-serif;
     overflow: hidden;
     animation: backgroundChange 15s infinite;
+    background-image: url('christmas-background.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 @keyframes backgroundChange {
-    0% { background-color: #ff7e5f; }
-    50% { background-color: #feb47b; }
-    100% { background-color: #ff7e5f; }
+    0% { background-color: #ff0000; }
+    50% { background-color: #008000; }
+    100% { background-color: #ff0000; }
 }
 
 #slideshow {
@@ -32,18 +35,18 @@ body {
 h1 {
     font-size: 4rem;
     margin: 20px 0;
+    color: #ffffff;
 }
 
 .glow {
-    color: white;
-    text-shadow: 0 0 20px #ffffff, 0 0 30px #ff00ff;
+    text-shadow: 0 0 20px #ffffff, 0 0 30px #ff0000, 0 0 40px #00ff00;
     animation: glowing 1.5s infinite;
 }
 
 @keyframes glowing {
-    0% { text-shadow: 0 0 20px #ffffff, 0 0 30px #ff00ff; }
-    50% { text-shadow: 0 0 30px #ffffff, 0 0 40px #ff00ff; }
-    100% { text-shadow: 0 0 20px #ffffff, 0 0 30px #ff00ff; }
+    0% { text-shadow: 0 0 20px #ffffff, 0 0 30px #ff0000, 0 0 40px #00ff00; }
+    50% { text-shadow: 0 0 30px #ffffff, 0 0 40px #ff0000, 0 0 50px #00ff00; }
+    100% { text-shadow: 0 0 20px #ffffff, 0 0 30px #ff0000, 0 0 40px #00ff00; }
 }
 
 #slide1 {
