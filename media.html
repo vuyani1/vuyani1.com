@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Christmas Media Player</title>
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <style>
+    /* Reset and Base Styles */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #1a1a2e;
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      background-image: url('christmas_bg.jpg');
+      background-size: cover;
+      background-position: center;
+    }
+
+    /* Container */
+    .media-container {
+      background: rgba(0, 0, 0, 0.6);
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+      max-width: 800px;
+      width: 90%;
+      text-align: center;
+      border: 2px solid #e63946;
+    }
+
+    /* Heading */
+    h1 {
+      margin-bottom: 20px;
+      font-size: 2.5rem;
+      color: #e63946;
+      text-shadow: 2px 2px #000000;
+    }
+
+    /* Video and Audio */
+    video, audio {
+      width: 100%;
+      max-width: 100%;
+      margin-bottom: 20px;
+      border-radius: 10px;
+    }
+
+    /* Embed Instructions */
+    .embed-code {
+      background: #ffffff;
+      color: #1a1a2e;
+      padding: 10px;
+      border-radius: 5px;
+      font-family: monospace;
+      overflow-x: auto;
+    }
+
+    /* Christmas Decorations */
+    .snowflakes {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      background-image: url('snowflake.png');
+      background-repeat: repeat;
+      animation: snowfall 30s linear infinite;
+      opacity: 0.5;
+    }
+
+    @keyframes snowfall {
+      from { transform: translateY(0); }
+      to { transform: translateY(100vh); }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 1.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Snowflake Effect -->
+  <div class="snowflakes"></div>
+
+  <!-- Media Container -->
+  <div class="media-container">
+    <h1>Merry Christmas!</h1>
+
+    <!-- Video Player -->
+    <video controls>
+      <source src="christmas_video.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+
+    <!-- Audio Player -->
+    <audio controls>
+      <source src="christmas_music.mp3" type="audio/mpeg">
+      Your browser does not support the audio element.
+    </audio>
+
+    <!-- Embed Code -->
+    <h2>Embed This Media Player</h2>
+    <textarea class="embed-code" rows="4" readonly>
+&lt;iframe src="https://yourwebsite.com/media.html" width="800" height="600" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;
+    </textarea>
+  </div>
+</body>
+</html>
