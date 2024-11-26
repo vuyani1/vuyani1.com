@@ -2,111 +2,127 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>V.S. Vilakazi's Site</title>
-  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Christmas Premium Screensaver</title>
   <style>
-    /* Reset and body styling */
+    /* Reset and Base Styles */
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: Arial, sans-serif; overflow: hidden; }
-
-    /* Background */
-    @keyframes backgroundFade {
-      0% { background-image: url('bg11.jpeg'); }
-      20% { background-image: url('bg12.jpeg'); }
-      40% { background-image: url('bg13.jpeg'); }
-      60% { background-image: url('bg14.jpeg'); }
-      80% { background-image: url('bg15.jpeg'); }
-      100% { background-image: url('bg16.jpeg'); }
-    }
-    body { 
-      animation: backgroundFade 30s infinite;
-      background-size: cover;
-      background-attachment: fixed;
-      background-position: center;
-      color: #fff;
+    body, html {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #0a0a23;
+      color: #ffffff;
+      position: relative;
     }
 
-    /* Center box */
-    .center-box {
+    /* Snowfall Effect */
+    .snowflake {
+      position: absolute;
+      top: -10px;
+      z-index: 1000;
+      user-select: none;
+      pointer-events: none;
+      animation: fall linear infinite;
+      opacity: 0.8;
+    }
+
+    /* Keyframes for Snowfall */
+    @keyframes fall {
+      to { transform: translateY(100vh) rotate(360deg); }
+    }
+
+    /* Create Multiple Snowflakes */
+    <style>
+      /* Additional CSS for multiple snowflakes with varying sizes and durations */
+      body::before, body::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 50%;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        background-image: url('snowflake.png');
+        background-repeat: repeat;
+        animation: snowfall 20s linear infinite;
+        opacity: 0.3;
+      }
+
+      @keyframes snowfall {
+        from { background-position: 0 0; }
+        to { background-position: 0 1000px; }
+      }
+    </style>
+
+    /* Center Message Box */
+    .message-box {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      padding: 2rem;
-      width: 300px;
-      height: 300px;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 30px;
+      border-radius: 20px;
       text-align: center;
-      font-size: 2rem;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+    }
+
+    .message-box h1 {
+      font-size: 3rem;
+      color: #e63946;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px #000000;
+    }
+
+    .message-box p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+    }
+
+    .message-box .cta {
+      background: #e63946;
       color: #ffffff;
-      background: rgba(0, 0, 0, 0.5);
-      border-radius: 15px;
-      box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
-      animation: colorPulse 5s infinite alternate;
-    }
-    @keyframes colorPulse {
-      0% { box-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff; }
-      50% { box-shadow: 0 0 20px #00ffff, 0 0 40px #00ffff; }
-      100% { box-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff; }
+      padding: 15px 30px;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
     }
 
-    /* Footer */
-    .footer {
-      position: fixed;
-      bottom: 10px;
-      width: 100%;
-      text-align: center;
-      font-size: 0.9rem;
-      color: #888;
+    .message-box .cta:hover {
+      background: #d62828;
     }
 
-    /* Mobile styling */
-    @media (max-width: 768px) {
-      body { background-image: url('mobilebg.png'); }
-      .center-box {
-        display: none;
+    /* Responsive Design */
+    @media (max-width: 600px) {
+      .message-box h1 {
+        font-size: 2rem;
       }
-      .mobile-message {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        text-align: center;
-        color: #fff;
-      }
-      .mobile-message img {
-        max-width: 100px;
-        margin-bottom: 10px;
+
+      .message-box p {
+        font-size: 1rem;
       }
     }
   </style>
 </head>
 <body>
-  <!-- Mobile Message -->
-  <div class="mobile-message">
-    <img src="logo.png" alt="Logo">
-    <p>Not allowed on mobile devices.</p>
-  </div>
+  <!-- Snowflake Elements -->
+  <div class="snowflake" style="left: 10%; width: 20px; height: 20px; animation-duration: 10s;"></div>
+  <div class="snowflake" style="left: 30%; width: 15px; height: 15px; animation-duration: 12s;"></div>
+  <div class="snowflake" style="left: 50%; width: 25px; height: 25px; animation-duration: 8s;"></div>
+  <div class="snowflake" style="left: 70%; width: 18px; height: 18px; animation-duration: 11s;"></div>
+  <div class="snowflake" style="left: 90%; width: 22px; height: 22px; animation-duration: 9s;"></div>
 
-  <!-- Center Box with Time -->
-  <div class="center-box" id="timeBox">
-    <div id="time"></div>
+  <!-- Center Message Box -->
+  <div class="message-box">
+    <h1>Christmas Premium Mode</h1>
+    <p>Enjoy our exclusive Christmas screensaver!</p>
+    <p><strong>Free to use only this month!</strong></p>
+    <button class="cta" onclick="window.location.href='https://yourwebsite.com/signup.html'">Get Premium</button>
   </div>
-
-  <!-- Footer with Copyright Info -->
-  <div class="footer">
-    &copy; 2024 V.S. Vilakazi. All rights reserved.
-  </div>
-
-  <!-- JavaScript for Time Update -->
-  <script>
-    function updateTime() {
-      const now = new Date();
-      const timeString = now.toLocaleTimeString();
-      document.getElementById('time').textContent = timeString;
-    }
-    setInterval(updateTime, 1000);
-    updateTime();
-  </script>
 </body>
 </html>
