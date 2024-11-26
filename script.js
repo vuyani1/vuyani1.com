@@ -27,9 +27,9 @@ function startSlideshow() {
 
 document.body.addEventListener('click', () => {
     const jokes = [
-        "Why don't scientists trust atoms? Because they make up everything!",
-        "What do you call fake spaghetti? An impasta!",
-        "Why was the math book sad? Because it had too many problems!",
+        "Why was the snowman looking through the carrots? He was picking his nose!",
+        "What do you call Santa when he stops moving? Santa Pause!",
+        "What do snowmen eat for breakfast? Snowflakes!"
     ];
     alert(jokes[Math.floor(Math.random() * jokes.length)]);
 });
