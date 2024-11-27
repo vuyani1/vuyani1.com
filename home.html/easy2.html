@@ -3,157 +3,131 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tic Tac Toe - Bot Mode</title>
+    <title>Christmas Tic Tac Toe - Bot Mode</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            overflow: hidden; /* Prevent scrolling */
-            animation: colorChange 10s infinite; /* Smooth color transition */
-            margin: 0; /* Remove default body margin */
-        }
-
-        @keyframes colorChange {
-            0% { background-color: #2980b9; }
-            25% { background-color: #3498db; }
-            50% { background-color: #1abc9c; }
-            75% { background-color: #2ecc71; }
-            100% { background-color: #2980b9; }
+            margin: 0;
+            background: linear-gradient(to bottom, #ff9a9e, #fad0c4, #fbc2eb); /* Christmas gradient */
         }
 
         .container {
             text-align: center;
-            z-index: 2; /* Ensure it is above the background */
-            padding: 20px; /* Add padding for better spacing */
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            color: #e74c3c;
+            font-size: 2.5em;
+            margin-bottom: 10px;
         }
 
         .grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr); /* Responsive grid */
-            grid-gap: 10px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
             margin: 20px auto;
-            max-width: 300px; /* Limit grid width */
+            max-width: 300px;
         }
 
         .cell {
-            width: 100%;
-            padding-top: 100%; /* Maintain square aspect ratio */
-            background-color: #fff;
+            width: 100px;
+            height: 100px;
+            background-color: #fdf5e6;
             display: flex;
             justify-content: center;
             align-items: center;
             font-size: 2em;
+            font-weight: bold;
             cursor: pointer;
-            border: 2px solid #333;
-            position: relative;
+            border: 2px solid #c0392b;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s;
+        }
+
+        .cell:hover {
+            background-color: #ffe5d9;
         }
 
         #message {
             margin-top: 20px;
             font-size: 1.5em;
-            color: white;
-            word-wrap: break-word; /* Allow text to wrap */
-        }
-
-        .home-btn, .friend-btn {
-            padding: 10px 20px;
-            margin-top: 20px;
-            background-color: #ff6b6b;
-            color: white;
-            cursor: pointer;
-            border-radius: 10px;
-            transition: background-color 0.3s;
-            font-size: 1em; /* Responsive font size */
-        }
-
-        .friend-btn {
-            background-color: #2ecc71; /* Green for friends */
+            color: #c0392b;
         }
 
         .difficulty-btn {
-            padding: 10px 15px;
+            padding: 10px 20px;
             margin: 10px;
-            color: white;
+            font-size: 1em;
             cursor: pointer;
             border-radius: 10px;
-            font-size: 1em;
             border: none;
-            transition: background-color 0.3s;
+            color: white;
+            transition: background-color 0.3s ease;
         }
 
         .easy-btn {
-            background-color: #3498db; /* Blue */
+            background-color: #2ecc71;
         }
 
         .medium-btn {
-            background-color: #8e44ad; /* Darker Purple */
+            background-color: #e67e22;
         }
 
         .hard-btn {
-            background-color: #2c3e50; /* Black */
+            background-color: #e74c3c;
         }
 
-        .difficulty-comment {
-            font-size: 0.8em;
-            color: #fff;
-        }
-
-        .trophy {
-            display: none; /* Hide trophy initially */
-            font-size: 3em; /* Adjust size as needed */
+        .home-btn {
             margin-top: 20px;
+            padding: 10px 30px;
+            background-color: #3498db;
+            color: white;
+            cursor: pointer;
+            border-radius: 10px;
+            border: none;
         }
 
-        /* Fireworks CSS animation */
-        @keyframes fireworks {
-            0% { opacity: 0; }
-            100% { opacity: 1; transform: scale(1.5); }
-        }
-        .fireworks {
-            display: none;
+        .snowflake {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            z-index: 999;
-            animation: fireworks 1s ease-in-out;
+            top: -10%;
+            width: 20px;
+            height: 20px;
+            background-color: white;
+            border-radius: 50%;
+            animation: snowfall 10s linear infinite;
         }
 
-        /* Media queries for responsiveness */
-        @media (max-width: 600px) {
-            .cell {
-                font-size: 3em; /* Increase font size on mobile */
+        @keyframes snowfall {
+            0% {
+                transform: translateY(0);
             }
-            #message {
-                font-size: 1.2em; /* Adjust message size on mobile */
-            }
-            .home-btn, .friend-btn, .difficulty-btn {
-                font-size: 0.9em; /* Smaller button text on mobile */
-                padding: 8px 16px; /* Adjust button padding */
+            100% {
+                transform: translateY(110vh);
             }
         }
     </style>
 </head>
 <body>
 
+<!-- Snowflake effect -->
+<div id="snowflakes"></div>
+
 <div class="container">
-    <h1 style="color: white;">Tic Tac Toe (vs Bot)</h1>
+    <h1>🎄 Tic Tac Toe (vs Bot) 🎅</h1>
 
-    <!-- Difficulty Buttons -->
     <div>
-        <button class="difficulty-btn easy-btn" onclick="startGame('easy')">Easy 🐻</button>
-        <div class="difficulty-comment">Good luck!</div>
-
-        <button class="difficulty-btn medium-btn" onclick="startGame('medium')">Medium ⚔️</button>
-        <div class="difficulty-comment">Are you sure?</div>
-
-        <button class="difficulty-btn hard-btn" onclick="startGame('hard')">Hard 💀</button>
-        <div class="difficulty-comment">Do not dare to go!</div>
+        <button class="difficulty-btn easy-btn" onclick="startGame('easy')">Easy ❄️</button>
+        <button class="difficulty-btn medium-btn" onclick="startGame('medium')">Medium ⛄</button>
+        <button class="difficulty-btn hard-btn" onclick="startGame('hard')">Hard 🎁</button>
     </div>
 
     <div class="grid" id="grid" style="display: none;">
@@ -168,141 +142,45 @@
         <div class="cell" data-cell></div>
     </div>
     <div id="message"></div>
-    <div class="trophy" id="trophy">🏆</div> <!-- Trophy emoji -->
-    
-    <button class="home-btn" onclick="window.location.href='vuyani1.github.io/easy1.html'">Back to Easy</button>
-    <button class="friend-btn" onclick="window.location.href='vuyani1.github.io/easy1.html'">Play with Friends</button> <!-- New button -->
+    <button class="home-btn" onclick="window.location.href='easy1.html'">Back to Easy 🎄</button>
 </div>
 
 <script>
     const cells = document.querySelectorAll('[data-cell]');
     const messageElement = document.getElementById('message');
-    const trophyElement = document.getElementById('trophy');
-    let currentPlayer;
-    let gameOver = false;
+    const gridElement = document.getElementById('grid');
+    let currentPlayer = 'X';
     let botDifficulty;
+
+    // Snowflake generator
+    function createSnowflakes() {
+        for (let i = 0; i < 50; i++) {
+            const snowflake = document.createElement('div');
+            snowflake.classList.add('snowflake');
+            snowflake.style.left = Math.random() * window.innerWidth + 'px';
+            snowflake.style.animationDuration = Math.random() * 3 + 5 + 's';
+            snowflake.style.opacity = Math.random();
+            document.getElementById('snowflakes').appendChild(snowflake);
+        }
+    }
+    createSnowflakes();
 
     function startGame(difficulty) {
         botDifficulty = difficulty;
-        currentPlayer = 'X';
-        gameOver = false;
+        gridElement.style.display = 'grid';
         messageElement.textContent = '';
-        trophyElement.style.display = 'none';
-        document.getElementById('grid').style.display = 'grid'; // Show the grid
-        cells.forEach(cell => {
-            cell.textContent = ''; // Clear the cells
-            cell.style.pointerEvents = 'auto'; // Enable clicks
-        });
-    }
-
-    function checkWin() {
-        const winPatterns = [
-            [0, 1, 2], [3, 4, 5], [6, 7, 8], // Rows
-            [0, 3, 6], [1, 4, 7], [2, 5, 8], // Columns
-            [0, 4, 8], [2, 4, 6]             // Diagonals
-        ];
-
-        winPatterns.forEach(pattern => {
-            const [a, b, c] = pattern;
-            if (cells[a].textContent === currentPlayer &&
-                cells[b].textContent === currentPlayer &&
-                cells[c].textContent === currentPlayer) {
-                messageElement.textContent = `${currentPlayer} Wins!`;
-                trophyElement.style.display = 'block'; // Show trophy
-                gameOver = true;
-                handleRedirect();
-            }
-        });
-    }
-
-    function checkDraw() {
-        const allFilled = [...cells].every(cell => cell.textContent !== '');
-        if (allFilled && !gameOver) {
-            messageElement.textContent = "It's a Draw!";
-            gameOver = true;
-            handleRedirect();
-        }
-    }
-
-    function botMove() {
-        let availableCells = [...cells].filter(cell => cell.textContent === '');
-        
-        if (availableCells.length === 0) return; // Check if there are available cells
-
-        let botCell;
-        switch (botDifficulty) {
-            case 'easy':
-                botCell = availableCells[Math.floor(Math.random() * availableCells.length)];
-                break;
-            case 'medium':
-                botCell = mediumBotMove(availableCells);
-                break;
-            case 'hard':
-                botCell = hardBotMove(availableCells);
-                break;
-        }
-        botCell.textContent = 'O';
-        checkWin();
-        checkDraw();
-        currentPlayer = 'X';
-    }
-
-    function mediumBotMove(availableCells) {
-        // Simple medium logic: make a winning move if possible or block the player
-        for (let cell of availableCells) {
-            cell.textContent = 'O';
-            if (checkWinCondition('O')) {
-                cell.textContent = 'O'; // Winning move
-                return cell;
-            }
-            cell.textContent = ''; // Reset if not winning
-        }
-        for (let cell of availableCells) {
-            cell.textContent = 'X';
-            if (checkWinCondition('X')) {
-                cell.textContent = 'O'; // Block move
-                return cell;
-            }
-            cell.textContent = ''; // Reset if not blocking
-        }
-        return availableCells[Math.floor(Math.random() * availableCells.length)]; // Random move
-    }
-
-    function hardBotMove(availableCells) {
-        // Implement hard logic here (e.g., Minimax algorithm)
-        // For now, using medium logic as a placeholder
-        return mediumBotMove(availableCells);
-    }
-
-    function checkWinCondition(player) {
-        return [...cells].some(cell => cell.textContent === player);
+        cells.forEach(cell => cell.textContent = '');
     }
 
     cells.forEach(cell => {
         cell.addEventListener('click', () => {
-            if (cell.textContent === '' && !gameOver) {
+            if (!cell.textContent && botDifficulty) {
                 cell.textContent = currentPlayer;
-                checkWin();
-                checkDraw();
-                if (!gameOver) {
-                    currentPlayer = 'O';
-                    botMove();
-                }
+                currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+                messageElement.textContent = `Player ${currentPlayer}'s turn`;
             }
         });
     });
-
-    function handleRedirect() {
-        const won = messageElement.textContent.includes('Wins');
-        const randomChannel = Math.random() < 0.5 ? 'https://www.youtube.com/@VUYANI_VILAKAZI' : 'https://www.youtube.com/@POOF-f5c';
-
-        if (won) {
-            const randomPage = 'your_random_page_here.html'; // Replace with your random pages
-            window.location.href = randomPage;
-        } else {
-            window.location.href = randomChannel; // Redirect to random YouTube channel
-        }
-    }
 </script>
 
 </body>
