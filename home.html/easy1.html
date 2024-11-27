@@ -6,72 +6,81 @@
     <title>Tic Tac Toe - Two Player</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #8e44ad;
+            margin: 0;
+            background: url('https://www.transparenttextures.com/patterns/giftly.png'), linear-gradient(to bottom, #ff4444, #33cc33);
+            color: white;
         }
         .container {
             text-align: center;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+        }
+        h1 {
+            font-size: 2.5em;
+            color: #ffcc00;
+            text-shadow: 0 0 5px white;
         }
         .grid {
             display: grid;
             grid-template-columns: repeat(3, 100px);
             grid-gap: 10px;
+            margin: 20px auto;
         }
         .cell {
             width: 100px;
             height: 100px;
-            background-color: #fff;
+            background-color: #ffffff;
             display: flex;
             justify-content: center;
             align-items: center;
             font-size: 2em;
+            font-weight: bold;
+            color: #ff3333;
+            border: 2px solid #006600;
+            border-radius: 5px;
             cursor: pointer;
-            border: 2px solid #333;
+        }
+        .cell:hover {
+            background-color: #ffdddd;
         }
         #message {
             margin-top: 20px;
             font-size: 1.5em;
-            color: white;
+            color: #ffcc00;
         }
-        .home-btn, .reset-btn {
-            padding: 10px 30px;
-            margin-top: 20px;
-            background-color: #ff6b6b;
+        .reset-btn, .game-button {
+            padding: 10px 20px;
+            margin: 10px;
+            background-color: #33cc33;
             color: white;
-            cursor: pointer;
-            border-radius: 10px;
+            font-size: 1em;
             border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.2s, background-color 0.3s;
+        }
+        .reset-btn:hover, .game-button:hover {
+            background-color: #28a745;
+            transform: scale(1.1);
         }
         .trophy {
-            display: none; /* Hide trophy initially */
-            font-size: 3em; /* Adjust size as needed */
-            margin-top: 20px;
-        }
-        @keyframes fireworks {
-            0% { opacity: 0; }
-            100% { opacity: 1; transform: scale(1.5); }
-        }
-        .fireworks {
             display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            z-index: 999;
-            animation: fireworks 1s ease-in-out forwards;
+            font-size: 3em;
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1 style="color: white;">Tic Tac Toe (2 Player)</h1>
+    <h1>🎄 Merry Christmas Tic Tac Toe 🎄</h1>
     <div class="grid" id="grid">
         <div class="cell" data-cell></div>
         <div class="cell" data-cell></div>
@@ -84,18 +93,15 @@
         <div class="cell" data-cell></div>
     </div>
     <div id="message"></div>
-    <div class="trophy" id="trophy">🏆</div> <!-- Trophy emoji -->
+    <div class="trophy" id="trophy">🎅 Ho Ho Ho! You Win! 🎅</div>
     <button class="reset-btn" id="resetButton">Reset Game</button>
-    <button class="game-button" onclick="window.location.href='https://vuyani1.github.io/easy2.html'">Easy 2: Bot Mode Tic Tac Toe</button>
-
-    <div class="fireworks" id="fireworks"></div>
+    <button class="game-button" onclick="window.location.href='easy2.html'">Play Bot Mode 🎁</button>
 </div>
 
 <script>
     const cells = document.querySelectorAll('[data-cell]');
     const messageElement = document.getElementById('message');
     const trophyElement = document.getElementById('trophy');
-    const fireworksElement = document.getElementById('fireworks');
     let currentPlayer = 'X';
     let gameOver = false;
 
@@ -111,11 +117,9 @@
             if (cells[a].textContent === currentPlayer &&
                 cells[b].textContent === currentPlayer &&
                 cells[c].textContent === currentPlayer) {
-                messageElement.textContent = `${currentPlayer} Wins!`;
+                messageElement.textContent = `${currentPlayer} Wins! 🎉`;
                 trophyElement.style.display = 'block'; // Show trophy
-                fireworksElement.style.display = 'block'; // Show fireworks
                 gameOver = true;
-                playSound(); // Play sound on win
             }
         });
     }
@@ -123,7 +127,7 @@
     function checkDraw() {
         const allFilled = [...cells].every(cell => cell.textContent !== '');
         if (allFilled && !gameOver) {
-            messageElement.textContent = "It's a Draw!";
+            messageElement.textContent = "It's a Draw! 🤷‍♂️";
             gameOver = true;
         }
     }
@@ -132,6 +136,7 @@
         cell.addEventListener('click', () => {
             if (cell.textContent === '' && !gameOver) {
                 cell.textContent = currentPlayer;
+                cell.style.color = currentPlayer === 'X' ? '#ff3333' : '#33cc33';
                 checkWin();
                 checkDraw();
                 currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
@@ -139,25 +144,12 @@
         });
     });
 
-    // Function to play sound
-    function playSound() {
-        const audio = new Audio('https://www.soundjay.com/button/beep-07.wav'); // Example sound effect
-        audio.play();
-    }
-
-    // Reset the game
     document.getElementById('resetButton').addEventListener('click', () => {
         cells.forEach(cell => cell.textContent = '');
         messageElement.textContent = '';
-        trophyElement.style.display = 'none'; // Hide trophy
-        fireworksElement.style.display = 'none'; // Hide fireworks
+        trophyElement.style.display = 'none';
         currentPlayer = 'X';
         gameOver = false;
-    });
-
-    // Hide fireworks after animation ends
-    fireworksElement.addEventListener('animationend', () => {
-        fireworksElement.style.display = 'none';
     });
 </script>
 
